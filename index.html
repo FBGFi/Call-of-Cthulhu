@@ -20,7 +20,7 @@
                 <div id="charinfo">
                     <table>
                         <tbody>
-                            <tr><td colspan="2"><h4>1920s Era Investigator</h4></td></tr>
+                            <tr><td colspan="2"><h3>1920s Era Investigator</h3></td></tr>
                             <tr><td colspan="2"><div>Name&nbsp;<input type="text" name="" id=""></div></td></tr>
                             <tr><td colspan="2"><div>Player&nbsp;<input type="text" name="" id=""></div></td></tr>
                             <tr><td colspan="2"><div>Occupatice&nbsp;<input type="text" name="" id=""></div></td></tr>
@@ -33,7 +33,7 @@
                 <div id="characteristics">
                     <table>
                         <tbody>
-                            <tr><td colspan="3"><h2>Characteristics</h2></td></tr>
+                            <tr class="grayback"><td colspan="3"><h2>Characteristics</h2></td></tr>
                             <tr>
                                 <td>
                                     <div class="triplevalues">
@@ -128,7 +128,7 @@
                 </div>
                 <div id="picture"></div>
             </div>
-            <div class="row">
+            <div class="row grayback">
                 <table id="numbervalues">
                     <tbody>
                         <tr>
@@ -138,10 +138,10 @@
                             <td><div>Indef. Insane&nbsp;<input type="checkbox" name="" id=""></div></td>
                             <td><div>Start&nbsp;<input type="number" placeholder="Start" name="" id=""></div></td>
                             <td><div>Max&nbsp;<input type="number" placeholder="Max" name="" id=""></div></td>
-                            <td>
+                            <td class="tableback">
                                 <table>
                                     <tbody class="sanity">
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>Insane</div></td>
                                             <td><div>01</div></td>
                                             <td><div>02</div></td>
@@ -155,22 +155,22 @@
                                 </table>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="tableback">
                             <td colspan="2" rowspan="2">
-                                <table id="hitpoints">
-                                    <tbody>
-                                        <tr><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateleft">Hit Points</h4></td><td colspan="2"><div><div><div>Dying<input type="checkbox" name="" id=""></div></div></div></td><td><div>(00)</div></td><td><div>01</div></td><td><div>02</div></td></tr>
-                                        <tr><td colspan="2"><div><div><div>Unconscious<input type="checkbox" name="" id=""></div></div></div></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td></tr>
-                                        <tr><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td><td><div>10</div></td></tr>
-                                        <tr><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td><td><div>15</div></td></tr>
-                                        <tr><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td><td><div>20</div></td></tr>
+                                <table class="hasborder">
+                                    <tbody id="hitpoints">
+                                        <tr><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateleft">Hit Points</h4></td><td colspan="2"><div><div><div>Dying<input type="checkbox" name="" id=""></div></div></div></td><td><div class="clickable">(00)</div></td><td><div class="clickable">01</div></td><td><div class="clickable">02</div></td></tr>
+                                        <tr><td colspan="2"><div><div><div>Unconscious<input type="checkbox" name="" id=""></div></div></div></td><td><div class="clickable">03</div></td><td><div class="clickable">04</div></td><td><div class="clickable">05</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td><td><div>10</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td><td><div>15</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td><td><div>20</div></td></tr>
                                     </tbody>
                                 </table>
                             </td>
                             <td colspan="5">
                                 <table>
                                     <tbody class="sanity">
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>08</div></td>
                                             <td><div>09</div></td>
                                             <td><div>10</div></td>
@@ -196,7 +196,7 @@
                                             <td><div>30</div></td>
                                             <td style="position: relative; width: 30px;"  rowspan="4"><h4 class="rotate rotateright">Sanity</h4></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>31</div></td>
                                             <td><div>32</div></td>
                                             <td><div>33</div></td>
@@ -221,7 +221,7 @@
                                             <td><div>52</div></td>
                                             <td><div>53</div></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>54</div></td>
                                             <td><div>55</div></td>
                                             <td><div>56</div></td>
@@ -246,7 +246,7 @@
                                             <td><div>75</div></td>
                                             <td><div>76</div></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>77</div></td>
                                             <td><div>78</div></td>
                                             <td><div>79</div></td>
@@ -276,12 +276,12 @@
                             </td>
                         </tr>
                         <tr><td colspan="4"><h1>Call of Cthulhu</h1></td><td><div>Max MP&nbsp;<input type="number" placeholder="Max MP" name="" id=""></div></td></tr>
-                        <tr>
+                        <tr class="tableback">
                             <td colspan="6">
                                 <table>
                                     <tbody id="luck">
-                                        <tr><td colspan="12"></td><td colspan="5"><div>Out of Luck</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td></tr>
-                                        <tr>                                      
+                                        <tr class="clickablenumbers"><td colspan="12" class="grayback"></td><td colspan="5"><div>Out of Luck</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td></tr>
+                                        <tr class="clickablenumbers">                                      
                                             <td style="position: relative; width: 30px;" rowspan="4"><h4 class="rotate rotateleft">Luck</h4></td>
                                             <td><div>08</div></td>
                                             <td><div>09</div></td>
@@ -307,7 +307,7 @@
                                             <td><div>29</div></td>
                                             <td><div>30</div></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>31</div></td>
                                             <td><div>32</div></td>
                                             <td><div>33</div></td>
@@ -332,7 +332,7 @@
                                             <td><div>52</div></td>
                                             <td><div>53</div></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>54</div></td>
                                             <td><div>55</div></td>
                                             <td><div>56</div></td>
@@ -357,7 +357,7 @@
                                             <td><div>75</div></td>
                                             <td><div>76</div></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="clickablenumbers">
                                             <td><div>77</div></td>
                                             <td><div>78</div></td>
                                             <td><div>79</div></td>
@@ -386,13 +386,13 @@
                                 </table>
                             </td>
                             <td>
-                                <table>
+                                <table class="hasborder">
                                     <tbody id="magicpoints">
-                                        <tr><td><div>00</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateright">Magic Points</h4></td></tr>
-                                        <tr><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td></tr>
-                                        <tr><td><div>10</div></td><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td></tr>
-                                        <tr><td><div>15</div></td><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td></tr>
-                                        <tr><td><div>20</div></td><td><div>21</div></td><td><div>22</div></td><td><div>23</div></td><td><div>24</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>00</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateright">Magic Points</h4></td></tr>
+                                        <tr class="clickablenumbers"><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>10</div></td><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>15</div></td><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td></tr>
+                                        <tr class="clickablenumbers"><td><div>20</div></td><td><div>21</div></td><td><div>22</div></td><td><div>23</div></td><td><div>24</div></td></tr>
                                     </tbody>
                                 </table>
                             </td>

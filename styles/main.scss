@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
-$headerBack: #ccc;
+$headerBack: #aaa;
+$tableHeader: #ccc;
 $mainFont: 'IM Fell English SC','Times New Roman', serif;
 
 input::-webkit-outer-spin-button,
@@ -76,6 +77,12 @@ input[type=checkbox]{
     display: flex;
     width: 100%;
     margin-bottom: 20px;
+    border: 2px solid black;
+}
+.clicked{
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 .rotate{
     text-decoration: underline;
@@ -90,9 +97,19 @@ input[type=checkbox]{
 .rotateright{
     transform: rotate(90deg);
 }
+.grayback{
+    background-color: $tableHeader;
+}
+.tableback{
+    background-color: #fff;
+}
 table{
     width: 100%;
     height: 100%;
+    border-collapse: collapse;
+}
+.hasborder{
+    border: 3px solid $tableHeader;
 }
 #page1, #page2{
     display: flex;
@@ -104,8 +121,7 @@ textarea{
     font-size: 1.5rem;
 }
 td{
-    border: 1px solid black;
-    padding: 0 5px;
+    //border: 1px solid black;
 }
 h1,h2,h3,h4{
     text-align: center;
@@ -154,6 +170,12 @@ main{
                 margin:auto;
             }
         }
+        .clickable{
+            cursor: pointer;
+        }
+        .clickablenumbers>td>div{
+            cursor: pointer;
+        }
     }
     #charinfo{
         flex: 2; 
@@ -162,7 +184,11 @@ main{
             &>*{
                 flex: 1;
             }
-        }     
+        }  
+        tr:first-child{
+            background-color: #111;
+            color: #fff;
+        }   
     }
     #characteristics{
         flex: 3;
