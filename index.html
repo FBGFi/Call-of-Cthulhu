@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="styles/main.css">
+<body>
+    <header>
+        <input type="text" placeholder="File to load/save" id="fileName">
+        <button id="load">Load</button>
+        <button id="save">Save</button>
+    </header>
+    <main>
+        <div id="page1">
+            <div class="row">
+                <table>
+                    <tbody>
+                        <thead><h4>1920s Era Investigator</h4></thead>
+                        <tr><td>Name<input type="text" name="" id=""></td></tr>
+                        <tr><td>Player<input type="text" name="" id=""></td></tr>
+                        <tr><td>Occupatice<input type="text" name="" id=""></td></tr>
+                        <tr><td>Age<input type="text" name="" id=""></td><td>Sex<input type="text" name="" id=""></td></tr>
+                        <tr><td>Residence<input type="text" name="" id=""></td></tr>
+                        <tr><td>Birthplace<input type="text" name="" id=""></td></tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                        <thead>Characteristics</thead>
+                        <tr>
+                            <td><h3>STR</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                            <td><h3>DEX</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                            <td><h3>POW</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                        </tr>
+                        <tr>
+                            <td><h3>CON</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                            <td><h3>APP</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                            <td><h3>EDU</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                        </tr>
+                        <tr>
+                            <td><h3>SIZ</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                            <td><h3>INT</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                            <td><h3>Move Rate</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="picture"></div>
+            </div>
+            <div class="row">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><div>Major Wound<input type="checkbox" name="" id=""></div></td>
+                            <td><input type="number" placeholder="Max HP" name="" id=""></td>
+                            <td><div>Temp Insane<input type="checkbox" name="" id=""></div></td>
+                            <td><div>Indef. Insane<input type="checkbox" name="" id=""></div></td>
+                            <td><input type="number" placeholder="Start" name="" id=""></td>
+                            <td><input type="number" placeholder="Max" name="" id=""></td>
+                            <td>
+                                <table>
+                                    <tbody class="sanity">
+                                        <tr>
+                                            <td><div>Insane</div></td>
+                                            <td><div>01</div></td>
+                                            <td><div>02</div></td>
+                                            <td><div>03</div></td>
+                                            <td><div>04</div></td>
+                                            <td><div>05</div></td>
+                                            <td><div>06</div></td>
+                                            <td><div>07</div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2">
+                                <table id="hitpoints">
+                                    <tbody>
+                                        <tr><td rowspan="5"><h4>Hit Points</h4></td><td colspan="2">Dying<input type="checkbox" name="" id=""></td><td><div>(00)</div></td><td><div>01</div></td><td><div>02</div></td></tr>
+                                        <tr><td colspan="2">Unconscious<input type="checkbox" name="" id=""></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td></tr>
+                                        <tr><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td><td><div>10</div></td></tr>
+                                        <tr><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td><td><div>15</div></td></tr>
+                                        <tr><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td><td><div>20</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td colspan="5">
+                                <table>
+                                    <tbody class="sanity">
+                                        <tr>
+                                            <td><div>08</div></td>
+                                            <td><div>09</div></td>
+                                            <td><div>10</div></td>
+                                            <td><div>11</div></td>
+                                            <td><div>12</div></td>
+                                            <td><div>13</div></td>
+                                            <td><div>14</div></td>
+                                            <td><div>15</div></td>
+                                            <td><div>16</div></td>
+                                            <td><div>17</div></td>
+                                            <td><div>18</div></td>
+                                            <td><div>19</div></td>
+                                            <td><div>20</div></td>
+                                            <td><div>21</div></td>
+                                            <td><div>22</div></td>
+                                            <td><div>23</div></td>
+                                            <td><div>24</div></td>
+                                            <td><div>25</div></td>
+                                            <td><div>26</div></td>
+                                            <td><div>27</div></td>
+                                            <td><div>28</div></td>
+                                            <td><div>29</div></td>
+                                            <td><div>30</div></td>
+                                            <td rowspan="4"><h4>Sanity</h4></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>31</div></td>
+                                            <td><div>32</div></td>
+                                            <td><div>33</div></td>
+                                            <td><div>34</div></td>
+                                            <td><div>35</div></td>
+                                            <td><div>36</div></td>
+                                            <td><div>37</div></td>
+                                            <td><div>38</div></td>
+                                            <td><div>39</div></td>
+                                            <td><div>40</div></td>
+                                            <td><div>41</div></td>
+                                            <td><div>42</div></td>
+                                            <td><div>43</div></td>
+                                            <td><div>44</div></td>
+                                            <td><div>45</div></td>
+                                            <td><div>46</div></td>
+                                            <td><div>47</div></td>
+                                            <td><div>48</div></td>
+                                            <td><div>49</div></td>
+                                            <td><div>50</div></td>
+                                            <td><div>51</div></td>
+                                            <td><div>52</div></td>
+                                            <td><div>53</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>54</div></td>
+                                            <td><div>55</div></td>
+                                            <td><div>56</div></td>
+                                            <td><div>57</div></td>
+                                            <td><div>58</div></td>
+                                            <td><div>59</div></td>
+                                            <td><div>60</div></td>
+                                            <td><div>61</div></td>
+                                            <td><div>62</div></td>
+                                            <td><div>63</div></td>
+                                            <td><div>64</div></td>
+                                            <td><div>65</div></td>
+                                            <td><div>66</div></td>
+                                            <td><div>67</div></td>
+                                            <td><div>68</div></td>
+                                            <td><div>69</div></td>
+                                            <td><div>70</div></td>
+                                            <td><div>71</div></td>
+                                            <td><div>72</div></td>
+                                            <td><div>73</div></td>
+                                            <td><div>74</div></td>
+                                            <td><div>75</div></td>
+                                            <td><div>76</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>77</div></td>
+                                            <td><div>78</div></td>
+                                            <td><div>79</div></td>
+                                            <td><div>80</div></td>
+                                            <td><div>81</div></td>
+                                            <td><div>82</div></td>
+                                            <td><div>83</div></td>
+                                            <td><div>84</div></td>
+                                            <td><div>85</div></td>
+                                            <td><div>86</div></td>
+                                            <td><div>87</div></td>
+                                            <td><div>88</div></td>
+                                            <td><div>89</div></td>
+                                            <td><div>90</div></td>
+                                            <td><div>91</div></td>
+                                            <td><div>92</div></td>
+                                            <td><div>93</div></td>
+                                            <td><div>94</div></td>
+                                            <td><div>95</div></td>
+                                            <td><div>96</div></td>
+                                            <td><div>97</div></td>
+                                            <td><div>98</div></td>
+                                            <td><div>99</div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr><td colspan="4"><h1>Call of Cthulhu</h1></td><td><input type="number" placeholder="Max MP" name="" id=""></td></tr>
+                        <tr>
+                            <td colspan="6">
+                                <table>
+                                    <tbody id="luck">
+                                        <tr><td colspan="12"></td><td colspan="5">Out of Luck</td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td></tr>
+                                        <tr>                                      
+                                            <td rowspan="4"><h4>Luck</h4></td>
+                                            <td><div>08</div></td>
+                                            <td><div>09</div></td>
+                                            <td><div>10</div></td>
+                                            <td><div>11</div></td>
+                                            <td><div>12</div></td>
+                                            <td><div>13</div></td>
+                                            <td><div>14</div></td>
+                                            <td><div>15</div></td>
+                                            <td><div>16</div></td>
+                                            <td><div>17</div></td>
+                                            <td><div>18</div></td>
+                                            <td><div>19</div></td>
+                                            <td><div>20</div></td>
+                                            <td><div>21</div></td>
+                                            <td><div>22</div></td>
+                                            <td><div>23</div></td>
+                                            <td><div>24</div></td>
+                                            <td><div>25</div></td>
+                                            <td><div>26</div></td>
+                                            <td><div>27</div></td>
+                                            <td><div>28</div></td>
+                                            <td><div>29</div></td>
+                                            <td><div>30</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>31</div></td>
+                                            <td><div>32</div></td>
+                                            <td><div>33</div></td>
+                                            <td><div>34</div></td>
+                                            <td><div>35</div></td>
+                                            <td><div>36</div></td>
+                                            <td><div>37</div></td>
+                                            <td><div>38</div></td>
+                                            <td><div>39</div></td>
+                                            <td><div>40</div></td>
+                                            <td><div>41</div></td>
+                                            <td><div>42</div></td>
+                                            <td><div>43</div></td>
+                                            <td><div>44</div></td>
+                                            <td><div>45</div></td>
+                                            <td><div>46</div></td>
+                                            <td><div>47</div></td>
+                                            <td><div>48</div></td>
+                                            <td><div>49</div></td>
+                                            <td><div>50</div></td>
+                                            <td><div>51</div></td>
+                                            <td><div>52</div></td>
+                                            <td><div>53</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>54</div></td>
+                                            <td><div>55</div></td>
+                                            <td><div>56</div></td>
+                                            <td><div>57</div></td>
+                                            <td><div>58</div></td>
+                                            <td><div>59</div></td>
+                                            <td><div>60</div></td>
+                                            <td><div>61</div></td>
+                                            <td><div>62</div></td>
+                                            <td><div>63</div></td>
+                                            <td><div>64</div></td>
+                                            <td><div>65</div></td>
+                                            <td><div>66</div></td>
+                                            <td><div>67</div></td>
+                                            <td><div>68</div></td>
+                                            <td><div>69</div></td>
+                                            <td><div>70</div></td>
+                                            <td><div>71</div></td>
+                                            <td><div>72</div></td>
+                                            <td><div>73</div></td>
+                                            <td><div>74</div></td>
+                                            <td><div>75</div></td>
+                                            <td><div>76</div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div>77</div></td>
+                                            <td><div>78</div></td>
+                                            <td><div>79</div></td>
+                                            <td><div>80</div></td>
+                                            <td><div>81</div></td>
+                                            <td><div>82</div></td>
+                                            <td><div>83</div></td>
+                                            <td><div>84</div></td>
+                                            <td><div>85</div></td>
+                                            <td><div>86</div></td>
+                                            <td><div>87</div></td>
+                                            <td><div>88</div></td>
+                                            <td><div>89</div></td>
+                                            <td><div>90</div></td>
+                                            <td><div>91</div></td>
+                                            <td><div>92</div></td>
+                                            <td><div>93</div></td>
+                                            <td><div>94</div></td>
+                                            <td><div>95</div></td>
+                                            <td><div>96</div></td>
+                                            <td><div>97</div></td>
+                                            <td><div>98</div></td>
+                                            <td><div>99</div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    <tbody id="magicpoints">
+                                        <tr><td><div>00</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td rowspan="5"><h4>Magic Points</h4></td></tr>
+                                        <tr><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td></tr>
+                                        <tr><td><div>10</div></td><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td></tr>
+                                        <tr><td><div>15</div></td><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td></tr>
+                                        <tr><td><div>20</div></td><td><div>21</div></td><td><div>22</div></td><td><div>23</div></td><td><div>24</div></td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <table>
+                    <tbody>
+                        <thead><h3>Investigator Skills</h3></thead>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Accounting (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Fast Talk (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Law (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <div><p>Science (01%)</p><input type="text" name="" id=""></div>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Anthropology (01%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Fighting (Brawl) (25%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Library Use (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Appraise (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Listen (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Archaeology (01%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Locksmith (01%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Sleight of Hand (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <div><p>Art/Craft (05%)</p><input type="text" name="" id=""></div>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Firearms (Handgun)(20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Mech. Repair (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Spot Hidden (25%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Firearms (Rifle/Shotgun) (25%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Medicine (01%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Stealth (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Natural World (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <div><p>Survival (10%)</p><input type="text" name="" id=""></div>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Charm (15%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>First Aid (30%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Navigate (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Swim (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Climb (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>History (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Occult (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Throw (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Credit Rating (00%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Intimidate (15%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Op. Hv. Machine (01%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Track (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Cthulhu Mythos (00%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Jump (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Persuade (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Disguise (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <div><p>Language (Other)(01%)</p><input type="text" name="" id=""></div>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <div><p>Pilot (01%)</p><input type="text" name="" id=""></div>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Dodge (half DEX)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Psychology (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Drive Auto (20%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Psychoanalysis (01%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Elec Repair (10%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <div><p>Language (own)(EDU)</p></div>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <p>Ride (05%)</p>
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                                <input type="text" name="" id="">
+                                <input type="number" name="" id="">
+                                <div><input type="number" name="" id=""><input type="number" name="" id=""></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row"></div>
+        </div>
+        <div id="page2">
+            <div class="row">
+                <table>
+                    <tbody>
+                        <thead><h1>Backstory</h1></thead>
+                        <tr>
+                            <td><h3>Personal Description</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Traits</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><h3>Ideology/Beliefs</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Injuries & Scars</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><h3>Significant People</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Phobias & Manias</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><h3>Meaningful Locations</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Arcane Tomes, Spells & Artifacts</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><h3>Treasured Possessions</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Encounters with Strange Entities</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <table>
+                    <tbody>
+                        <thead><h1>Gear & Possessions</h1></thead>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                        <thead>Cash & Assets</thead>
+                        <tr><td>Spending Level<input type="text" name="" id=""></td></tr>
+                        <tr><td>Cash<input type="text" name="" id=""></td></tr>
+                        <tr><td>Assets<input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h1>Quick Reference Rules</h1>
+                    <h3>Skill & Characteristics Rolls</h3>
+                    <div>
+                        <p>Levels of success</p>
+                        <div><p>Fumble</p><p>100/96+</p></div>
+                        <div><p>Fail</p><p>> skill</p></div>
+                        <div><p>Regular</p><p><= skill</p></div>
+                        <div><p>Hard</p><p>1/2 skill</p></div>
+                        <div><p>Extreme</p><p>1/5 skill</p></div>
+                        <div><p>Critical</p><p>01</p></div>
+                    </div>
+                    <p>Pushing Rolls: must justify reroll; Cannot Push Combat or Sanity Rolls</p>
+                    <h3>Wounds & Healing</h3>
+                    <div><p>First Aid heals 1HP</p><p>Medicine heals +1d3 HP</p></div>
+                    <p><b>Major Wound</b> = loss of >= max HP in one attack</p>
+                    <p>Reach 0 HP without Major Wound = <b>Unconscious</b></p>
+                    <p>Reach 0 HP with Major Wound = <b>Dying</b></p>
+                    <p>Dying: First Aid = temp. stabilized; then require Medicine</p>
+                    <p><b>Natural Heal rate</b> (non Major Wound): recover 1HP per day</p>
+                    <p><b>Natural Heal rate</b> (Major Wound): weekly healing roll</p>
+                </div>
+                <div class="column">
+                    <table>
+                        <tbody>
+                            <thead><h1>Fellow Investigators</h1></thead>
+                            <tr>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                            </tr>
+                            <tr>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                                <td><h1>Me</h1></td>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                            </tr>
+                            <tr>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                                <td><div>Char.<input type="text" name="" id=""></div><div>Player.<input type="text" name="" id=""></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
