@@ -1,17 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
 $headerBack: #ccc;
+$mainFont: 'IM Fell English SC','Times New Roman', serif;
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 body{
     margin: auto;
     padding: 0;
     width: 1200px;
+    text-align: center;
 }
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: $mainFont;
 }
 input{
-    width: 50px;
+    width: 100%;
+    text-align: center;
+}
+input[type=text]{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid black;
+    font-size: 1.5rem;
+}
+input[type=number]{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+input[type=checkbox]{
+    min-width:50px;
+    height: 20px;
+    cursor: pointer;
 }
 .triplevalues{
     display: flex;
@@ -41,25 +68,44 @@ input{
             width: 100%;
         }
     }
+    .values>input{
+        font-size: 1.3rem;
+    }
 }
 .row{
     display: flex;
     width: 100%;
+    margin-bottom: 20px;
+}
+.rotate{
+    text-decoration: underline;
+    position: absolute;
+    width: 100px;
+    top: 40%;
+    left: -120%;
+}
+.rotateleft{
+    transform: rotate(-90deg);
+}
+.rotateright{
+    transform: rotate(90deg);
 }
 table{
     width: 100%;
+    height: 100%;
 }
 #page1, #page2{
     display: flex;
     flex-direction: column;
 }
-tr{
+textarea{
+    width: 90%;
+    resize: none;
+    font-size: 1.5rem;
 }
 td{
-    &>div{
-        text-align: center;
-    }
     border: 1px solid black;
+    padding: 0 5px;
 }
 h1,h2,h3,h4{
     text-align: center;
@@ -71,11 +117,44 @@ header{
     height: 50px;
     left: 0;
     top: 0;
+    display: flex;
+    justify-content: flex-end;
+
+    &>*{
+        margin:auto 0;
+    }
+    input{
+        height: 80%;
+        width: 300px;
+        border: none !important;
+        font-size: 1.7rem;
+    }
+    button{
+        width: 150px;
+        height: 80%;
+        font-size: 1.5rem;
+    }
 }
 main{
     width: 1200px;
 }
 #page1{
+    #hitpoints{
+        td>div>div{
+            justify-content: flex-end;
+            width: 100%;
+        }
+    }
+    #numbervalues{
+        div{
+            display: flex;
+            justify-content: center;
+            input{
+                flex:1;
+                margin:auto;
+            }
+        }
+    }
     #charinfo{
         flex: 2; 
         tr>td>div{
@@ -99,6 +178,94 @@ main{
             }
             &>*:nth-child(3){
                 flex: 2;
+            }
+        }
+    }
+    #combatinfo{
+        display: flex;
+        flex: 1;
+        text-align: center;
+        input{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        #weapons{
+            flex: 5;
+            tr{
+                height: 30px;
+            }
+        }
+        #combat{
+            flex: 1;
+            tr:nth-child(4) div{
+                display: flex;
+                height: 100%;
+                &>*{
+                    flex:1;
+                }
+                div{
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+            input[type=number]{
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+#page2{
+    #gear{
+        flex:6;
+        input{
+            width: 100%;
+            height: 30px;
+        }
+    }
+    #cash{
+        flex:4;
+        div{
+            display: flex;
+            input{
+                flex: 1;
+                height: 30px;
+            }
+        }
+    }
+    #rules{
+        flex:2;
+        td{
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+        #levels{
+            display: flex;
+            div:not(:first-child){
+                border: 1px solid black;
+                padding: 3px;
+            }
+            div:first-child{
+                display: flex;
+                justify-content: center;
+                &>*{
+                    flex: 1;
+                    margin: auto;
+                }
+            }
+        }
+    }
+    #fellowinvestigators{
+        flex: 3;
+        input{
+            margin-bottom:15px;
+        }
+        td{
+            div{
+                display: flex;
+                &>*{
+                    flex:1;
+                }
             }
         }
     }

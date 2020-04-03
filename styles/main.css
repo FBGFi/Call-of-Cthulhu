@@ -1,7 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 body {
   margin: auto;
   padding: 0;
   width: 1200px;
+  text-align: center;
 }
 
 * {
@@ -9,10 +17,31 @@ body {
           box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "IM Fell English SC", "Times New Roman", serif;
 }
 
 input {
-  width: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+input[type=text] {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid black;
+  font-size: 1.5rem;
+}
+
+input[type=number] {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+input[type=checkbox] {
+  min-width: 50px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .triplevalues {
@@ -71,15 +100,39 @@ input {
   width: 100%;
 }
 
+.triplevalues .values > input {
+  font-size: 1.3rem;
+}
+
 .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
+  margin-bottom: 20px;
+}
+
+.rotate {
+  text-decoration: underline;
+  position: absolute;
+  width: 100px;
+  top: 40%;
+  left: -120%;
+}
+
+.rotateleft {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.rotateright {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 table {
   width: 100%;
+  height: 100%;
 }
 
 #page1, #page2 {
@@ -92,12 +145,15 @@ table {
           flex-direction: column;
 }
 
-td {
-  border: 1px solid black;
+textarea {
+  width: 90%;
+  resize: none;
+  font-size: 1.5rem;
 }
 
-td > div {
-  text-align: center;
+td {
+  border: 1px solid black;
+  padding: 0 5px;
 }
 
 h1, h2, h3, h4 {
@@ -111,10 +167,56 @@ header {
   height: 50px;
   left: 0;
   top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+header > * {
+  margin: auto 0;
+}
+
+header input {
+  height: 80%;
+  width: 300px;
+  border: none !important;
+  font-size: 1.7rem;
+}
+
+header button {
+  width: 150px;
+  height: 80%;
+  font-size: 1.5rem;
 }
 
 main {
   width: 1200px;
+}
+
+#page1 #hitpoints td > div > div {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 100%;
+}
+
+#page1 #numbervalues div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#page1 #numbervalues div input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto;
 }
 
 #page1 #charinfo {
@@ -158,5 +260,154 @@ main {
   -webkit-box-flex: 2;
       -ms-flex: 2;
           flex: 2;
+}
+
+#page1 #combatinfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+#page1 #combatinfo input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#page1 #combatinfo #weapons {
+  -webkit-box-flex: 5;
+      -ms-flex: 5;
+          flex: 5;
+}
+
+#page1 #combatinfo #weapons tr {
+  height: 30px;
+}
+
+#page1 #combatinfo #combat {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+#page1 #combatinfo #combat tr:nth-child(4) div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+#page1 #combatinfo #combat tr:nth-child(4) div > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+#page1 #combatinfo #combat tr:nth-child(4) div div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#page1 #combatinfo #combat input[type=number] {
+  font-size: 1.5rem;
+}
+
+#page2 #gear {
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
+}
+
+#page2 #gear input {
+  width: 100%;
+  height: 30px;
+}
+
+#page2 #cash {
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+}
+
+#page2 #cash div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#page2 #cash div input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 30px;
+}
+
+#page2 #rules {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+#page2 #rules td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#page2 #rules #levels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#page2 #rules #levels div:not(:first-child) {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+#page2 #rules #levels div:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#page2 #rules #levels div:first-child > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto;
+}
+
+#page2 #fellowinvestigators {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+#page2 #fellowinvestigators input {
+  margin-bottom: 15px;
+}
+
+#page2 #fellowinvestigators td div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#page2 #fellowinvestigators td div > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 /*# sourceMappingURL=main.css.map */
