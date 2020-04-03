@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Call of Cthulhu</title>
 </head>
 <link rel="stylesheet" href="styles/main.css">
 <body>
@@ -15,9 +15,9 @@
     <main>
         <div id="page1">
             <div class="row">
-                <table>
+                <table id="charinfo">
                     <tbody>
-                        <thead><h4>1920s Era Investigator</h4></thead>
+                        <tr><td colspan="2"><h4>1920s Era Investigator</h4></td></tr>
                         <tr><td>Name<input type="text" name="" id=""></td></tr>
                         <tr><td>Player<input type="text" name="" id=""></td></tr>
                         <tr><td>Occupatice<input type="text" name="" id=""></td></tr>
@@ -26,9 +26,9 @@
                         <tr><td>Birthplace<input type="text" name="" id=""></td></tr>
                     </tbody>
                 </table>
-                <table>
+                <table id="characteristics">
                     <tbody>
-                        <thead>Characteristics</thead>
+                        <tr><td colspan="3"><h2>Characteristics</h2></td></tr>
                         <tr>
                             <td><h3>STR</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
                             <td><h3>DEX</h3><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></td>
@@ -715,7 +715,28 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row"></div>
+            <div class="row">
+                <table>
+                    <tbody>
+                        <thead><h3>Weapons</h3></thead>
+                        <tr><td>Weapon</td><td>Regular</td><td>Hard</td><td>Extreme</td><td>Damage</td><td>Range</td><td>Attacks</td><td>Ammo</td><td>Malf</td></tr>
+                        <tr><td>Unarmed</td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td>1d3 + db</td><td>-</td><td>1</td><td>-</td><td>-</td></tr>
+                        <tr><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td></tr>
+                        <tr><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td></tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                        <thead><h3>Combat</h3></thead>
+                        <tr><div><p><h4>Damage Bonus</h4></p><input type="text" name="" id=""></div></tr>
+                        <tr><div><p><h4>Build</h4></p><input type="text" name="" id=""></div></tr>
+                        <tr><div><p><h4>Dodge</h4></p><div><input type="text" name="" id=""><div><input type="text" name="" id=""><input type="text" name="" id=""></div></div></div></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div id="page2">
             <div class="row">

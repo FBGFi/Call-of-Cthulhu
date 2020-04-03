@@ -1,10 +1,26 @@
 body{
     margin: 0;
     padding: 0;
+    width: 100vh;
 }
 *{
     box-sizing: border-box;
 }
+.row{
+    display: flex;
+}
 td{
     border: 1px solid black;
+}
+#page1{
+    #charinfo{
+        flex: 2;
+    }
+    #characteristics{
+        flex: 3;
+    }
+    #picture{
+        flex: 1;
+        background-color: red;
+    }
 }

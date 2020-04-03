@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100vh;
 }
 
 * {
@@ -8,7 +9,32 @@ body {
           box-sizing: border-box;
 }
 
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 td {
   border: 1px solid black;
+}
+
+#page1 #charinfo {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+#page1 #characteristics {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+#page1 #picture {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: red;
 }
 /*# sourceMappingURL=main.css.map */
