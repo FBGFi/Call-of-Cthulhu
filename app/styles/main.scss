@@ -9,7 +9,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 html{
-    background-image: url("paper_back.png");
+    background-image: url("paper.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -138,6 +138,7 @@ h1,h2,h3,h4{
     text-align: center;
 }
 header{
+    z-index: 2;
     background-color: $headerBack;
     width: 100%;
     position: fixed;
@@ -214,6 +215,9 @@ main{
         background-color: #fff;
     }
     #investigatorskills{
+        input[type=text]{
+            font-size: 1.2rem;
+        }
         .triplevalues{
             &>*:nth-child(2){
                 flex: 3;

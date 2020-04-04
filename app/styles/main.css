@@ -6,7 +6,7 @@ input::-webkit-inner-spin-button {
 }
 
 html {
-  background-image: url("paper_back.png");
+  background-image: url("paper.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -190,6 +190,7 @@ h1, h2, h3, h4 {
 }
 
 header {
+  z-index: 2;
   background-color: #aaa;
   width: 100%;
   position: fixed;
@@ -298,6 +299,10 @@ main {
       -ms-flex: 1;
           flex: 1;
   background-color: #fff;
+}
+
+#page1 #investigatorskills input[type=text] {
+  font-size: 1.2rem;
 }
 
 #page1 #investigatorskills .triplevalues > *:nth-child(2) {
