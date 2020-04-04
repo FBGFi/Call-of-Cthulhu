@@ -1,0 +1,24 @@
+{
+  "name": "Call-of-Cthulhu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FBGFi/Call-of-Cthulhu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FBGFi/Call-of-Cthulhu/issues"
+  },
+  "homepage": "https://github.com/FBGFi/Call-of-Cthulhu#readme",
+  "devDependencies": {
+    "electron": "^8.2.0"
+  }
+}

@@ -17,7 +17,7 @@
         <div id="page1">
             <div style="height:70px"></div>
             <div class="row">
-                <div id="charinfo">
+                <div id="charinfo" class="column">
                     <table>
                         <tbody>
                             <tr><td colspan="2"><h3>1920s Era Investigator</h3></td></tr>
@@ -30,7 +30,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="characteristics">
+                <div id="characteristics" class="column">
                     <table>
                         <tbody>
                             <tr class="grayback"><td colspan="3"><h2>Characteristics</h2></td></tr>
@@ -126,7 +126,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="picture"></div>
+                <div id="picture" class="column"></div>
             </div>
             <div class="row grayback">
                 <table id="numbervalues">
@@ -157,7 +157,7 @@
                         </tr>
                         <tr class="tableback">
                             <td colspan="2" rowspan="2">
-                                <table class="hasborder">
+                                <table class="hasborderright">
                                     <tbody id="hitpoints">
                                         <tr><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateleft">Hit Points</h4></td><td colspan="2"><div><div><div>Dying<input type="checkbox" name="" id=""></div></div></div></td><td><div class="clickable">(00)</div></td><td><div class="clickable">01</div></td><td><div class="clickable">02</div></td></tr>
                                         <tr><td colspan="2"><div><div><div>Unconscious<input type="checkbox" name="" id=""></div></div></div></td><td><div class="clickable">03</div></td><td><div class="clickable">04</div></td><td><div class="clickable">05</div></td></tr>
@@ -386,7 +386,7 @@
                                 </table>
                             </td>
                             <td>
-                                <table class="hasborder">
+                                <table class="hasborderleft">
                                     <tbody id="magicpoints">
                                         <tr class="clickablenumbers"><td><div>00</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateright">Magic Points</h4></td></tr>
                                         <tr class="clickablenumbers"><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td></tr>
@@ -400,10 +400,10 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
+            <div class="row column">
                 <table id="investigatorskills">
                     <tbody>
-                        <tr><td colspan="4"><h3>Investigator Skills</h3></td></tr>
+                        <tr class="grayback"><td colspan="4"><h2>Investigator Skills</h2></td></tr>
                         <tr>
                             <td>
                                 <div class="triplevalues">
@@ -1041,10 +1041,10 @@
             </div>
             <div class="row">
                 <div id="combatinfo">  
-                    <div id="weapons">         
+                    <div id="weapons" class="column">         
                         <table>
                             <tbody>
-                                <tr><td colspan="9"><h3>Weapons</h3></td></tr>
+                                <tr class="grayback"><td colspan="9"><h2>Weapons</h2></td></tr>
                                 <tr><td>Weapon</td><td>Regular</td><td>Hard</td><td>Extreme</td><td>Damage</td><td>Range</td><td>Attacks</td><td>Ammo</td><td>Malf</td></tr>
                                 <tr><td>Unarmed</td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td>1d3 + db</td><td>-</td><td>1</td><td>-</td><td>-</td></tr>
                                 <tr><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td></tr>
@@ -1055,10 +1055,10 @@
                             </tbody>
                         </table>
                     </div>       
-                    <div id="combat">
+                    <div id="combat" class="column">
                         <table>
                             <tbody>
-                                <tr><td colspan="2"><h3>Combat</h3></td></tr>
+                                <tr class="grayback"><td colspan="2"><h2>Combat</h2></td></tr>
                                 <tr><td><h4>Damage Bonus</h4></td><td><input type="number" name="" id=""></td></tr>
                                 <tr><td><h4>Build</h4></td><td><input type="number" name="" id=""></td></tr>
                                 <tr><td><h4>Dodge</h4></td><td><div><input type="number" name="" id=""><div><input type="number" name="" id=""><input type="number" name="" id=""></div></td></tr>
@@ -1069,10 +1069,10 @@
             </div>
         </div>
         <div id="page2">
-            <div class="row">
+            <div class="row column">
                 <table>
                     <tbody>
-                        <tr><td colspan="2"><h1>Backstory</h1></td></tr>
+                        <tr class="grayback"><td colspan="2"><h1>Backstory</h1></td></tr>
                         <tr>
                             <td><h3>Personal Description</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
                             <td><h3>Traits</h3><textarea name="" id="" cols="30" rows="10"></textarea></td>
@@ -1097,10 +1097,10 @@
                 </table>
             </div>
             <div class="row">
-                <div id="gear">
+                <div id="gear" class="column">
                     <table>
                         <tbody>
-                            <tr><td colspan="2"><h1>Gear & Possessions</h1></td></tr>
+                            <tr class="grayback"><td colspan="2"><h1>Gear & Possessions</h1></td></tr>
                             <tr>
                                 <td><input type="text" name="" id=""></td><td><input type="text" name="" id=""></td>
                             </tr>
@@ -1134,10 +1134,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="cash">
+                <div id="cash" class="column">
                     <table>
                         <tbody>
-                            <tr><td><h1>Cash & Assets</h1></td></tr>
+                            <tr class="grayback"><td><h1>Cash & Assets</h1></td></tr>
                             <tr><td><div>Spending Level&nbsp;<input type="text" name="" id=""></div></td></tr>
                             <tr><td><div>Cash&nbsp;<input type="text" name="" id=""></div></td></tr>
                             <tr><td><div>Assets&nbsp;<input type="text" name="" id=""></div></td></tr>
@@ -1153,9 +1153,9 @@
                 </div>
             </div>
             <div class="row">
-                <div id="rules">
+                <div id="rules" class="column">
                     <table>
-                        <tr><td><h1>Quick Reference Rules</h1></td></tr>
+                        <tr class="grayback"><td><h1>Quick Reference Rules</h1></td></tr>
                         <tr><td><h3>Skill & Characteristics Rolls</h3></td></tr>
                         <tr>
                             <td>
@@ -1181,10 +1181,10 @@
                         <tr><td><p><b>Natural Heal rate</b> (Major Wound): weekly healing roll</p></td></tr>
                     </table>                
                 </div>
-                <div id="fellowinvestigators">
+                <div id="fellowinvestigators" class="column">
                     <table>
                         <tbody>
-                            <tr><td colspan="3"><h1>Fellow Investigators</h1></td></tr>
+                            <tr class="grayback"><td colspan="3"><h1>Fellow Investigators</h1></td></tr>
                             <tr>
                                 <td><div>Char.&nbsp;<input type="text" name="" id=""></div><div>Player.&nbsp;<input type="text" name="" id=""></div></td>
                                 <td><div>Char.&nbsp;<input type="text" name="" id=""></div><div>Player.&nbsp;<input type="text" name="" id=""></div></td>
