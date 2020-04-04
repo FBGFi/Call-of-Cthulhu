@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
 $headerBack: #aaa;
 $tableHeader: #ccc;
+$transparentWhite: rgba(255,255,255,0.3);
 $mainFont: 'IM Fell English SC','Times New Roman', serif;
 
 input::-webkit-outer-spin-button,
@@ -9,9 +10,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 html{
-    background-image: url("paper.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 body{
     margin: auto;
@@ -28,6 +26,7 @@ body{
 input{
     width: 100%;
     text-align: center;
+    background-color: $transparentWhite;
 }
 input[type=text]{
     border-top: 0;
@@ -40,9 +39,10 @@ input[type=text]{
 input[type=number]{
     font-size: 1.1rem;
     font-weight: bold;
+    border: 1px solid $tableHeader;
 }
 input[type=checkbox]{
-    min-width:50px;
+    min-width:20px;
     height: 20px;
     cursor: pointer;
 }
@@ -83,6 +83,9 @@ input[type=checkbox]{
     width: 100%;
     margin-bottom: 20px;
     //border: 2px solid black;
+}
+.row:last-child{
+    margin-bottom: 0;
 }
 .column{  
     border: 2px solid $headerBack;
@@ -125,6 +128,12 @@ table{
 #page1, #page2{
     display: flex;
     flex-direction: column;
+    background-image: url("paper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 10px solid $headerBack;
 }
 textarea{
     width: 90%;
@@ -156,7 +165,7 @@ header{
         width: 300px;
         border: none !important;
         font-size: 1.7rem;
-        background-color: #fff !important;
+        background-color: $transparentWhite !important;
         margin-right: 3px;
     }
     button{
@@ -169,6 +178,7 @@ main{
     width: 1200px;
 }
 #page1{
+    margin-top: 70px;
     #hitpoints{
         td>div>div{
             justify-content: flex-end;
@@ -191,6 +201,12 @@ main{
         .clickablenumbers>td>div{
             cursor: pointer;
         }
+        input[type=number]{
+            background-color: #fff;
+            border: 2px solid $headerBack;
+            margin-right: 5px;
+            width: 50px;
+        }
     }
     #charinfo{
         flex: 2; 
@@ -203,7 +219,7 @@ main{
         }  
         tr:first-child{
             background-color: #111;
-            color: #fff;
+            color: $transparentWhite;
         }   
     }
     #characteristics{
@@ -212,7 +228,7 @@ main{
     }
     #picture{
         flex: 1;
-        background-color: #fff;
+        background-color: $transparentWhite;
     }
     #investigatorskills{
         input[type=text]{
@@ -252,7 +268,7 @@ main{
         #combat{
             flex: 1;
             tr:first-child{
-                border-bottom: 5px solid #fff;
+                border-bottom: 5px solid $transparentWhite;
             }
             tr:nth-child(4) div{
                 display: flex;

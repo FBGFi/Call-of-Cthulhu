@@ -5,12 +5,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-html {
-  background-image: url("paper.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 body {
   margin: auto;
   padding: 0;
@@ -29,6 +23,7 @@ body {
 input {
   width: 100%;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 input[type=text] {
@@ -43,10 +38,11 @@ input[type=text] {
 input[type=number] {
   font-size: 1.1rem;
   font-weight: bold;
+  border: 1px solid #ccc;
 }
 
 input[type=checkbox] {
-  min-width: 50px;
+  min-width: 20px;
   height: 20px;
   cursor: pointer;
 }
@@ -119,6 +115,10 @@ input[type=checkbox] {
   margin-bottom: 20px;
 }
 
+.row:last-child {
+  margin-bottom: 0;
+}
+
 .column {
   border: 2px solid #aaa;
 }
@@ -177,6 +177,12 @@ table {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background-image: url("paper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 10px solid #aaa;
 }
 
 textarea {
@@ -214,7 +220,7 @@ header input {
   width: 300px;
   border: none !important;
   font-size: 1.7rem;
-  background-color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
   margin-right: 3px;
 }
 
@@ -226,6 +232,10 @@ header button {
 
 main {
   width: 1200px;
+}
+
+#page1 {
+  margin-top: 70px;
 }
 
 #page1 #hitpoints td > div > div {
@@ -263,6 +273,13 @@ main {
   cursor: pointer;
 }
 
+#page1 #numbervalues input[type=number] {
+  background-color: #fff;
+  border: 2px solid #aaa;
+  margin-right: 5px;
+  width: 50px;
+}
+
 #page1 #charinfo {
   -webkit-box-flex: 2;
       -ms-flex: 2;
@@ -284,7 +301,7 @@ main {
 
 #page1 #charinfo tr:first-child {
   background-color: #111;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 #page1 #characteristics {
@@ -298,7 +315,7 @@ main {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 #page1 #investigatorskills input[type=text] {
@@ -355,7 +372,7 @@ main {
 }
 
 #page1 #combatinfo #combat tr:first-child {
-  border-bottom: 5px solid #fff;
+  border-bottom: 5px solid rgba(255, 255, 255, 0.3);
 }
 
 #page1 #combatinfo #combat tr:nth-child(4) div {
