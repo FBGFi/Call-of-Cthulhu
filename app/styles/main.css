@@ -8,8 +8,8 @@ input::-webkit-inner-spin-button {
 body {
   margin: auto;
   padding: 0;
-  width: 1200px;
   text-align: center;
+  position: relative;
 }
 
 * {
@@ -45,6 +45,29 @@ input[type=checkbox] {
   min-width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+#loadingscreen {
+  background-color: #444;
+  color: #fff;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 .triplevalues {
@@ -189,6 +212,8 @@ textarea {
   width: 90%;
   resize: none;
   font-size: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 5px;
 }
 
 h1, h2, h3, h4 {
@@ -220,7 +245,7 @@ header input {
   width: 300px;
   border: none !important;
   font-size: 1.7rem;
-  background-color: rgba(255, 255, 255, 0.3) !important;
+  background-color: #fff !important;
   margin-right: 3px;
 }
 
@@ -232,10 +257,9 @@ header button {
 
 main {
   width: 1200px;
-}
-
-#page1 {
-  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 70px;
 }
 
 #page1 #hitpoints td > div > div {
@@ -245,8 +269,16 @@ main {
   width: 100%;
 }
 
+#page1 #hitpoints #unconscious {
+  margin-right: 5px;
+}
+
 #page1 #numbervalues {
   border: 4px solid #ccc;
+}
+
+#page1 #numbervalues > tbody > tr:first-child div p, #page1 #numbervalues > tbody > tr:nth-child(3) div p {
+  padding: 3px 3px 0 0;
 }
 
 #page1 #numbervalues div {
@@ -280,6 +312,10 @@ main {
   width: 50px;
 }
 
+#page1 #numbervalues h1 {
+  padding: 5px 0;
+}
+
 #page1 #charinfo {
   -webkit-box-flex: 2;
       -ms-flex: 2;
@@ -301,7 +337,7 @@ main {
 
 #page1 #charinfo tr:first-child {
   background-color: #111;
-  color: rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
 
 #page1 #characteristics {
@@ -316,6 +352,9 @@ main {
       -ms-flex: 1;
           flex: 1;
   background-color: rgba(255, 255, 255, 0.3);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #page1 #investigatorskills input[type=text] {
@@ -363,6 +402,10 @@ main {
 
 #page1 #combatinfo #weapons tr {
   height: 30px;
+}
+
+#page1 #combatinfo #weapons input {
+  font-size: 1.0rem;
 }
 
 #page1 #combatinfo #combat {
@@ -418,23 +461,23 @@ main {
   height: 30px;
 }
 
-#page2 #cash {
+#page2 #cashandassets {
   -webkit-box-flex: 4;
       -ms-flex: 4;
           flex: 4;
 }
 
-#page2 #cash td {
+#page2 #cashandassets td {
   padding: 5px;
 }
 
-#page2 #cash div {
+#page2 #cashandassets div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#page2 #cash div input {
+#page2 #cashandassets div input {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;

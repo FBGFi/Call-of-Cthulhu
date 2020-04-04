@@ -7,6 +7,7 @@
 </head>
 <link rel="stylesheet" href="styles/main.css">
 <body>
+    <div id="loadingscreen"></div>
     <header>
         <h3>Current player:&nbsp;</h3>
         <input type="text" id="fileName">
@@ -129,12 +130,12 @@
                 <table id="numbervalues">
                     <tbody>
                         <tr>
-                            <td><div>Major Wound&nbsp;<input type="checkbox"  id=""></div></td>
-                            <td><div>Max HP&nbsp;<input type="number" placeholder="Max HP"  id=""></div></td>
-                            <td><div>Temp Insane&nbsp;<input type="checkbox"  id=""></div></td>
-                            <td><div>Indef. Insane&nbsp;<input type="checkbox"  id=""></div></td>
-                            <td><div>Start&nbsp;<input type="number" placeholder="Start"  id=""></div></td>
-                            <td><div>Max&nbsp;<input type="number" placeholder="Max"  id=""></div></td>
+                            <td><div>Major Wound<input type="checkbox"  id="majorwound"></div></td>
+                            <td><div><p>Max HP</p><input type="number" placeholder="Max HP"  id="maxhp"></div></td>
+                            <td><div>Temp Insane<input type="checkbox"  id="tempinsane"></div></td>
+                            <td><div>Indef. Insane<input type="checkbox"  id="indefinsane"></div></td>
+                            <td><div><p>Start</p><input type="number" placeholder="Start"  id="startsanity"></div></td>
+                            <td><div><p>Max</p><input type="number" placeholder="Max"  id="maxsanity"></div></td>
                             <td class="tableback">
                                 <table>
                                     <tbody class="sanity">
@@ -153,14 +154,41 @@
                             </td>
                         </tr>
                         <tr class="tableback">
-                            <td colspan="2" rowspan="2">
-                                <table class="hasborderright">
+                            <td colspan="2" rowspan="2" class="hasborderright">
+                                <table>
                                     <tbody id="hitpoints">
-                                        <tr><td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateleft">Hit Points</h4></td><td colspan="2"><div><div><div>Dying&nbsp;<input type="checkbox"  id=""></div></div></div></td><td><div class="clickable">(00)</div></td><td><div class="clickable">01</div></td><td><div class="clickable">02</div></td></tr>
-                                        <tr><td colspan="2"><div><div><div>Unconscious&nbsp;<input type="checkbox"  id=""></div></div></div></td><td><div class="clickable">03</div></td><td><div class="clickable">04</div></td><td><div class="clickable">05</div></td></tr>
-                                        <tr class="clickablenumbers"><td><div>06</div></td><td><div>07</div></td><td><div>08</div></td><td><div>09</div></td><td><div>10</div></td></tr>
-                                        <tr class="clickablenumbers"><td><div>11</div></td><td><div>12</div></td><td><div>13</div></td><td><div>14</div></td><td><div>15</div></td></tr>
-                                        <tr class="clickablenumbers"><td><div>16</div></td><td><div>17</div></td><td><div>18</div></td><td><div>19</div></td><td><div>20</div></td></tr>
+                                        <tr>
+                                            <td style="position: relative; width: 30px;"  rowspan="5"><h4 class="rotate rotateleft">Hit Points</h4></td>
+                                            <td colspan="3"><div><div><div>Dying&nbsp;<input type="checkbox"  id="dying"></div></div></div></td>
+                                            <td colspan="4"><div><div><div>Unconscious&nbsp;<input type="checkbox"  id="unconscious"></div></div></div></td>
+                                        </tr>
+                                        <tr class="clickablenumbers">
+                                            <td><div>(00)</div></td>
+                                            <td><div>01</div></td>
+                                            <td><div>02</div></td>
+                                            <td><div>03</div></td>
+                                            <td><div>04</div></td>
+                                            <td><div>05</div></td>
+                                            <td><div>06</div></td>
+                                        </tr>
+                                        <tr class="clickablenumbers">
+                                            <td><div>07</div></td>
+                                            <td><div>08</div></td>
+                                            <td><div>09</div></td>
+                                            <td><div>10</div></td>
+                                            <td><div>11</div></td>
+                                            <td><div>12</div></td>
+                                            <td><div>13</div></td>
+                                        </tr>
+                                        <tr class="clickablenumbers">
+                                            <td><div>14</div></td>
+                                            <td><div>15</div></td>
+                                            <td><div>16</div></td>
+                                            <td><div>17</div></td>
+                                            <td><div>18</div></td>
+                                            <td><div>19</div></td>
+                                            <td><div>20</div></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </td>
@@ -272,12 +300,12 @@
                                 </table>
                             </td>
                         </tr>
-                        <tr><td colspan="4"><h1>Call of Cthulhu</h1></td><td><div>Max MP&nbsp;<input type="number" placeholder="Max MP"  id=""></div></td></tr>
+                        <tr><td colspan="4"><h1>Call of Cthulhu</h1></td><td><div><p>Max MP</p><input type="number" placeholder="Max MP"  id="maxmp"></div></td></tr>
                         <tr class="tableback">
                             <td colspan="6">
                                 <table>
                                     <tbody id="luck">
-                                        <tr class="clickablenumbers"><td colspan="12" class="grayback"></td><td colspan="5"><div>Out of Luck</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td></tr>
+                                        <tr class="clickablenumbers"><td colspan="12" class="grayback"><div></div></td><td colspan="5"><div>Out of Luck</div></td><td><div>01</div></td><td><div>02</div></td><td><div>03</div></td><td><div>04</div></td><td><div>05</div></td><td><div>06</div></td><td><div>07</div></td></tr>
                                         <tr class="clickablenumbers">                                      
                                             <td style="position: relative; width: 30px;" rowspan="4"><h4 class="rotate rotateleft">Luck</h4></td>
                                             <td><div>08</div></td>
@@ -1039,12 +1067,12 @@
                             <tbody>
                                 <tr class="grayback"><td colspan="9"><h2>Weapons</h2></td></tr>
                                 <tr><td>Weapon</td><td>Regular</td><td>Hard</td><td>Extreme</td><td>Damage</td><td>Range</td><td>Attacks</td><td>Ammo</td><td>Malf</td></tr>
-                                <tr><td>Unarmed</td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td>1d3 + db</td><td>-</td><td>1</td><td>-</td><td>-</td></tr>
-                                <tr><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td></tr>
-                                <tr><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td></tr>
-                                <tr><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td></tr>
-                                <tr><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td></tr>
-                                <tr><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td><td><input type="text"  id=""></td></tr>
+                                <tr><td>Unarmed</td><td><input type="text"  id="uareg"></td><td><input type="text"  id="uahard"></td><td><input type="text"  id="uaext"></td><td>1d3 + db</td><td>-</td><td>1</td><td>-</td><td>-</td></tr>
+                                <tr><td><input type="text"  id="weapon1"></td><td><input type="text"  id="regular1"></td><td><input type="text"  id="hard1"></td><td><input type="text"  id="extreme1"></td><td><input type="text"  id="damage1"></td><td><input type="text"  id="range1"></td><td><input type="text"  id="attacks1"></td><td><input type="text"  id="ammo1"></td><td><input type="text"  id="malf1"></td></tr>
+                                <tr><td><input type="text"  id="weapon2"></td><td><input type="text"  id="regular2"></td><td><input type="text"  id="hard2"></td><td><input type="text"  id="extreme2"></td><td><input type="text"  id="damage2"></td><td><input type="text"  id="range2"></td><td><input type="text"  id="attacks2"></td><td><input type="text"  id="ammo2"></td><td><input type="text"  id="malf2"></td></tr>
+                                <tr><td><input type="text"  id="weapon3"></td><td><input type="text"  id="regular3"></td><td><input type="text"  id="hard3"></td><td><input type="text"  id="extreme3"></td><td><input type="text"  id="damage3"></td><td><input type="text"  id="range3"></td><td><input type="text"  id="attacks3"></td><td><input type="text"  id="ammo3"></td><td><input type="text"  id="malf3"></td></tr>
+                                <tr><td><input type="text"  id="weapon4"></td><td><input type="text"  id="regular4"></td><td><input type="text"  id="hard4"></td><td><input type="text"  id="extreme4"></td><td><input type="text"  id="damage4"></td><td><input type="text"  id="range4"></td><td><input type="text"  id="attacks4"></td><td><input type="text"  id="ammo4"></td><td><input type="text"  id="malf4"></td></tr>
+                                <tr><td><input type="text"  id="weapon5"></td><td><input type="text"  id="regular5"></td><td><input type="text"  id="hard5"></td><td><input type="text"  id="extreme5"></td><td><input type="text"  id="damage5"></td><td><input type="text"  id="range5"></td><td><input type="text"  id="attacks5"></td><td><input type="text"  id="ammo5"></td><td><input type="text"  id="malf5"></td></tr>
                             </tbody>
                         </table>
                     </div>       
@@ -1052,9 +1080,9 @@
                         <table>
                             <tbody>
                                 <tr class="grayback"><td colspan="2"><h2>Combat</h2></td></tr>
-                                <tr><td><h4>Damage Bonus</h4></td><td><input type="number"  id=""></td></tr>
-                                <tr><td><h4>Build</h4></td><td><input type="number"  id=""></td></tr>
-                                <tr><td><h4>Dodge</h4></td><td><div><input type="number"  id=""><div><input type="number"  id=""><input type="number"  id=""></div></td></tr>
+                                <tr><td><h4>Damage Bonus</h4></td><td><input type="number"  id="dmgbonus"></td></tr>
+                                <tr><td><h4>Build</h4></td><td><input type="number"  id="build"></td></tr>
+                                <tr><td><h4>Dodge</h4></td><td><div class="values"><input type="number"  id="dodgeval"><div><input type="number"><input type="number"></div></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1067,24 +1095,24 @@
                     <tbody>
                         <tr class="grayback"><td colspan="2"><h1>Backstory</h1></td></tr>
                         <tr>
-                            <td><h3>Personal Description</h3><textarea  id="" cols="30" rows="10"></textarea></td>
-                            <td><h3>Traits</h3><textarea  id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Personal Description</h3><textarea  id="description" cols="30" rows="10"></textarea></td>
+                            <td><h3>Traits</h3><textarea  id="traits" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
-                            <td><h3>Ideology/Beliefs</h3><textarea  id="" cols="30" rows="10"></textarea></td>
-                            <td><h3>Injuries & Scars</h3><textarea  id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Ideology/Beliefs</h3><textarea  id="ideology" cols="30" rows="10"></textarea></td>
+                            <td><h3>Injuries & Scars</h3><textarea  id="injuries" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
-                            <td><h3>Significant People</h3><textarea  id="" cols="30" rows="10"></textarea></td>
-                            <td><h3>Phobias & Manias</h3><textarea  id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Significant People</h3><textarea  id="people" cols="30" rows="10"></textarea></td>
+                            <td><h3>Phobias & Manias</h3><textarea  id="phobias" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
-                            <td><h3>Meaningful Locations</h3><textarea  id="" cols="30" rows="10"></textarea></td>
-                            <td><h3>Arcane Tomes, Spells & Artifacts</h3><textarea  id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Meaningful Locations</h3><textarea  id="locations" cols="30" rows="10"></textarea></td>
+                            <td><h3>Arcane Tomes, Spells & Artifacts</h3><textarea  id="spells" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
-                            <td><h3>Treasured Possessions</h3><textarea  id="" cols="30" rows="10"></textarea></td>
-                            <td><h3>Encounters with Strange Entities</h3><textarea  id="" cols="30" rows="10"></textarea></td>
+                            <td><h3>Treasured Possessions</h3><textarea  id="possessions" cols="30" rows="10"></textarea></td>
+                            <td><h3>Encounters with Strange Entities</h3><textarea  id="encounters" cols="30" rows="10"></textarea></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1095,52 +1123,52 @@
                         <tbody>
                             <tr class="grayback"><td colspan="2"><h1>Gear & Possessions</h1></td></tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear1"></td><td><input type="text"  id="gear11"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear2"></td><td><input type="text"  id="gear12"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear3"></td><td><input type="text"  id="gear13"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear4"></td><td><input type="text"  id="gear14"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear5"></td><td><input type="text"  id="gear15"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear6"></td><td><input type="text"  id="gear16"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear7"></td><td><input type="text"  id="gear17"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear8"></td><td><input type="text"  id="gear18"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear9"></td><td><input type="text"  id="gear19"></td>
                             </tr>
                             <tr>
-                                <td><input type="text"  id=""></td><td><input type="text"  id=""></td>
+                                <td><input type="text"  id="gear10"></td><td><input type="text"  id="gear20"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div id="cash" class="column">
+                <div id="cashandassets" class="column">
                     <table>
                         <tbody>
                             <tr class="grayback"><td><h1>Cash & Assets</h1></td></tr>
-                            <tr><td><div>Spending Level&nbsp;<input type="text"  id=""></div></td></tr>
-                            <tr><td><div>Cash&nbsp;<input type="text"  id=""></div></td></tr>
-                            <tr><td><div>Assets&nbsp;<input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
-                            <tr><td><div><input type="text"  id=""></div></td></tr>
+                            <tr><td><div>Spending Level&nbsp;<input type="text"  id="spending"></div></td></tr>
+                            <tr><td><div>Cash&nbsp;<input type="text"  id="cash"></div></td></tr>
+                            <tr><td><div>Assets&nbsp;<input type="text"  id="assets1"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets2"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets3"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets4"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets5"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets6"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets7"></div></td></tr>
+                            <tr><td><div><input type="text"  id="assets8"></div></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1179,19 +1207,19 @@
                         <tbody>
                             <tr class="grayback"><td colspan="3"><h1>Fellow Investigators</h1></td></tr>
                             <tr>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar1"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer1"></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar2"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer2"></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar3"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer3"></div></td>
                             </tr>
                             <tr>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar4"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer4"></div></td>
                                 <td><h1>Me</h1></td>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar5"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer5"></div></td>
                             </tr>
                             <tr>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id=""></div><div>Player.&nbsp;<input type="text"  id=""></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar6"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer6"></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar7"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer7"></div></td>
+                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar8"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer8"></div></td>
                             </tr>
                         </tbody>
                     </table>

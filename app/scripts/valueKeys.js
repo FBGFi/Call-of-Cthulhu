@@ -35,10 +35,11 @@ const keys = {
             maxhp: "maxhp",
             maxsanity: "maxsanity",
             startsanity: "startsanity",
+            maxmp: "maxmp",
             combat: [
                 "dmgbonus",
                 "build",
-                "dodge"
+                "dodgeval"
             ]
         },
         selectables: [
@@ -59,7 +60,7 @@ const keys = {
         ],
         textvalues: {
             gear: "gear",
-            fellowinvestigators: "investigators",
+            fellowinvestigators: "fellowinvestigators",
             backstory: [
                 "description",
                 "traits",

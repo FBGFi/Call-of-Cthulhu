@@ -14,8 +14,8 @@ html{
 body{
     margin: auto;
     padding: 0;
-    width: 1200px;
     text-align: center;
+    position: relative;
 }
 *{
     box-sizing: border-box;
@@ -45,6 +45,20 @@ input[type=checkbox]{
     min-width:20px;
     height: 20px;
     cursor: pointer;
+}
+#loadingscreen{
+    background-color: #444;
+    color: #fff;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    top:0;
+    left:0;
+    z-index: 3;
 }
 .triplevalues{
     display: flex;
@@ -139,6 +153,8 @@ textarea{
     width: 90%;
     resize: none;
     font-size: 1.5rem;
+    background-color: $transparentWhite;
+    padding: 5px;
 }
 td{
     //border: 1px solid black;
@@ -165,7 +181,7 @@ header{
         width: 300px;
         border: none !important;
         font-size: 1.7rem;
-        background-color: $transparentWhite !important;
+        background-color: #fff !important;
         margin-right: 3px;
     }
     button{
@@ -176,17 +192,25 @@ header{
 }
 main{
     width: 1200px;
+    margin-left:auto;
+    margin-right: auto;
+    padding-top: 70px;
 }
 #page1{
-    margin-top: 70px;
     #hitpoints{
         td>div>div{
             justify-content: flex-end;
             width: 100%;
         }
+        #unconscious{
+            margin-right: 5px;
+        }
     }
     #numbervalues{
         border: 4px solid $tableHeader;
+        &>tbody>tr:first-child div p, &>tbody>tr:nth-child(3) div p{
+            padding: 3px 3px 0 0;
+        }
         div{
             display: flex;
             justify-content: center;
@@ -207,6 +231,9 @@ main{
             margin-right: 5px;
             width: 50px;
         }
+        h1{
+            padding: 5px 0;
+        }
     }
     #charinfo{
         flex: 2; 
@@ -219,7 +246,7 @@ main{
         }  
         tr:first-child{
             background-color: #111;
-            color: $transparentWhite;
+            color: #fff;
         }   
     }
     #characteristics{
@@ -229,6 +256,9 @@ main{
     #picture{
         flex: 1;
         background-color: $transparentWhite;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
     #investigatorskills{
         input[type=text]{
@@ -261,8 +291,8 @@ main{
             tr{
                 height: 30px;
             }
-            td{
-                //padding: 0 3px;
+            input{
+                font-size: 1.0rem;
             }
         }
         #combat{
@@ -299,7 +329,7 @@ main{
             height: 30px;
         }
     }
-    #cash{
+    #cashandassets{
         flex:4;
         td{
             padding: 5px;
