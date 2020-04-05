@@ -34,7 +34,7 @@ input {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-input[type=text] {
+input[type=text]:not(#dmgbonus) {
   border-top: 0;
   border-left: 0;
   border-right: 0;
@@ -43,7 +43,7 @@ input[type=text] {
   background: none;
 }
 
-input[type=number] {
+input[type=number], #dmgbonus {
   font-size: 1.1rem;
   font-weight: bold;
   border: 1px solid #ccc;
@@ -78,7 +78,7 @@ input[type=checkbox] {
           flex-direction: column;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 4;
 }
 
 #loadingscreen h1 {
@@ -239,7 +239,7 @@ h1, h2, h3, h4 {
 }
 
 header {
-  z-index: 2;
+  z-index: 3;
   background-color: #aaa;
   width: 100%;
   min-width: 1200px;
@@ -374,6 +374,62 @@ main {
   margin: 0 4px;
 }
 
+#page1 #characteristics #mainvalues {
+  position: relative;
+}
+
+#page1 #characteristics #mainvalues h2 {
+  margin-right: 10px;
+}
+
+#page1 #characteristics #mainvalues > button {
+  padding: 0 5px;
+  font-size: 1.1rem;
+  position: absolute;
+  right: 6px;
+  top: 0;
+  height: 32px;
+}
+
+#page1 #characteristics #mainvalues #infocontainer {
+  position: absolute;
+  background-color: #ccc;
+  border: 2px solid #aaa;
+  right: -206px;
+  top: -8px;
+  z-index: 2;
+  width: 200px;
+  min-height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 5px 5px 0 5px;
+}
+
+#page1 #characteristics #mainvalues #infocontainer #infotext {
+  border: 2px solid #aaa;
+  background: url("paper_small.jpg");
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+  font-size: 1.3rem;
+  padding: 10px;
+}
+
+#page1 #characteristics #mainvalues #infocontainer #infotext p {
+  font-size: 1.0rem;
+}
+
+#page1 #characteristics #mainvalues #infocontainer #confirm {
+  width: 100px;
+  font-size: 1.2rem;
+  margin: 3px;
+}
+
 #page1 #picture {
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -477,8 +533,8 @@ main {
           flex-direction: column;
 }
 
-#page1 #combatinfo #combat input[type=number] {
-  font-size: 1.5rem;
+#page1 #combatinfo #combat input {
+  font-size: 1.5rem !important;
 }
 
 #page2 #gear {
@@ -562,26 +618,127 @@ main {
   -webkit-box-flex: 3;
       -ms-flex: 3;
           flex: 3;
+  background: url("tentacles.png");
+  background-position: right 0 bottom -40px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #page2 #fellowinvestigators input {
   margin-bottom: 15px;
+  font-size: 1.2rem !important;
 }
 
 #page2 #fellowinvestigators td {
-  padding: 5px;
+  padding: 5px 15px;
 }
 
-#page2 #fellowinvestigators td div {
+#page2 #fellowinvestigators td > div {
+  padding: 5px;
+  border: 2px solid #aaa;
+  background: url("./paper_small.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+#page2 #fellowinvestigators td div > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#page2 #fellowinvestigators td div > * {
+#page2 #fellowinvestigators td div > div > *:not(p) {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+#page2 #fellowinvestigators td div > div p {
+  padding-top: 5px;
+}
+
+#page2 #fellowinvestigators td .me {
+  color: #fff;
+  font-size: 2.4rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 240px;
+  background-color: #aaa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: left 1s;
+  transition: left 1s;
+}
+
+footer.hidden {
+  left: -200px;
+}
+
+footer #dice {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+footer #dice > div {
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 41px;
+}
+
+footer #dice > div button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 1.3rem;
+  padding: 0 10px;
+}
+
+footer #dice > div p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 1.3rem;
+  padding-top: 3px;
+}
+
+footer #dice > div input {
+  width: 40px;
+  margin-left: 5px;
+  font-size: 1.3rem;
+}
+
+footer #hidedice {
+  cursor: pointer;
+  width: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+footer #hidedice:hover {
+  background-color: #666;
+}
+
+footer #hidedice p {
+  font-size: 1.3rem;
 }
 
 @-webkit-keyframes loadingPump {

@@ -1,5 +1,6 @@
 const valueKeys = {
     required: {
+        valuescalculated: "valuescalculated",
         textvalues:{
             playerInfo: [
                 "name",

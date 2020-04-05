@@ -10,7 +10,7 @@
     <div id="loadingscreen"></div>
     <header>
         <button id="calculate">Calculate values</button>
-        <h3>Current player:&nbsp;</h3>
+        <h3>Current character:&nbsp;</h3>
         <input type="text" id="fileName">
         <button id="load">Load</button>
         <button id="save">Save</button>
@@ -35,7 +35,7 @@
                 <div id="characteristics" class="column">
                     <table>
                         <tbody>
-                            <tr class="grayback"><td colspan="3"><h2>Characteristics</h2></td></tr>
+                            <tr class="grayback"><td colspan="3"><div id="mainvalues"><h2>Characteristics</h2><button id="maincalcs">Calculate</button><div id="infocontainer" style="visibility: hidden;"><p id="infotext"></p><div><button id="confirm">Done!</button></div></div></div></td></tr>
                             <tr>
                                 <td>
                                     <div class="triplevalues">
@@ -1084,7 +1084,7 @@
                         <table>
                             <tbody>
                                 <tr class="grayback"><td colspan="2"><h2>Combat</h2></td></tr>
-                                <tr><td><h4>Damage Bonus</h4></td><td><input type="number"  id="dmgbonus"></td></tr>
+                                <tr><td><h4>Damage Bonus</h4></td><td><input type="text"  id="dmgbonus"></td></tr>
                                 <tr><td><h4>Build</h4></td><td><input type="number"  id="build"></td></tr>
                                 <tr><td><h4>Dodge</h4></td><td><div class="values"><input type="number"  id="dodgeval"><div><input type="number"><input type="number"></div></td></tr>
                             </tbody>
@@ -1211,19 +1211,19 @@
                         <tbody>
                             <tr class="grayback"><td colspan="3"><h1>Fellow Investigators</h1></td></tr>
                             <tr>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar1"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer1"></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar2"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer2"></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar3"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer3"></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar1"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer1"></div></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar2"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer2"></div></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar3"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer3"></div></div></td>
                             </tr>
                             <tr>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar4"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer4"></div></td>
-                                <td><h1>Me</h1></td>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar5"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer5"></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar4"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer4"></div></div></td>
+                                <td><h1 class="me">ME</h1></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar5"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer5"></div></div></td>
                             </tr>
                             <tr>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar6"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer6"></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar7"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer7"></div></td>
-                                <td><div>Char.&nbsp;<input type="text"  id="fellowchar8"></div><div>Player.&nbsp;<input type="text"  id="fellowplayer8"></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar6"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer6"></div></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar7"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer7"></div></div></td>
+                                <td><div><div><p>Char.&nbsp;</p><input type="text"  id="fellowchar8"></div><div><p>Player.&nbsp;</p><input type="text"  id="fellowplayer8"></div></div></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1231,6 +1231,21 @@
             </div>
         </div>
     </main>
+    <footer id="footer" class="hidden">
+        <div id="dice">          
+            <div><p>Times to roll:</p><input type="number" value="0" id="rollcount"></div>
+            <div><button id="d4" class="dice">Roll D4</button><input type="number" id=""></div>
+            <div><button id="d6" class="dice">Roll D6</button><input type="number" id=""></div>
+            <div><button id="d8" class="dice">Roll D8</button><input type="number" id=""></div>
+            <div><button id="d10" class="dice">Roll D10</button><input type="number" id=""></div>
+            <div><button id="d12" class="dice">Roll D12</button><input type="number" id=""></div>
+            <div><button id="d20" class="dice">Roll D20</button><input type="number" id=""></div>
+            <div><button id="d100" class="dice">Roll D100</button><input type="number" id=""></div>
+        </div>
+        <div id="hidedice">
+            <p id="arrows">&gt;&gt;</p>
+        </div>
+    </footer>
 </body>
 <script src="scripts/main.js"></script>
 </html>
