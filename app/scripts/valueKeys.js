@@ -1,4 +1,4 @@
-const keys = {
+const valueKeys = {
     required: {
         textvalues:{
             playerInfo: [
@@ -149,4 +149,8 @@ const keys = {
 
 };
 
-module.exports = keys;
+try {
+    module.exports = valueKeys;   
+} catch {
+    //export default valueKeys;
+}

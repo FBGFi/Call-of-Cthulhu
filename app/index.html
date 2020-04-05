@@ -9,10 +9,12 @@
 <body>
     <div id="loadingscreen"></div>
     <header>
+        <button id="calculate">Calculate values</button>
         <h3>Current player:&nbsp;</h3>
         <input type="text" id="fileName">
         <button id="load">Load</button>
         <button id="save">Save</button>
+        <button id="new">New</button>
     </header>
     <main>
         <div id="page1">
@@ -124,7 +126,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="picture" class="column"></div>
+                <div id="picture" class="column">
+                    <input type="file" id="pictureInput">
+                </div>
             </div>
             <div class="row grayback">
                 <table id="numbervalues">

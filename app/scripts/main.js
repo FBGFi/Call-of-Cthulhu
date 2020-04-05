@@ -1,11 +1,15 @@
 const keys = require('./scripts/valueKeys');
 const electron = require('electron');
+
 let savingData = false;
 let playerName = localStorage.getItem("PLAYER_NAME");
 let userData;
 
 loadPage();
 async function loadPage(){
+    if (electron == undefined) {
+        await sleep(1000);
+    }
     if(playerName != null && playerName.length > 0){ 
         try {
             userData = require('./saves/' + playerName + '.json');
@@ -26,26 +30,7 @@ async function loadPage(){
             field.nextElementSibling.children[1].value = Math.floor(value/5); 
         });
     }
-
-    document.getElementById("save").addEventListener(("click"), (e) => {
-        saveData();
-    });
-
-    document.getElementById("load").addEventListener(("click"), (e) => {
-        let filename = document.getElementById("fileName").value;
-        let checkFile;
-        try {
-            checkFile = require('./saves/' + filename + '.json');
-            if(filename != ""){
-                localStorage.setItem("PLAYER_NAME", filename);
-                location.reload();           
-            }        
-        } catch {
-            electron.remote.dialog.showErrorBox('No data found', 'Player data has not been saved yet!');
-        }      
-    });
-
-    addClickableEvents();
+    addEventListeners();
     if(userData != null){      
         countTriplesforMainSkills(keys.required.numbervalues.characteristics, userData.required.numbervalues.characteristics);
         countTriplesforMainSkills(keys.required.numbervalues.investigatorskills, userData.required.numbervalues.investigatorskills);
@@ -63,12 +48,52 @@ async function loadPage(){
         getCheckBoxes(keys.optional.checkboxes, userData.optional.checkboxes);
         getInitNumbers(userData.required.numbervalues.maxhp, userData.required.numbervalues.maxsanity, userData.required.numbervalues.startsanity, userData.required.numbervalues.maxmp);
         getPlayerInfo(keys.required.numbervalues.combat, userData.required.numbervalues.combat);
-        if(userData.optional.picture != ""){           
-            document.getElementById("picture").style.backgroundImage = 'url("./styles/' + userData.optional.picture + '")';
-        }
+        checkPicture(userData.optional.picture);
     }
     removeLoadingScreen();
 }
+async function addEventListeners(){   
+    addClickableEvents();
+
+    document.getElementById("pictureInput").addEventListener(("change"), (e) => {
+        let type = e.target.files[0].type;
+        if(type == "image/png" || type == "image/jpeg" || type == "image/jpg" || type == "image/svg+xml"){
+            let path = e.target.files[0].path;                    
+            path = path.replace(/\\/g, '/');                
+            document.getElementById("picture").style.backgroundImage = 'url("' + path + '")';
+            userData.optional.picture = path;
+        }
+        else{
+            showAlert("Wrong filetype", "Only .jpg .jpeg .png and .svg files are accepted!");
+            document.getElementById("picture").attributes.removeNamedItem("style");
+        }
+               
+    });
+
+    document.getElementById("new").addEventListener(("click"), (e) => {
+        localStorage.removeItem("PLAYER_NAME");
+        location.reload();
+    });
+
+    document.getElementById("save").addEventListener(("click"), (e) => {
+        saveData();
+    });
+
+    document.getElementById("load").addEventListener(("click"), (e) => {
+        let filename = document.getElementById("fileName").value;
+        let checkFile;
+        try {
+            checkFile = require('./saves/' + filename + '.json');
+            if(filename != ""){
+                localStorage.setItem("PLAYER_NAME", filename);
+                location.reload();           
+            }        
+        } catch {
+            showAlert('No data found', 'Player data has not been saved yet!', "error");
+        }      
+    });
+}
+
 async function saveData(){
     if(!savingData){
         savingData = true;
@@ -76,17 +101,16 @@ async function saveData(){
         savingData = false;      
     }
 }
+
 async function removeLoadingScreen(){
     let loadingscreen = document.getElementById("loadingscreen");
     let loadHeader = document.createElement('h1');
-    loadHeader.innerHTML = "Loading";
+    loadHeader.innerHTML = "Loading...";
+    await sleep(10);
+    loadingscreen.style.backgroundImage = 'url("./styles/paper_dark.jpeg")';
     await sleep(10);
     loadingscreen.appendChild(loadHeader);
-    await sleep(500);   
-    for (let i = 0; i < 5; i++) {
-        loadingscreen.firstChild.innerHTML += '.';  
-        await sleep(500);   
-    }
+    await sleep(5000); 
     loadingscreen.remove();
 }
 async function addClickableEvents(){
@@ -100,12 +124,20 @@ async function addClickableEvents(){
             if(cellDiv != null && cellDiv.tagName == "DIV"){        
                 cellDiv.addEventListener("click", (e) => {
                     let valueClass = e.toElement.parentNode.parentNode.parentNode;
+                    let oldValue;
+                    
                     if(valueClass.id != ""){
                         valueClass = valueClass.id;
                     }
                     else{
-                        valueClass = "sanityValue";
+                        valueClass = "sanityValue"; 
                     }
+                    
+                    oldValue = document.getElementsByClassName("clicked " + valueClass);                                    
+                    if(oldValue.length > 0){
+                        oldValue[0].classList.value = "";
+                    }    
+
                     e.toElement.classList.toggle("clicked"); 
                     e.toElement.classList.toggle(valueClass); 
                                 
@@ -113,6 +145,16 @@ async function addClickableEvents(){
             }   
         }
         
+    }
+}
+async function checkPicture(path){   
+    if(path != ""){   
+        if(ImageExist(userData.optional.picture)){
+            document.getElementById("picture").style.backgroundImage = 'url("' + path + '")'; 
+        }  
+        else{
+            document.getElementById("picture").style.backgroundImage = "./saves/profile.jpg";
+        }   
     }
 }
 async function getInitNumbers(maxhp, maxsanity, startsanity, maxmp){    
@@ -157,7 +199,7 @@ async function getClickables(currentValue, id){
             for (let k = 0; k < row.children.length; k++) {                
                 if(row.children[k].children[0].innerHTML == currentValue){                   
                     row.children[k].children[0].classList.add("clicked");
-                    row.children[k].children[0].classList.add(id);
+                    row.children[k].children[0].classList.add(id + "Value");
                     return;
                 } 
             }          
@@ -289,9 +331,27 @@ async function getInvestigatorSkills(keyArr, json){
         
     }
 }
+function showAlert(title, message, type = "warning") { 
+    if(electron != undefined){       
+        electron.remote.dialog.showMessageBox({
+            type: type,
+            title: title,
+            message: message,
+        });
+    } else {
+        alert(title, message);
+    }
+}
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 function checkBool(val){ 
     return val == "true" ? true : false;
+}
+async function ImageExist(url) 
+{  
+    var img = new Image();
+    img.src = url;
+    await sleep(100);  
+    return img.height != 0;
 }

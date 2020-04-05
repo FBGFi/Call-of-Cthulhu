@@ -5,6 +5,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+html {
+  background: url("paper_dark.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 body {
   margin: auto;
   padding: 0;
@@ -48,7 +56,10 @@ input[type=checkbox] {
 }
 
 #loadingscreen {
-  background-color: #444;
+  background-color: #111;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   color: #fff;
   height: 100vh;
   width: 100vw;
@@ -68,6 +79,12 @@ input[type=checkbox] {
   top: 0;
   left: 0;
   z-index: 3;
+}
+
+#loadingscreen h1 {
+  -webkit-animation: loadingPump infinite alternate 1s;
+          animation: loadingPump infinite alternate 1s;
+  opacity: 1;
 }
 
 .triplevalues {
@@ -148,8 +165,9 @@ input[type=checkbox] {
 
 .clicked {
   font-weight: bold;
-  border: 2px solid black;
-  border-radius: 10px;
+  background: #333;
+  border-radius: 50%;
+  color: #fff;
 }
 
 .rotate {
@@ -224,6 +242,7 @@ header {
   z-index: 2;
   background-color: #aaa;
   width: 100%;
+  min-width: 1200px;
   position: fixed;
   height: 50px;
   left: 0;
@@ -234,6 +253,7 @@ header {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  padding-right: 5px;
 }
 
 header > * {
@@ -250,9 +270,16 @@ header input {
 }
 
 header button {
-  width: 150px;
+  min-width: 150px;
+  padding: 0 10px;
   height: 80%;
   font-size: 1.5rem;
+}
+
+header button:first-child {
+  position: absolute;
+  left: 5px;
+  top: 5px;
 }
 
 main {
@@ -355,6 +382,15 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+#page1 #picture input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
 }
 
 #page1 #investigatorskills input[type=text] {
@@ -546,5 +582,23 @@ main {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+@-webkit-keyframes loadingPump {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes loadingPump {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
 }
 /*# sourceMappingURL=main.css.map */

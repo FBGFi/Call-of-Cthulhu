@@ -2,7 +2,7 @@
     "required": {
         "textvalues":{
             "playerInfo": {
-                "name": "Aleksi",
+                "name": "Sr. Reginald",
                 "player": "Aleksi",
                 "occupatice": "Miner",
                 "age": "80",
@@ -46,14 +46,14 @@
             }
         },
         "selectables": {
-            "hitpoints": "18",
-            "sanity": "88",
-            "magicpoints": "24",
-            "luck": "24"
+            "hitpoints": "(00)",
+            "sanity": "Insane",
+            "magicpoints": "00",
+            "luck": "Out of Luck"
         }
     },
     "optional":{
-        "picture": "profile.jpg",
+        "picture": "D:/Ohjelmat/GitHub/Call-of-Cthulhu/app/saves/profile.jpg",
         "checkboxes": {
             "majorwound": "false",
             "dying": "false",
