@@ -273,6 +273,20 @@ main{
     #characteristics{
         flex: 3;
         margin: 0 4px;
+        tr>td>div{
+            display: flex;
+            padding: 5px;
+            &>*{
+                flex:1;
+            }
+        }
+        #move{
+            flex: 1;
+            height: 48px;
+            margin: 3px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
         #mainvalues{
             position: relative;
             h2{
@@ -352,6 +366,11 @@ main{
             width: 100%;
             height: 100%;
             text-align: center;
+            background: none;
+            border-bottom: 1px solid black;
+            border-left: none;
+            border-right: none;
+            border-top: none;
         }
         td{           
             padding: 0 5px 5px 5px;
@@ -517,6 +536,40 @@ footer{
         }
         p{
             font-size: 1.3rem;
+        }
+    }
+}
+#personalInterests{
+    width: 200px;
+    height: 80px;
+    padding: 5px;
+    background: url('./paper_small.jpg');
+    border: 3px solid $headerBack;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    display: flex;
+    &>*{
+        flex: 1;
+    }
+    input{
+        background-color: rgba(0,0,0,0.8);
+        font-size: 2.7rem;
+        color: #fff;
+    }
+    p:last-child{
+        position: absolute;
+        color: #fff;
+        background-color: #222;
+        padding: 0 2px;
+        right: 0;
+        top: 0;
+        font-weight: bold;
+        transition: background-color 0.5s, color 0.5s;
+        cursor: pointer;
+        &:hover{
+            background-color: #999;
+            color: #000;
         }
     }
 }

@@ -114,11 +114,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="triplevalues">
+                                    <div>
                                         <h3>Move Rate</h3>
-                                        <div class="values">
                                         <input type="number"  id="move">
-                                        <div><input type="number"><input type="number"></div>
                                     </div>
                                     </div>
                                 </td>
@@ -1071,12 +1069,12 @@
                             <tbody>
                                 <tr class="grayback"><td colspan="9"><h2>Weapons</h2></td></tr>
                                 <tr><td>Weapon</td><td>Regular</td><td>Hard</td><td>Extreme</td><td>Damage</td><td>Range</td><td>Attacks</td><td>Ammo</td><td>Malf</td></tr>
-                                <tr><td>Unarmed</td><td><input type="text"  id="uareg"></td><td><input type="text"  id="uahard"></td><td><input type="text"  id="uaext"></td><td>1d3 + db</td><td>-</td><td>1</td><td>-</td><td>-</td></tr>
-                                <tr><td><input type="text"  id="weapon1"></td><td><input type="text"  id="regular1"></td><td><input type="text"  id="hard1"></td><td><input type="text"  id="extreme1"></td><td><input type="text"  id="damage1"></td><td><input type="text"  id="range1"></td><td><input type="text"  id="attacks1"></td><td><input type="text"  id="ammo1"></td><td><input type="text"  id="malf1"></td></tr>
-                                <tr><td><input type="text"  id="weapon2"></td><td><input type="text"  id="regular2"></td><td><input type="text"  id="hard2"></td><td><input type="text"  id="extreme2"></td><td><input type="text"  id="damage2"></td><td><input type="text"  id="range2"></td><td><input type="text"  id="attacks2"></td><td><input type="text"  id="ammo2"></td><td><input type="text"  id="malf2"></td></tr>
-                                <tr><td><input type="text"  id="weapon3"></td><td><input type="text"  id="regular3"></td><td><input type="text"  id="hard3"></td><td><input type="text"  id="extreme3"></td><td><input type="text"  id="damage3"></td><td><input type="text"  id="range3"></td><td><input type="text"  id="attacks3"></td><td><input type="text"  id="ammo3"></td><td><input type="text"  id="malf3"></td></tr>
-                                <tr><td><input type="text"  id="weapon4"></td><td><input type="text"  id="regular4"></td><td><input type="text"  id="hard4"></td><td><input type="text"  id="extreme4"></td><td><input type="text"  id="damage4"></td><td><input type="text"  id="range4"></td><td><input type="text"  id="attacks4"></td><td><input type="text"  id="ammo4"></td><td><input type="text"  id="malf4"></td></tr>
-                                <tr><td><input type="text"  id="weapon5"></td><td><input type="text"  id="regular5"></td><td><input type="text"  id="hard5"></td><td><input type="text"  id="extreme5"></td><td><input type="text"  id="damage5"></td><td><input type="text"  id="range5"></td><td><input type="text"  id="attacks5"></td><td><input type="text"  id="ammo5"></td><td><input type="text"  id="malf5"></td></tr>
+                                <tr><td>Unarmed</td><td><input type="number"  id="uareg"></td><td><input type="number"  id="uahard"></td><td><input type="number"  id="uaext"></td><td>1d3 + db</td><td>-</td><td>1</td><td>-</td><td>-</td></tr>
+                                <tr><td><input type="text"  id="weapon1"></td><td><input type="number"  id="regular1"></td><td><input type="number"  id="hard1"></td><td><input type="number"  id="extreme1"></td><td><input type="text"  id="damage1"></td><td><input type="text"  id="range1"></td><td><input type="text"  id="attacks1"></td><td><input type="text"  id="ammo1"></td><td><input type="text"  id="malf1"></td></tr>
+                                <tr><td><input type="text"  id="weapon2"></td><td><input type="number"  id="regular2"></td><td><input type="number"  id="hard2"></td><td><input type="number"  id="extreme2"></td><td><input type="text"  id="damage2"></td><td><input type="text"  id="range2"></td><td><input type="text"  id="attacks2"></td><td><input type="text"  id="ammo2"></td><td><input type="text"  id="malf2"></td></tr>
+                                <tr><td><input type="text"  id="weapon3"></td><td><input type="number"  id="regular3"></td><td><input type="number"  id="hard3"></td><td><input type="number"  id="extreme3"></td><td><input type="text"  id="damage3"></td><td><input type="text"  id="range3"></td><td><input type="text"  id="attacks3"></td><td><input type="text"  id="ammo3"></td><td><input type="text"  id="malf3"></td></tr>
+                                <tr><td><input type="text"  id="weapon4"></td><td><input type="number"  id="regular4"></td><td><input type="number"  id="hard4"></td><td><input type="number"  id="extreme4"></td><td><input type="text"  id="damage4"></td><td><input type="text"  id="range4"></td><td><input type="text"  id="attacks4"></td><td><input type="text"  id="ammo4"></td><td><input type="text"  id="malf4"></td></tr>
+                                <tr><td><input type="text"  id="weapon5"></td><td><input type="number"  id="regular5"></td><td><input type="number"  id="hard5"></td><td><input type="number"  id="extreme5"></td><td><input type="text"  id="damage5"></td><td><input type="text"  id="range5"></td><td><input type="text"  id="attacks5"></td><td><input type="text"  id="ammo5"></td><td><input type="text"  id="malf5"></td></tr>
                             </tbody>
                         </table>
                     </div>       
@@ -1096,7 +1094,7 @@
         <div id="page2">
             <div class="row column">
                 <table>
-                    <tbody>
+                    <tbody id="backstory">
                         <tr class="grayback"><td colspan="2"><h1>Backstory</h1></td></tr>
                         <tr>
                             <td><h3>Personal Description</h3><textarea  id="description" cols="30" rows="10"></textarea></td>
@@ -1231,6 +1229,11 @@
             </div>
         </div>
     </main>
+    <div id="personalInterests" style="visibility: hidden;">
+        <p>Personal interests points left</p>
+        <input type="number" id="interestvalue">
+        <p>X</p>
+    </div>
     <footer id="footer" class="hidden">
         <div id="dice">          
             <div><p>Times to roll:</p><input type="number" value="0" id="rollcount"></div>

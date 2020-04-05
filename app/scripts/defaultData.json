@@ -30,8 +30,8 @@
                 "move": ""
             },
             "investigatorskills": {
-                "credit": "",
-                "mythos": ""
+                "credit": "0",
+                "mythos": "0"
             },        
             "maxhp": "",
             "maxsanity": "",

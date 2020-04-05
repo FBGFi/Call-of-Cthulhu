@@ -6,6 +6,7 @@ const fs = require('fs');
 let savingData = false;
 let charName = localStorage.getItem("PLAYER_NAME");
 let userData;
+let personalValue = 0;
 
 loadPage();
 async function loadPage(){
@@ -65,7 +66,7 @@ async function addEventListeners(){
             let age = document.getElementById("age").value;           
             let infoText;
             for (let i = 0; i < ageMods.length; i++) {
-                if(age < 15){
+                if(age < 15 || age > 89){
                     document.getElementById("infocontainer").remove();
                     return;
                 } else if(age <= ageMods[i][0]){
@@ -93,6 +94,7 @@ async function addEventListeners(){
     document.getElementById("calculate").addEventListener(("click"), async (e) => {
         if(!checkBool(userData.required.valuescalculated)){
             calculateValues();
+            userData.required.valuescalculated = true;
         }
         else{
             let promise = await showAlert("Already calculated!", "Confirm to do recalculations", "warning", "Confirm");
@@ -142,6 +144,146 @@ async function addEventListeners(){
     addCharInfoListeners(document.getElementById("charinfo").children[0].children[0]);
     addMainStatListeners(keys.required.numbervalues.characteristics);
     addInvestigatorListeners(keys.optional.investigatorskills);
+
+    document.getElementById("maxhp").addEventListener("change", (e) => {
+        initClickableEvents(e);
+    });
+    document.getElementById("startsanity").addEventListener("change", (e) => {
+        initClickableEvents(e);
+    });
+    document.getElementById("maxsanity").addEventListener("change", (e) => {
+        initClickableEvents(e);
+    });
+    document.getElementById("maxmp").addEventListener("change", (e) => {
+        initClickableEvents(e);
+    });
+
+    for (let i = 0; i < keys.optional.checkboxes.length; i++) {
+        document.getElementById(keys.optional.checkboxes[i]).addEventListener("change", (e) => {
+            userData.optional.checkboxes[e.target.id] = e.target.checked;           
+        });       
+    }
+    document.getElementById("credit").addEventListener("change", (e) => {
+        userData.required.numbervalues.investigatorskills[e.target.id] = e.target.value;
+    });
+    document.getElementById("mythos").addEventListener("change", (e) => {
+        userData.required.numbervalues.investigatorskills[e.target.id] = e.target.value;
+    });
+
+    document.getElementById("personalInterests").children[2].addEventListener("click", (e) => {
+        document.getElementById("personalInterests").remove();
+    });
+
+    let backstory = document.getElementById("backstory").children;
+    for (let i = 1; i < backstory.length; i++) {       
+        for (let j = 0; j < backstory[i].children.length; j++) {
+            backstory[i].children[j].children[1].addEventListener("change", (e) => {
+                userData.optional.textvalues.backstory[e.target.id] = e.target.value;               
+            });           
+        }       
+    }
+    let gear = document.getElementById("gear").children[0].children[0].children;
+    for (let i = 1; i < gear.length; i++) {       
+        for (let j = 0; j < gear[i].children.length; j++) {
+            gear[i].children[j].children[0].addEventListener("change", (e) => {
+                let index = e.target.id.replace("gear", '');
+                index = parseInt(index) - 1;
+                userData.optional.textvalues.gear[index] = e.target.value;               
+            });           
+        }       
+    }
+    document.getElementById("spending").addEventListener("change", (e) =>{
+        let value = e.target.value;
+        if(!value.includes('$')){
+            value += '$';
+            e.target.value = value;
+        }
+        userData.required.textvalues.cash.spending = value;
+    });
+    document.getElementById("cash").addEventListener("change", (e) =>{
+        let value = e.target.value;
+        if(!value.includes('$')){
+            value += '$';
+            e.target.value = value;
+        }
+        userData.required.textvalues.cash.cash = value;
+    });
+    let assets = document.getElementById("cashandassets").children[0].children[0].children;
+    for (let i = 3; i < assets.length; i++) {
+        assets[i].children[0].children[0].children[0].addEventListener("change", (e) => {
+            let index = e.target.id.replace("assets", '');
+            index = parseInt(index) - 1;
+            userData.required.textvalues.cash.assets[index] = e.target.value;
+        });
+        
+    }
+    fellowListeners();
+    weaponListeners();
+}
+function weaponListeners(){
+    document.getElementById("uareg").addEventListener("change", (e) => {
+        userData.optional.textvalues.weapons.unarmed.regular = e.target.value;
+        userData.optional.textvalues.weapons.unarmed.hard = Math.floor(e.target.value / 2);
+        userData.optional.textvalues.weapons.unarmed.extreme = Math.floor(e.target.value / 5);
+        document.getElementById("uahard").value = Math.floor(e.target.value / 2);
+        document.getElementById("uaext").value = Math.floor(e.target.value / 5);
+    });
+    document.getElementById("uahard").addEventListener("change", (e) => {
+        userData.optional.textvalues.weapons.unarmed.hard = e.target.value;
+    });
+    document.getElementById("uaext").addEventListener("change", (e) => {
+        userData.optional.textvalues.weapons.unarmed.extreme = e.target.value;
+    });
+
+    let rows = document.getElementById("weapons").children[0].children[0].children;
+    let columns;
+    for (let i = 3; i < rows.length; i++) {
+        columns = rows[i].children;               
+        for (let j = 0; j < columns.length; j++) {
+            columns[j].children[0].addEventListener("change", (e) => {
+                let index = e.target.id.slice(-1);
+                let key = e.target.id.substring(0, e.target.id.length - 1);      
+                index = parseInt(index) - 1;
+                userData.optional.textvalues.weapons[key][index] = e.target.value;
+            });                        
+        }      
+    }
+    for (let i = 1; i < 6; i++) {
+        document.getElementById("regular" + i).addEventListener("change", (e) => {
+            let value = e.target.value;
+            let index = e.target.id.slice(-1);
+            userData.optional.textvalues.weapons.hard[index - 1] = Math.floor(value / 2);
+            userData.optional.textvalues.weapons.extreme[index - 1] = Math.floor(value / 5);
+            document.getElementById("hard" + index).value = Math.floor(value / 2);
+            document.getElementById("extreme" + index).value = Math.floor(value / 5);
+        });
+        
+    }
+    
+}
+function fellowListeners(){
+    let rows = document.getElementById("fellowinvestigators").children[0].children[0].children;
+    let columns;
+    for (let i = 1; i < rows.length; i++) {
+        columns = rows[i].children;       
+        for (let j = 0; j < columns.length; j++) {    
+            if(columns[j].children[0].nodeName != "H1"){             
+                columns[j].children[0].children[0].children[1].addEventListener("change", (e) => {
+                    let index = e.target.id.replace("fellowchar", '');
+                    index = parseInt(index) - 1;
+                    userData.optional.textvalues.fellowinvestigators[index][0] = e.target.value;                   
+                });
+                columns[j].children[0].children[1].children[1].addEventListener("change", (e) => {
+                    let index = e.target.id.replace("fellowplayer", '');
+                    index = parseInt(index) - 1;
+                    userData.optional.textvalues.fellowinvestigators[index][1] = e.target.value;                    
+                });
+            }      
+        }       
+    }
+}
+function initClickableEvents(e){
+    userData.required.numbervalues[e.target.id] = e.target.value;   
 }
 async function addInvestigatorListeners(keyArr){
     for (let i = 0; i < keyArr.length; i++) {
@@ -176,8 +318,17 @@ async function addInvestigatorListeners(keyArr){
             if(id != ""){             
                 columns[j].children[0].lastElementChild.children[0].classList.add(id);
                 columns[j].children[0].lastElementChild.children[0].addEventListener("change", (e) => {
-                    let key = e.target.classList.value;  
-                    userData.optional.investigatorskills[key][1] = e.target.value;                    
+                    let key = e.target.classList.value;
+                    let value = e.target.value;
+                    let oldValue = e.target.getAttribute("oldval")
+                    userData.optional.investigatorskills[key][1] = value;
+                    if(oldValue != null){
+                        personalValue = personalValue + (oldValue - value);
+                    } else {
+                        personalValue -= value;
+                    }
+                    e.target.setAttribute("oldval", value); 
+                    document.getElementById("interestvalue").value = personalValue;                   
                 });
                 if(siblingNode.nodeName == "DIV"){   
                     siblingNode = siblingNode.children[1];
@@ -420,6 +571,9 @@ function calculateMainValues(data){
     target = document.getElementById("int");
     target.value = value;
     e.target = target;
+    document.getElementById("personalInterests").style.visibility = "visible";
+    personalValue = value * 2;
+    document.getElementById("interestvalue").value = personalValue;
     tripleValueEvent(e);
 
     value = rollDsix(3) * 5;
@@ -537,13 +691,17 @@ async function calculateValues(){
     document.getElementById("maxsanity").value = value;
     document.getElementById("maxmp").value = Math.floor(value/5);
     userData.required.selectables.magicpoints = Math.floor(value/5);
+    userData.required.numbervalues.maxmp = Math.floor(value/5);
     userData.required.selectables.sanity = value;
+    userData.required.numbervalues.maxsanity = value;
+    userData.required.numbervalues.startsanity = value;
     
     value = parseInt(siz) + parseInt(con);
     value = Math.floor(value / 10);
     getClickables(value, "hitpoints");
     document.getElementById("maxhp").value = value;
     userData.required.selectables.hitpoints = value;
+    userData.required.numbervalues.maxhp = value;
     
     value = rollDsix(3);
     value = value * 5;  
@@ -576,7 +734,6 @@ async function calculateValues(){
     target = document.getElementById("move");
     target.value = value;
     e.target = target;
-    tripleValueEvent(e);
     
 }
 
@@ -656,11 +813,17 @@ async function countTriplesforMainSkills(keyArr, data){
     let field;
     let value;
     for (let i = 0; i < keyArr.length; i++) {
-        field = document.getElementById(keyArr[i]);  
-        value = data[keyArr[i]];
-        field.value = value;       
-        field.nextElementSibling.children[0].value = Math.floor(value/2);
-        field.nextElementSibling.children[1].value = Math.floor(value/5);              
+        if(keyArr[i] != "move"){
+            field = document.getElementById(keyArr[i]);  
+            value = data[keyArr[i]];
+            field.value = value;       
+            field.nextElementSibling.children[0].value = Math.floor(value/2);
+            field.nextElementSibling.children[1].value = Math.floor(value/5); 
+        } else {
+            field = document.getElementById(keyArr[i]);  
+            value = data[keyArr[i]];
+            field.value = value;
+        }             
     }
 }
 async function countTriplesforInvestigatorSkills(id, data){    
@@ -719,8 +882,8 @@ async function showAlert(title, message, type = "warning", checkBoxLabel) {
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-function checkBool(val){ 
-    return val == "true" ? true : false;
+function checkBool(val){    
+    return val == "true" || val == true ? true : false;
 }
 async function ImageExist(url) 
 {  
