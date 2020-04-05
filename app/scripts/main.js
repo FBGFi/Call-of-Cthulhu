@@ -4,7 +4,7 @@ const electron = require('electron');
 const fs = require('fs');
 
 let savingData = false;
-let playerName = localStorage.getItem("PLAYER_NAME");
+let charName = localStorage.getItem("PLAYER_NAME");
 let userData;
 
 loadPage();
@@ -12,10 +12,12 @@ async function loadPage(){
     if (electron == undefined) {
         await sleep(1000);
     }
-    if(playerName != null && playerName.length > 0){ 
+    if(charName != null && charName.length > 0){ 
         try {
-            userData = require('./saves/' + playerName + '.json');
-            document.getElementById("fileName").value = playerName;
+            let fileName = charName.replace(/[./, ]/g, '');
+            userData = require('./saves/' + fileName + '.json');
+            document.getElementById("fileName").value = charName;          
+            document.getElementById("name").value = charName;           
         } catch(e) {
             userData = require('./scripts/defaultData.json');
             showAlert('No data found', 'Player data has not been saved yet!', "error");
@@ -84,7 +86,10 @@ async function addEventListeners(){
             tripleValueEvent(e);
         });
     }
-    
+    document.getElementById("fileName").addEventListener("change", (e) => {
+        document.getElementById("name").value = e.target.value;
+        userData.required.textvalues.playerInfo.name = e.target.value;
+    });
     document.getElementById("calculate").addEventListener(("click"), async (e) => {
         if(!checkBool(userData.required.valuescalculated)){
             calculateValues();
@@ -123,9 +128,9 @@ async function addEventListeners(){
 
     document.getElementById("load").addEventListener(("click"), (e) => {
         let filename = document.getElementById("fileName").value;
-        let checkFile;
+        let checkFile = filename.replace(/[./, ]/g, '');;
         try {
-            checkFile = require('./saves/' + filename + '.json');
+            checkFile = require('./saves/' + checkFile + '.json');
             if(filename != ""){
                 localStorage.setItem("PLAYER_NAME", filename);
                 location.reload();           
@@ -134,6 +139,81 @@ async function addEventListeners(){
             showAlert('No data found', 'Player data has not been saved yet!', "error");
         }      
     });
+    addCharInfoListeners(document.getElementById("charinfo").children[0].children[0]);
+    addMainStatListeners(keys.required.numbervalues.characteristics);
+    addInvestigatorListeners(keys.optional.investigatorskills);
+}
+async function addInvestigatorListeners(keyArr){
+    for (let i = 0; i < keyArr.length; i++) {
+        document.getElementById(keyArr[i]).addEventListener("change", (e) => {
+            let id = e.target.id;
+            let sibling = e.target.nextElementSibling.nodeName;
+            if(e.target.checked){  
+                if(sibling == "P"){
+                    userData.optional.investigatorskills[id] = ["checked", ""];               
+                } else {
+                    userData.optional.investigatorskills[id] = ["checked", "", ""]; 
+                }             
+            } else {
+                if(sibling == "P"){
+                    userData.optional.investigatorskills[id] = ["", ""];               
+                } else {
+                    userData.optional.investigatorskills[id] = ["", "", ""];
+                }
+            }          
+        });       
+    }
+    let rows = document.getElementById('investigatorskills').children[0].children;
+    let columns;
+    let id;
+    let siblingNode;
+    for (let i = 1; i < rows.length; i++) {
+        columns = rows[i].children;
+        for (let j = 0; j < columns.length; j++) {
+            id = columns[j].children[0].children[0].id;
+            siblingNode = columns[j].children[0].children[0].nextElementSibling;           
+
+            if(id != ""){             
+                columns[j].children[0].lastElementChild.children[0].classList.add(id);
+                columns[j].children[0].lastElementChild.children[0].addEventListener("change", (e) => {
+                    let key = e.target.classList.value;  
+                    userData.optional.investigatorskills[key][1] = e.target.value;                    
+                });
+                if(siblingNode.nodeName == "DIV"){   
+                    siblingNode = siblingNode.children[1];
+                }
+                try {
+                    if(siblingNode.nodeName != "P"){
+                        siblingNode.classList.add(id);
+                        siblingNode.addEventListener("change", (e) => {
+                            let key = e.target.classList.value;                              
+                            userData.optional.investigatorskills[key][2] = e.target.value;                    
+                        });
+                    }    
+                } catch {}                      
+            }            
+        }        
+    }
+}
+async function addMainStatListeners(keyArr){
+    for (let i = 0; i < keyArr.length; i++) {
+        document.getElementById(keyArr[i]).addEventListener("change", (e) => {
+            let id = e.target.id;
+            userData.required.numbervalues.characteristics[id] = e.target.value;
+        });      
+    }
+}
+async function addCharInfoListeners(parent){
+    let row;
+    for (let i = 1; i < parent.children.length; i++) {
+        row = parent.children[i];
+        for (let j = 0; j < row.children.length; j++) {
+            row.children[j].children[0].children[0].addEventListener("change", (e) => {
+                let id = e.target.id;             
+                userData.required.textvalues.playerInfo[id] = e.target.value;              
+            });           
+        }       
+    }   
 }
 async function addDiceListeners(){
     document.getElementById("d4").addEventListener("click", (e) => {
@@ -192,20 +272,22 @@ function tripleValueEvent(e){
 async function saveData(){
     if(!savingData){
         savingData = true;
-        playerName = document.getElementById("fileName").value;
-        if(playerName == null || playerName == ""){
+        charName = document.getElementById("fileName").value;              
+        let fileName = charName.replace(/[./, ]/g, '');
+        if(fileName == null || fileName == ""){
             showAlert("No name!", "Enter name for your character in the header!");
             savingData = false;
             return;
         }
-        localStorage.setItem("PLAYER_NAME", playerName);
+        localStorage.setItem("PLAYER_NAME", fileName);
         let data = JSON.stringify(userData);
-        fs.writeFile('./app/saves/' + playerName + '.json', data, (err) => {
+        fs.writeFile('./app/saves/' + fileName + '.json', data, (err) => {
             if(err) throw err;
-            showAlert("Saved!", "Character saved for: " + playerName, "info");
+            showAlert("Saved!", "Character saved for: " + charName, "info");
         });
         savingData = false;      
     }
+    
 }
 
 async function removeLoadingScreen(){
@@ -234,9 +316,11 @@ async function addClickableEvents(){
                     
                     if(valueClass.id != ""){
                         valueClass = valueClass.id;
+                        userData.required.selectables[valueClass] = e.target.innerHTML;
                     }
                     else{
                         valueClass = "sanityValue"; 
+                        userData.required.selectables.sanity = e.target.innerHTML;
                     }
                     
                     oldValue = document.getElementsByClassName("clicked " + valueClass);                                    
