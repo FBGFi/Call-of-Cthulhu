@@ -6,7 +6,7 @@ function createWindow () {
     width: 1200,
     height: 1080,
     icon: "./imaged/logo.ico",
-    show: false,
+    backgroundColor: '#111',
     webPreferences: {
       nodeIntegration: true
     }
@@ -16,11 +16,13 @@ function createWindow () {
   win.loadFile('app/index.html')
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  
+  //win.webContents.openDevTools()
+  //win.setMenu(null);
 
-  win.once('ready-to-show', () => {
-      win.show();
-  });
+  // win.once('ready-to-show', () => {
+  //     win.show();
+  // });
 }
 
 // This method will be called when Electron has finished
