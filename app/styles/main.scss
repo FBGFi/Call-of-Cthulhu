@@ -304,10 +304,11 @@ main{
                 position: absolute;
                 background-color: $tableHeader;
                 border: 2px solid $headerBack;
-                right: -206px;
-                top: -8px;
+                right: -246px;
+                visibility: hidden;
+                top: -7px;
                 z-index: 2;
-                width: 200px;
+                width: 240px;
                 min-height: 100px;
                 display: flex;
                 flex-direction: column;

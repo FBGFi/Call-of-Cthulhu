@@ -93,7 +93,7 @@ async function addEventListeners(){
     });
     document.getElementById("calculate").addEventListener(("click"), async (e) => {
         if(!checkBool(userData.required.valuescalculated)){
-            calculateValues();
+            await calculateValues();
             userData.required.valuescalculated = true;
         }
         else{
@@ -219,6 +219,9 @@ async function addEventListeners(){
     }
     fellowListeners();
     weaponListeners();
+    document.getElementById("interestvalue").addEventListener("change", (e) => {
+        personalValue = e.target.value;
+    });
 }
 function weaponListeners(){
     document.getElementById("uareg").addEventListener("change", (e) => {
@@ -328,7 +331,10 @@ async function addInvestigatorListeners(keyArr){
                         personalValue -= value;
                     }
                     e.target.setAttribute("oldval", value); 
-                    document.getElementById("interestvalue").value = personalValue;                   
+                    let points = document.getElementById("interestvalue");
+                    if(points != undefined && points != null && points != ""){
+                        points.value = personalValue;   
+                    }                
                 });
                 if(siblingNode.nodeName == "DIV"){   
                     siblingNode = siblingNode.children[1];
@@ -675,8 +681,10 @@ function getMoveRate(dex,str,siz){
 async function calculateValues(){  
     let oldClickeds = await document.getElementsByClassName("clicked");
     let count = oldClickeds.length;
-    for (let i = 0; i < count; i++) {      
-        oldClickeds[0].classList.value = "";               
+    for (let i = 0; i < count; i++) { 
+        if(count > 1 || !oldClickeds[0].classList.value.includes("luck")){
+            oldClickeds[0].classList.value = ""; 
+        }                   
     }
     
     let dex = document.getElementById("dex").value;;
@@ -703,10 +711,14 @@ async function calculateValues(){
     userData.required.selectables.hitpoints = value;
     userData.required.numbervalues.maxhp = value;
     
-    value = rollDsix(3);
-    value = value * 5;  
-    getClickables(value, "luck");
-    userData.required.selectables.luck = value;
+    if(!checkBool(userData.required.valuescalculated) && userData.required.selectables.luck != ""){
+
+    } else {       
+        value = rollDsix(3);
+        value = value * 5;  
+        getClickables(value, "luck");
+        userData.required.selectables.luck = value;
+    }
   
     let target = "";
     let e = {target: target};
