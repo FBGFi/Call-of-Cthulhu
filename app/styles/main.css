@@ -1,4 +1,45 @@
 @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
+.hasborderright {
+  border-right: 3px solid #ccc;
+}
+
+.hasborderleft {
+  border-left: 3px solid #ccc;
+}
+
+.rotateleft {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.rotateright {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.grayback {
+  background-color: #ccc;
+}
+
+.tableback {
+  background-color: #fff;
+}
+
+.clicked {
+  font-weight: bold;
+  background: #333;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.rotate {
+  text-decoration: underline;
+  position: absolute;
+  width: 100px;
+  top: 40%;
+  left: -120%;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -71,6 +112,24 @@ input[type=checkbox] {
   cursor: pointer;
 }
 
+table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+textarea {
+  width: 90%;
+  resize: none;
+  font-size: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 5px;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+}
+
 #loadingscreen {
   background-color: #111;
   background-position: center;
@@ -101,6 +160,74 @@ input[type=checkbox] {
   -webkit-animation: loadingPump infinite alternate 1s;
           animation: loadingPump infinite alternate 1s;
   opacity: 1;
+}
+
+#notification {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#notification #notificationBox {
+  width: 400px;
+  background: url("./paper_small.jpg");
+  border: 5px solid #888;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#notification #notificationBox > * {
+  max-width: 400px;
+}
+
+#notification #notificationBox > *:first-child {
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+  margin-bottom: 10px;
+}
+
+#notification #notificationBox > *:last-child {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#notification #notificationBox > *:last-child button {
+  width: 100px;
+  margin: auto;
+  font-size: 1.2rem;
+}
+
+#notification #notificationBox #notificationcontent {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 2px solid #888;
+  font-size: 1.2rem;
+  padding: 15px;
 }
 
 .triplevalues {
@@ -179,81 +306,6 @@ input[type=checkbox] {
   border: 2px solid #aaa;
 }
 
-.clicked {
-  font-weight: bold;
-  background: #333;
-  border-radius: 50%;
-  color: #fff;
-}
-
-.rotate {
-  text-decoration: underline;
-  position: absolute;
-  width: 100px;
-  top: 40%;
-  left: -120%;
-}
-
-.rotateleft {
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-}
-
-.rotateright {
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-}
-
-.grayback {
-  background-color: #ccc;
-}
-
-.tableback {
-  background-color: #fff;
-}
-
-table {
-  width: 100%;
-  height: 100%;
-  border-collapse: collapse;
-}
-
-.hasborderright {
-  border-right: 3px solid #ccc;
-}
-
-.hasborderleft {
-  border-left: 3px solid #ccc;
-}
-
-#page1, #page2 {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-image: url("paper.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin-bottom: 20px;
-  padding: 20px;
-  border: 10px solid #aaa;
-}
-
-textarea {
-  width: 90%;
-  resize: none;
-  font-size: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.3);
-  padding: 5px;
-}
-
-h1, h2, h3, h4 {
-  text-align: center;
-}
-
 header {
   z-index: 3;
   background-color: #888;
@@ -303,6 +355,22 @@ main {
   margin-left: auto;
   margin-right: auto;
   padding-top: 70px;
+}
+
+#page1, #page2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-image: url("paper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 10px solid #aaa;
 }
 
 #page1 #hitpoints td > div > div {

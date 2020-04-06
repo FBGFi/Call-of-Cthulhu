@@ -3,8 +3,40 @@ $darkGray: #aaa;
 $darkerGray: #888;
 $tableHeader: #ccc;
 $transparentWhite: rgba(255,255,255,0.3);
+$paperSmall: url('./paper_small.jpg');
 $mainFont: 'IM Fell English SC','Times New Roman', serif;
 
+.hasborderright{
+    border-right: 3px solid $tableHeader;
+}
+.hasborderleft{
+    border-left: 3px solid $tableHeader;
+}
+.rotateleft{
+    transform: rotate(-90deg);
+}
+.rotateright{
+    transform: rotate(90deg);
+}
+.grayback{
+    background-color: $tableHeader;
+}
+.tableback{
+    background-color: #fff;
+}
+.clicked{
+    font-weight: bold;
+    background: #333;
+    border-radius: 50%;
+    color: #fff;
+}
+.rotate{
+    text-decoration: underline;
+    position: absolute;
+    width: 100px;
+    top: 40%;
+    left: -120%;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -64,6 +96,21 @@ input[type=checkbox]{
     height: 20px;
     cursor: pointer;
 }
+table{
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+textarea{
+    width: 90%;
+    resize: none;
+    font-size: 1.5rem;
+    background-color: $transparentWhite;
+    padding: 5px;
+}
+h1,h2,h3,h4{
+    text-align: center;
+}
 #loadingscreen{
     background-color: #111;
     background-position: center;
@@ -83,6 +130,48 @@ input[type=checkbox]{
     h1{
         animation: loadingPump infinite alternate 1s;
         opacity: 1;
+    }
+}
+#notification{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    #notificationBox{
+        width: 400px;
+        background: $paperSmall;
+        border: 5px solid $darkerGray;
+        padding: 10px;
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+        &>*{
+            max-width: 400px;
+        }
+        &>*:first-child{
+            flex: 4;
+            margin-bottom: 10px;
+        }
+        &>*:last-child{
+            flex: 1;
+            display: flex;
+            button{
+                width: 100px;
+                margin:auto;
+                font-size: 1.2rem;
+            }
+        }
+        #notificationcontent{
+            background-color: rgba(0,0,0,0.3);
+            border: 2px solid $darkerGray;
+            font-size: 1.2rem;
+            padding: 15px;
+        }
     }
 }
 .triplevalues{
@@ -129,65 +218,6 @@ input[type=checkbox]{
 .column{  
     border: 2px solid $darkGray;
 }
-.clicked{
-    font-weight: bold;
-    background: #333;
-    border-radius: 50%;
-    color: #fff;
-}
-.rotate{
-    text-decoration: underline;
-    position: absolute;
-    width: 100px;
-    top: 40%;
-    left: -120%;
-}
-.rotateleft{
-    transform: rotate(-90deg);
-}
-.rotateright{
-    transform: rotate(90deg);
-}
-.grayback{
-    background-color: $tableHeader;
-}
-.tableback{
-    background-color: #fff;
-}
-table{
-    width: 100%;
-    height: 100%;
-    border-collapse: collapse;
-}
-.hasborderright{
-    border-right: 3px solid $tableHeader;
-}
-.hasborderleft{
-    border-left: 3px solid $tableHeader;
-}
-#page1, #page2{
-    display: flex;
-    flex-direction: column;
-    background-image: url("paper.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 10px solid $darkGray;
-}
-textarea{
-    width: 90%;
-    resize: none;
-    font-size: 1.5rem;
-    background-color: $transparentWhite;
-    padding: 5px;
-}
-td{
-    //border: 1px solid black;
-}
-h1,h2,h3,h4{
-    text-align: center;
-}
 header{
     z-index: 3;
     background-color: $darkerGray;
@@ -209,7 +239,7 @@ header{
         width: 300px;
         border: none !important;
         font-size: 1.7rem;
-        background: url('./paper_small.jpg') !important;
+        background: $paperSmall !important;
         margin-right: 3px;
     }
     button{
@@ -229,6 +259,16 @@ main{
     margin-left:auto;
     margin-right: auto;
     padding-top: 70px;
+}
+#page1, #page2{
+    display: flex;
+    flex-direction: column;
+    background-image: url("paper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 10px solid $darkGray;
 }
 #page1{
     #hitpoints{
@@ -483,7 +523,7 @@ main{
             &>div{
                 padding: 5px;
                 border: 2px solid $darkGray;
-                background: url('./paper_small.jpg');
+                background: $paperSmall;
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
@@ -519,7 +559,7 @@ footer{
     }
     #dice{
         flex: 1;
-        background-image: url('./paper_small.jpg');
+        background-image: $paperSmall;
         &>div{
             padding: 5px;
             display: flex;
@@ -562,7 +602,7 @@ footer{
     width: 200px;
     height: 80px;
     padding: 5px;
-    background: url('./paper_small.jpg');
+    background: $paperSmall;
     border: 3px solid $darkerGray;
     position: fixed;
     bottom: 5px;

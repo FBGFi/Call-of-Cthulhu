@@ -11,6 +11,7 @@ let savingData = false;
 let charName = localStorage.getItem("PLAYER_NAME");
 let userData;
 let personalValue = 0;
+let notificationPromise;
 
 loadPage();
 async function loadPage(){
@@ -435,8 +436,10 @@ async function saveData(){
         savingData = true;
         charName = document.getElementById("fileName").value;              
         let fileName = charName.replace(/[./, ]/g, '');
-        if(fileName == null || fileName == ""){
-            showAlert("No name!", "Enter name for your character in the header!");
+        if(fileName == null || fileName == ""){           
+            let callback = await showAlert("No name!", "Enter name for your character in the header!");
+            console.log(callback);
+            
             savingData = false;
             return;
         }
@@ -884,7 +887,24 @@ async function getInvestigatorSkills(keyArr, json){
         
     }
 }
-async function showAlert(title, message, type = "warning", checkBoxLabel) { 
+async function showAlert(title, message, type = "warning", checkBoxLabel, hasCancel = false) {   
+    document.body.appendChild(await createAlert(title, message, hasCancel));      
+    
+    let promise = await new Promise((res, rej) => {
+        let hasCancel = document.getElementById("cancelnot");
+        if(hasCancel != null){
+            document.getElementById("cancelnot").addEventListener("click", (e) => {
+                document.getElementById("notification").remove();
+                rej();
+            });
+        } 
+        document.getElementById("oknot").addEventListener("click", (e) => {
+            document.getElementById("notification").remove();
+            res();
+        });             
+    }).then(() => true).catch(() => false);
+    return promise;
+    
     if(electron != undefined){       
         let promise = await electron.remote.dialog.showMessageBox({
             type: type,
@@ -894,6 +914,37 @@ async function showAlert(title, message, type = "warning", checkBoxLabel) {
         });
         return promise;
     } 
+}
+function createAlert(title, message, hasCancel){
+    let alertContainer = document.createElement('div');
+    alertContainer.id = "notification";
+    let alertInner = document.createElement('div');
+    alertInner.id = "notificationBox";
+    let div = document.createElement('div');
+    let head = document.createElement('h2');
+    head.id = 'notificationtitle';
+    head.innerHTML = title;
+    let text = document.createElement('p');
+    text.id = 'notificationcontent';
+    text.innerHTML = message;
+    div.appendChild(head);
+    div.appendChild(text);
+    alertInner.appendChild(div);
+    div = document.createElement('div');
+    let button;
+    if(hasCancel){       
+        button = document.createElement('button');
+        button.id = "cancelnot";
+        button.innerHTML = "Cancel"
+        div.appendChild(button);
+    }
+    button = document.createElement('button');
+    button.id = "oknot";
+    button.innerHTML = 'Ok';
+    div.appendChild(button);
+    alertInner.appendChild(div);
+    alertContainer.appendChild(alertInner);
+    return alertContainer;
 }
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));

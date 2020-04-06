@@ -18,12 +18,9 @@ function createWindow () {
 
   // Open the DevTools.
   
-  //win.webContents.openDevTools()
-  win.setMenu(null);
+  win.webContents.openDevTools()
+  //win.setMenu(null);
 
-  // win.once('ready-to-show', () => {
-  //     win.show();
-  // });
 }
 
 // This method will be called when Electron has finished
