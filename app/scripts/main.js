@@ -6,12 +6,11 @@ let pathname;
 pathname = electron.remote.app.getAppPath();
 pathname = pathname.replace('\\app.asar', '');
 
-
+let loadPath;
 let savingData = false;
 let charName = localStorage.getItem("PLAYER_NAME");
 let userData;
 let personalValue = 0;
-let notificationPromise;
 
 loadPage();
 async function loadPage(){
@@ -21,15 +20,19 @@ async function loadPage(){
     if(charName != null && charName.length > 0){ 
         try {
             let fileName = charName.replace(/[./, ]/g, '');
-            userData = require(pathname + '/saves/' + fileName + '.json');
+            loadPath = pathname + '/saves/' + fileName + '.json';
+            userData = require(loadPath);
             document.getElementById("fileName").value = charName;          
-            document.getElementById("name").value = charName;           
+            document.getElementById("name").value = charName;  
+            document.title = 'Player: ' + charName;         
         } catch(e) {
             userData = require('./scripts/defaultData.json');
             document.getElementById("fileName").value = "";
+            document.title = 'Call of Cthulhu';
         }   
     }
     else{
+        document.title = 'Call of Cthulhu';
         userData = require('./scripts/defaultData.json');
     }
 
@@ -433,21 +436,24 @@ function tripleValueEvent(e){
     field.nextElementSibling.children[1].value = Math.floor(value/5); 
 }
 async function saveData(){
-    if(!savingData){
+    if(!savingData){        
         savingData = true;
-        charName = document.getElementById("fileName").value;              
-        let fileName = charName.replace(/[./, ]/g, '');
-        if(fileName == null || fileName == ""){           
-            showAlert("No name!", "Enter name for your character in the header!");           
-            savingData = false;
-            return;
+        try {
+            charName = document.getElementById("fileName").value;              
+            let fileName = charName.replace(/[./, ]/g, '');
+            if(fileName == null || fileName == ""){           
+                showAlert("No name!", "Enter name for your character in the header!");           
+                savingData = false;
+                return;
+            }
+            localStorage.setItem("PLAYER_NAME", fileName);
+            let data = JSON.stringify(userData);
+            fs.writeFile(pathname + '/saves/' + fileName + '.json', data, (err) => {
+                if(err) throw err;
+                showAlert("Saved!", "Character saved for: " + charName);
+            });
+        } catch (error) {
         }
-        localStorage.setItem("PLAYER_NAME", fileName);
-        let data = JSON.stringify(userData);
-        fs.writeFile(pathname + '/saves/' + fileName + '.json', data, (err) => {
-            if(err) throw err;
-            showAlert("Saved!", "Character saved for: " + charName);
-        });
         savingData = false;      
     }
     

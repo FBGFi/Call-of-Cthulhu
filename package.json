@@ -13,7 +13,9 @@
   },
   "build": {
     "appId": "fi.callofcthulhu.app",
-    "extraFiles": ["resources"],
+    "extraFiles": [
+      "resources"
+    ],
     "win": {
       "target": "NSIS",
       "icon": "icon.ico"
@@ -32,5 +34,8 @@
   "devDependencies": {
     "electron": "^8.2.0",
     "electron-builder": "^22.4.1"
+  },
+  "dependencies": {
+    "electron-navigation": "^1.5.8"
   }
 }

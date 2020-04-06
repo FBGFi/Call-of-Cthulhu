@@ -1,0 +1,165 @@
+{
+    "required": {
+        "valuescalculated": "false",
+        "textvalues":{
+            "playerInfo": {
+                "name": "",
+                "player": "",
+                "occupatice": "",
+                "age": "",
+                "sex": "",
+                "residence": "",
+                "birthplace": ""
+            },
+            "cash": {
+                "spending": "",
+                "cash": "",
+                "assets": ["","","","","","","",""]
+            }
+        },
+        "numbervalues": {         
+            "characteristics": {
+                "str": "",
+                "dex": "",
+                "pow": "",
+                "con": "",
+                "app": "",
+                "edu": "",
+                "siz": "",
+                "int": "",
+                "move": ""
+            },
+            "investigatorskills": {
+                "credit": "0",
+                "mythos": "0"
+            },        
+            "maxhp": "",
+            "maxsanity": "",
+            "startsanity": "",
+            "maxmp": "",
+            "combat": {
+                "dmgbonus": "",
+                "build": "",
+                "dodgeval": ""
+            }
+        },
+        "selectables": {
+            "hitpoints": "",
+            "sanity": "",
+            "magicpoints": "",
+            "luck": ""
+        }
+    },
+    "optional":{
+        "picture": "",
+        "checkboxes": {
+            "majorwound": "",
+            "dying": "",
+            "unconscious": "",
+            "tempinsane": "",
+            "indefinsane": ""
+        },
+        "textvalues": {
+            "gear": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+            "fellowinvestigators": [
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""],
+                ["",""]
+            ],
+            "backstory": {
+                "description": "",
+                "traits": "",
+                "ideology": "",
+                "injuries": "",
+                "people": "",
+                "phobias": "",
+                "locations": "",
+                "spells": "",
+                "possessions": "",
+                "encounters": ""
+            },
+            "weapons": {
+                "weapon": ["", "", "", "", ""],
+                "regular": ["", "", "", "", ""],
+                "hard": ["", "", "", "", ""],
+                "extreme": ["", "", "", "", ""],
+                "damage": ["", "", "", "", ""],
+                "range": ["", "", "", "", ""],
+                "attacks":["", "", "", "", ""],
+                "ammo":["", "", "", "", ""],
+                "malf":["", "", "", "", ""],
+                "unarmed":{
+                    "regular": "",
+                    "hard": "",
+                    "extreme": ""
+                }
+            } 
+        },
+        "investigatorskills": {
+            "accounting": ["", ""],
+            "fasttalk": ["", ""],
+            "law": ["", ""],
+            "science": ["","",""],
+            "anthropology":["", ""],
+            "brawl":["", ""],
+            "library":["", ""],
+            "custom1":["","",""],
+            "appraise":["", ""],
+            "custom2":["","",""],
+            "listen":["", ""],
+            "custom3":["", ""],
+            "archaeology":["", ""],
+            "custom4":["","",""],
+            "locksmith":["", ""],
+            "sleight":["", ""],
+            "artcraft":["","",""],
+            "handgun":["", ""],
+            "mechrep":["", ""],
+            "spothidden":["", ""],
+            "custom5":["","",""],
+            "shotgun":["", ""],
+            "medicine":["", ""],
+            "stealth":["", ""],
+            "custom6":["","",""],
+            "custom7":["","",""],
+            "natural":["", ""],
+            "survival":["","",""],
+            "charm":["", ""],
+            "firstaid":["", ""],
+            "navigate":["", ""],
+            "swim":["", ""],
+            "climb":["", ""],
+            "history":["", ""],
+            "occult":["", ""],
+            "throw":["", ""],
+            "intimidate":["", ""],
+            "opheavy":["", ""],
+            "track":["", ""],
+            "jump":["", ""],
+            "persuade":["", ""],
+            "custom8":["","",""],
+            "disguise":["", ""],
+            "languageother":["","",""],
+            "pilot":["","",""],
+            "custom9":["","",""],
+            "dodge":["", ""],
+            "custom10":["","",""],
+            "psychology":["", ""],
+            "custom11":["","",""],
+            "drive":["", ""],
+            "custom12":["","",""],
+            "psychoanalysis":["", ""],
+            "custom13":["","",""],
+            "elecrep":["", ""],
+            "languageown":["", ""],
+            "ride":["", ""],
+            "custom14":["","",""]
+        }
+    }
+
+}

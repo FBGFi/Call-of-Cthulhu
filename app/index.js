@@ -8,8 +8,10 @@ function createWindow () {
     tabbingIdentifier: "cthulhu",
     icon: "./app/images/icon.ico",
     backgroundColor: '#111',
+    nodeIntegration: true,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webviewTag: true
     }
   })
 
@@ -18,8 +20,8 @@ function createWindow () {
 
   // Open the DevTools.
   
-  win.webContents.openDevTools()
-  //win.setMenu(null);
+  // win.webContents.openDevTools()
+  win.setMenu(null);
 
 }
 
