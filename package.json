@@ -2,7 +2,7 @@
   "name": "Call-of-Cthulhu",
   "productName": "Call of Cthulhu",
   "version": "1.0.0",
-  "description": "Electron app for Call of Cthulhu tabletop's character creation.",
+  "description": "Call of Cthulhu tabletop's character creation.",
   "author": "FBGFi",
   "main": "app/index.js",
   "scripts": {
@@ -13,30 +13,10 @@
   },
   "build": {
     "appId": "fi.callofcthulhu.app",
-    "extraFiles": ["saves"],
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
-    },
+    "extraFiles": ["resources"],
     "win": {
       "target": "NSIS",
-      "icon": "app/images/logo.ico"
+      "icon": "icon.ico"
     }
   },
   "repository": {

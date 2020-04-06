@@ -1,9 +1,11 @@
 const keys = require('./scripts/valueKeys');
 const ageMods = require('./scripts/ageMods');
 const electron = require('electron');
-const pathname = electron.remote.app.getAppPath();
-
 const fs = require('fs');
+let pathname;
+pathname = electron.remote.app.getAppPath();
+pathname = pathname.replace('\\app.asar', '');
+
 
 let savingData = false;
 let charName = localStorage.getItem("PLAYER_NAME");
@@ -23,7 +25,6 @@ async function loadPage(){
             document.getElementById("name").value = charName;           
         } catch(e) {
             userData = require('./scripts/defaultData.json');
-            showAlert('No data found', 'Player data has not been saved yet!', "error");
             document.getElementById("fileName").value = "";
         }   
     }

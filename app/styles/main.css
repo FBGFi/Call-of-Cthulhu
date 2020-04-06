@@ -256,7 +256,7 @@ h1, h2, h3, h4 {
 
 header {
   z-index: 3;
-  background-color: #aaa;
+  background-color: #888;
   width: 100%;
   min-width: 1200px;
   position: fixed;
@@ -281,7 +281,7 @@ header input {
   width: 300px;
   border: none !important;
   font-size: 1.7rem;
-  background-color: #fff !important;
+  background: url("./paper_small.jpg") !important;
   margin-right: 3px;
 }
 
@@ -713,12 +713,14 @@ footer {
   bottom: 0;
   left: 0;
   width: 240px;
-  background-color: #aaa;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-transition: left 1s;
   transition: left 1s;
+  background-color: #888;
+  border-top: 3px solid #ccc;
+  border-bottom: 3px solid #ccc;
 }
 
 footer.hidden {
@@ -729,6 +731,7 @@ footer #dice {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  background-image: url("./paper_small.jpg");
 }
 
 footer #dice > div {
@@ -776,6 +779,8 @@ footer #hidedice {
           justify-content: center;
   -webkit-transition: background-color 0.5s;
   transition: background-color 0.5s;
+  border-left: 3px solid #ccc;
+  border-right: 3px solid #ccc;
 }
 
 footer #hidedice:hover {
@@ -791,7 +796,7 @@ footer #hidedice p {
   height: 80px;
   padding: 5px;
   background: url("./paper_small.jpg");
-  border: 3px solid #aaa;
+  border: 3px solid #888;
   position: fixed;
   bottom: 5px;
   right: 5px;
@@ -817,9 +822,11 @@ footer #hidedice p {
   color: #fff;
   background-color: #222;
   padding: 0 2px;
-  right: 0;
-  top: 0;
+  right: 2px;
+  top: 2px;
   font-weight: bold;
+  font-size: 0.9rem;
+  border: 2px solid #aaa;
   -webkit-transition: background-color 0.5s, color 0.5s;
   transition: background-color 0.5s, color 0.5s;
   cursor: pointer;

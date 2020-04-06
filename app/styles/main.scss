@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
-$headerBack: #aaa;
+$darkGray: #aaa;
+$darkerGray: #888;
 $tableHeader: #ccc;
 $transparentWhite: rgba(255,255,255,0.3);
 $mainFont: 'IM Fell English SC','Times New Roman', serif;
@@ -126,7 +127,7 @@ input[type=checkbox]{
     margin-bottom: 0;
 }
 .column{  
-    border: 2px solid $headerBack;
+    border: 2px solid $darkGray;
 }
 .clicked{
     font-weight: bold;
@@ -172,7 +173,7 @@ table{
     background-size: cover;
     margin-bottom: 20px;
     padding: 20px;
-    border: 10px solid $headerBack;
+    border: 10px solid $darkGray;
 }
 textarea{
     width: 90%;
@@ -189,7 +190,7 @@ h1,h2,h3,h4{
 }
 header{
     z-index: 3;
-    background-color: $headerBack;
+    background-color: $darkerGray;
     width: 100%;
     min-width: 1200px;
     position: fixed;
@@ -208,7 +209,7 @@ header{
         width: 300px;
         border: none !important;
         font-size: 1.7rem;
-        background-color: #fff !important;
+        background: url('./paper_small.jpg') !important;
         margin-right: 3px;
     }
     button{
@@ -260,7 +261,7 @@ main{
         }
         input[type=number]{
             background-color: #fff;
-            border: 2px solid $headerBack;
+            border: 2px solid $darkGray;
             margin-right: 5px;
             width: 50px;
         }
@@ -315,7 +316,7 @@ main{
             #infocontainer{
                 position: absolute;
                 background-color: $tableHeader;
-                border: 2px solid $headerBack;
+                border: 2px solid $darkGray;
                 right: -246px;
                 visibility: hidden;
                 top: -7px;
@@ -326,7 +327,7 @@ main{
                 flex-direction: column;
                 padding: 5px 5px 0 5px;
                 #infotext{
-                    border: 2px solid $headerBack;
+                    border: 2px solid $darkGray;
                     background: url('paper_small.jpg');
                     flex: 4;
                     font-size: 1.3rem;
@@ -481,7 +482,7 @@ main{
             padding: 5px 15px;
             &>div{
                 padding: 5px;
-                border: 2px solid $headerBack;
+                border: 2px solid $darkGray;
                 background: url('./paper_small.jpg');
                 background-repeat: no-repeat;
                 background-position: center;
@@ -508,14 +509,17 @@ footer{
     bottom: 0;
     left: 0;
     width: 240px;
-    background-color: $headerBack;
     display: flex;
     transition: left 1s;
+    background-color: $darkerGray;
+    border-top: 3px solid $tableHeader;
+    border-bottom: 3px solid $tableHeader;
     &.hidden{
         left: -200px
     }
     #dice{
         flex: 1;
+        background-image: url('./paper_small.jpg');
         &>div{
             padding: 5px;
             display: flex;
@@ -544,6 +548,8 @@ footer{
         flex-direction: column;
         justify-content: center;
         transition: background-color 0.5s;
+        border-left: 3px solid $tableHeader;
+        border-right: 3px solid $tableHeader;
         &:hover{
             background-color: #666;
         }
@@ -557,7 +563,7 @@ footer{
     height: 80px;
     padding: 5px;
     background: url('./paper_small.jpg');
-    border: 3px solid $headerBack;
+    border: 3px solid $darkerGray;
     position: fixed;
     bottom: 5px;
     right: 5px;
@@ -575,9 +581,11 @@ footer{
         color: #fff;
         background-color: #222;
         padding: 0 2px;
-        right: 0;
-        top: 0;
+        right: 2px;
+        top: 2px;
         font-weight: bold;
+        font-size: 0.9rem;
+        border: 2px solid $darkGray;
         transition: background-color 0.5s, color 0.5s;
         cursor: pointer;
         &:hover{
