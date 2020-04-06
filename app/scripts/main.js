@@ -1,6 +1,8 @@
 const keys = require('./scripts/valueKeys');
 const ageMods = require('./scripts/ageMods');
 const electron = require('electron');
+const pathname = electron.remote.app.getAppPath();
+
 const fs = require('fs');
 
 let savingData = false;
@@ -16,7 +18,7 @@ async function loadPage(){
     if(charName != null && charName.length > 0){ 
         try {
             let fileName = charName.replace(/[./, ]/g, '');
-            userData = require('./saves/' + fileName + '.json');
+            userData = require(pathname + '/saves/' + fileName + '.json');
             document.getElementById("fileName").value = charName;          
             document.getElementById("name").value = charName;           
         } catch(e) {
@@ -130,9 +132,10 @@ async function addEventListeners(){
 
     document.getElementById("load").addEventListener(("click"), (e) => {
         let filename = document.getElementById("fileName").value;
-        let checkFile = filename.replace(/[./, ]/g, '');;
+        let checkFile = filename.replace(/[./, ]/g, '');        
+        
         try {
-            checkFile = require('./saves/' + checkFile + '.json');
+            checkFile = require(pathname + '/saves/' + checkFile + '.json');
             if(filename != ""){
                 localStorage.setItem("PLAYER_NAME", filename);
                 location.reload();           
@@ -438,7 +441,7 @@ async function saveData(){
         }
         localStorage.setItem("PLAYER_NAME", fileName);
         let data = JSON.stringify(userData);
-        fs.writeFile('./app/saves/' + fileName + '.json', data, (err) => {
+        fs.writeFile(pathname + '/saves/' + fileName + '.json', data, (err) => {
             if(err) throw err;
             showAlert("Saved!", "Character saved for: " + charName, "info");
         });

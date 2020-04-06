@@ -3,9 +3,8 @@ const { app, BrowserWindow } = require('electron')
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1200,
-    height: 1080,
-    icon: "./imaged/logo.ico",
+    fullscreen: true,
+    icon: "./app/images/icon.ico",
     backgroundColor: '#111',
     webPreferences: {
       nodeIntegration: true
