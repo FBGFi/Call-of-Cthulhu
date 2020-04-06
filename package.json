@@ -1,24 +1,55 @@
 {
   "name": "Call-of-Cthulhu",
   "version": "1.0.0",
-  "description": "",
+  "description": "Electron app for Call of Cthulhu tabletop's character creation.",
+  "author": "FBGFi",
   "main": "app/index.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "install-app-deps",   
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "fi.callofcthulhu.app",
+    "category": "tabletop.games.app",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/logo.ico"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FBGFi/Call-of-Cthulhu.git"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/FBGFi/Call-of-Cthulhu/issues"
   },
   "homepage": "https://github.com/FBGFi/Call-of-Cthulhu#readme",
   "devDependencies": {
-    "electron": "^8.2.0"
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1"
   }
 }
