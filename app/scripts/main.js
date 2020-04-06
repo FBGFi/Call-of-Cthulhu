@@ -101,8 +101,9 @@ async function addEventListeners(){
             userData.required.valuescalculated = true;
         }
         else{
-            let promise = await showAlert("Already calculated!", "Confirm to do recalculations", "warning", "Confirm");
-            if(promise.checkboxChecked){
+            let promise = await showAlert("Already calculated!", "Confirm to do recalculations", true);
+            
+            if(promise){
                 calculateValues();      
             }
             
@@ -143,7 +144,7 @@ async function addEventListeners(){
                 location.reload();           
             }        
         } catch {
-            showAlert('No data found', 'Player data has not been saved yet!', "error");
+            showAlert('No data found', 'Player data has not been saved yet!');
         }      
     });
     addCharInfoListeners(document.getElementById("charinfo").children[0].children[0]);
@@ -437,9 +438,7 @@ async function saveData(){
         charName = document.getElementById("fileName").value;              
         let fileName = charName.replace(/[./, ]/g, '');
         if(fileName == null || fileName == ""){           
-            let callback = await showAlert("No name!", "Enter name for your character in the header!");
-            console.log(callback);
-            
+            showAlert("No name!", "Enter name for your character in the header!");           
             savingData = false;
             return;
         }
@@ -447,7 +446,7 @@ async function saveData(){
         let data = JSON.stringify(userData);
         fs.writeFile(pathname + '/saves/' + fileName + '.json', data, (err) => {
             if(err) throw err;
-            showAlert("Saved!", "Character saved for: " + charName, "info");
+            showAlert("Saved!", "Character saved for: " + charName);
         });
         savingData = false;      
     }
@@ -887,9 +886,8 @@ async function getInvestigatorSkills(keyArr, json){
         
     }
 }
-async function showAlert(title, message, type = "warning", checkBoxLabel, hasCancel = false) {   
-    document.body.appendChild(await createAlert(title, message, hasCancel));      
-    
+async function showAlert(title, message, hasCancel = false) {   
+    document.body.appendChild(await createAlert(title, message, hasCancel));         
     let promise = await new Promise((res, rej) => {
         let hasCancel = document.getElementById("cancelnot");
         if(hasCancel != null){
@@ -902,18 +900,8 @@ async function showAlert(title, message, type = "warning", checkBoxLabel, hasCan
             document.getElementById("notification").remove();
             res();
         });             
-    }).then(() => true).catch(() => false);
+    }).then(() => true).catch(() => false); 
     return promise;
-    
-    if(electron != undefined){       
-        let promise = await electron.remote.dialog.showMessageBox({
-            type: type,
-            title: title,
-            message: message,
-            checkboxLabel: checkBoxLabel
-        });
-        return promise;
-    } 
 }
 function createAlert(title, message, hasCancel){
     let alertContainer = document.createElement('div');
