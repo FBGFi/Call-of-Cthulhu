@@ -16,7 +16,7 @@ loadPage();
 async function loadPage(){
     if(charName != null && charName.length > 0){ 
         try {
-            let fileName = charName.replace(/[./, ]/g, '');
+            let fileName = trimFileName(charName);
             loadPath = pathname + '/saves/' + fileName + '.json';
             userData = require(loadPath);
             document.getElementById("fileName").value = charName;          
@@ -98,12 +98,10 @@ async function addEventListeners(){
             userData.required.valuescalculated = true;
         }
         else{
-            let promise = await showAlert("Already calculated!", "Confirm to do recalculations", true);
-            
+            let promise = await showAlert("Already calculated!", "Confirm to do recalculations", true);           
             if(promise){
                 calculateValues();      
-            }
-            
+            }            
         }
     });
     document.getElementById("pictureInput").addEventListener(("change"), (e) => {
@@ -130,8 +128,7 @@ async function addEventListeners(){
 
     document.getElementById("load").addEventListener(("click"), (e) => {
         let filename = document.getElementById("fileName").value;
-        let checkFile = filename.replace(/[./, ]/g, '');        
-        
+        let checkFile = trimFileName(filename);                
         try {
             checkFile = require(pathname + '/saves/' + checkFile + '.json');
             if(filename != ""){
@@ -216,9 +213,6 @@ async function addEventListeners(){
         personalValue = e.target.value;
     });
 }
-function simpleDataToValueListener(){
-
-}
 function weaponListeners(){
     document.getElementById("uareg").addEventListener("change", (e) => {
         userData.optional.textvalues.weapons.unarmed.regular = e.target.value;
@@ -255,10 +249,8 @@ function weaponListeners(){
             userData.optional.textvalues.weapons.extreme[index - 1] = Math.floor(value / 5);
             document.getElementById("hard" + index).value = Math.floor(value / 2);
             document.getElementById("extreme" + index).value = Math.floor(value / 5);
-        });
-        
-    }
-    
+        });       
+    }   
 }
 function fellowListeners(){
     let rows = document.getElementById("fellowinvestigators").children[0].children[0].children;
@@ -289,12 +281,18 @@ async function addInvestigatorListeners(keyArr){
         document.getElementById(keyArr[i]).addEventListener("change", (e) => {
             let id = e.target.id;
             let sibling = e.target.nextElementSibling.nodeName;
+            let value = e.target.nextElementSibling.nextElementSibling.children[0].value;
+            let customtext;
             if(e.target.checked){  
                 if(sibling == "P"){
-                    userData.optional.investigatorskills[id] = ["checked", ""];               
+                    userData.optional.investigatorskills[id] = ["checked", value]; 
+                    return;              
+                } else if(sibling == "DIV") {
+                    customtext = e.target.nextElementSibling.children[1].value;
                 } else {
-                    userData.optional.investigatorskills[id] = ["checked", "", ""]; 
-                }             
+                    customtext = e.target.nextElementSibling.value;
+                } 
+                userData.optional.investigatorskills[id] = ["checked", value, customtext];            
             } else {
                 if(sibling == "P"){
                     userData.optional.investigatorskills[id] = ["", ""];               
@@ -308,11 +306,13 @@ async function addInvestigatorListeners(keyArr){
     let columns;
     let id;
     let siblingNode;
+    
     for (let i = 1; i < rows.length; i++) {
         columns = rows[i].children;
+        
         for (let j = 0; j < columns.length; j++) {
             id = columns[j].children[0].children[0].id;
-            siblingNode = columns[j].children[0].children[0].nextElementSibling;           
+            siblingNode = columns[j].children[0].children[0].nextElementSibling; 
 
             if(id != ""){             
                 columns[j].children[0].lastElementChild.children[0].classList.add(id);
@@ -336,7 +336,7 @@ async function addInvestigatorListeners(keyArr){
                     siblingNode = siblingNode.children[1];
                 }
                 try {
-                    if(siblingNode.nodeName != "P"){
+                    if(siblingNode != undefined && siblingNode.nodeName != "P"){
                         siblingNode.classList.add(id);
                         siblingNode.addEventListener("change", (e) => {
                             let key = e.target.classList.value;                              
@@ -427,7 +427,7 @@ async function saveData(){
         savingData = true;
         try {
             charName = document.getElementById("fileName").value;              
-            let fileName = charName.replace(/[./, ]/g, '');
+            let fileName = trimFileName(charName);
             if(fileName == null || fileName == ""){           
                 showAlert("No name!", "Enter name for your character in the header!");           
                 savingData = false;
@@ -896,7 +896,7 @@ async function showAlert(title, message, hasCancel = false) {
     }).then(() => true).catch(() => false); 
     return promise;
 }
-function createAlert(title, message, hasCancel){
+function createAlert(title, message, hasCancel, okText = "Ok", cancelText = "Cancel"){
     let alertContainer = document.createElement('div');
     alertContainer.id = "notification";
     let alertInner = document.createElement('div');
@@ -916,12 +916,12 @@ function createAlert(title, message, hasCancel){
     if(hasCancel){       
         button = document.createElement('button');
         button.id = "cancelnot";
-        button.innerHTML = "Cancel"
+        button.innerHTML = cancelText
         div.appendChild(button);
     }
     button = document.createElement('button');
     button.id = "oknot";
-    button.innerHTML = 'Ok';
+    button.innerHTML = okText;
     div.appendChild(button);
     alertInner.appendChild(div);
     alertContainer.appendChild(alertInner);
@@ -940,7 +940,10 @@ async function ImageExist(url)
     await sleep(100);  
     return img.height != 0;
 }
-
+function trimFileName(name){
+    name = name.replace(/[./, ]/g, '');
+    return name;
+}
 function rollDsix(times = 1){
     let returnValue = 0;
     for (let i = 0; i < times; i++) {       
@@ -989,4 +992,8 @@ function rollDtwelve(times = 1){
         returnValue += Math.floor(Math.random() * 12) + 1;;      
     }
     return returnValue;
+}
+
+function deBug(...message){   
+    require('electron').ipcRenderer.sendToHost('ipc-message', message);
 }

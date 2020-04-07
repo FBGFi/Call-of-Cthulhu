@@ -1,7 +1,7 @@
 {
   "name": "Call-of-Cthulhu",
   "productName": "Call of Cthulhu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Call of Cthulhu tabletop's character creation.",
   "author": "FBGFi",
   "main": "app/index.js",
