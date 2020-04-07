@@ -14,9 +14,6 @@ let personalValue = 0;
 
 loadPage();
 async function loadPage(){
-    if (electron == undefined) {
-        await sleep(1000);
-    }
     if(charName != null && charName.length > 0){ 
         try {
             let fileName = charName.replace(/[./, ]/g, '');
@@ -35,9 +32,8 @@ async function loadPage(){
         document.title = 'Call of Cthulhu';
         userData = require('./scripts/defaultData.json');
     }
-
     addEventListeners();
-    if(userData != null){      
+    if(userData != null && userData != undefined && userData.required.textvalues.playerInfo.name != ""){      
         countTriplesforMainSkills(keys.required.numbervalues.characteristics, userData.required.numbervalues.characteristics);
         countTriplesforMainSkills(keys.required.numbervalues.investigatorskills, userData.required.numbervalues.investigatorskills);
         getInvestigatorSkills(keys.optional.investigatorskills, userData.optional.investigatorskills);
@@ -59,14 +55,11 @@ async function loadPage(){
     removeLoadingScreen();
 }
 async function addEventListeners(){  
-    document.getElementById("confirm").addEventListener("click", (e) => {
-        document.getElementById("infocontainer").remove();
-    });
-
     if(checkBool(userData.required.valuescalculated)){
         document.getElementById("maincalcs").remove();
         document.getElementById("infocontainer").remove();
     } else {       
+        document.getElementById("confirm").addEventListener("click", (e) => document.getElementById("infocontainer").remove());
         document.getElementById("maincalcs").addEventListener("click", async (e) => {
             userData.required.numbervalues.characteristics = await calculateMainValues(userData.required.numbervalues.characteristics);
             document.getElementById("maincalcs").remove();
@@ -96,6 +89,7 @@ async function addEventListeners(){
     }
     document.getElementById("fileName").addEventListener("change", (e) => {
         document.getElementById("name").value = e.target.value;
+        document.title = "Player: " + e.target.value;
         userData.required.textvalues.playerInfo.name = e.target.value;
     });
     document.getElementById("calculate").addEventListener(("click"), async (e) => {
@@ -132,9 +126,7 @@ async function addEventListeners(){
         location.reload();
     });
 
-    document.getElementById("save").addEventListener(("click"), (e) => {
-        saveData();
-    });
+    document.getElementById("save").addEventListener(("click"), (e) => saveData());
 
     document.getElementById("load").addEventListener(("click"), (e) => {
         let filename = document.getElementById("fileName").value;
@@ -154,18 +146,10 @@ async function addEventListeners(){
     addMainStatListeners(keys.required.numbervalues.characteristics);
     addInvestigatorListeners(keys.optional.investigatorskills);
 
-    document.getElementById("maxhp").addEventListener("change", (e) => {
-        initClickableEvents(e);
-    });
-    document.getElementById("startsanity").addEventListener("change", (e) => {
-        initClickableEvents(e);
-    });
-    document.getElementById("maxsanity").addEventListener("change", (e) => {
-        initClickableEvents(e);
-    });
-    document.getElementById("maxmp").addEventListener("change", (e) => {
-        initClickableEvents(e);
-    });
+    document.getElementById("maxhp").addEventListener("change", (e) => initClickableEvents(e));
+    document.getElementById("startsanity").addEventListener("change", (e) => initClickableEvents(e));
+    document.getElementById("maxsanity").addEventListener("change", (e) => initClickableEvents(e));
+    document.getElementById("maxmp").addEventListener("change", (e) => initClickableEvents(e));
 
     for (let i = 0; i < keys.optional.checkboxes.length; i++) {
         document.getElementById(keys.optional.checkboxes[i]).addEventListener("change", (e) => {
@@ -231,6 +215,9 @@ async function addEventListeners(){
     document.getElementById("interestvalue").addEventListener("change", (e) => {
         personalValue = e.target.value;
     });
+}
+function simpleDataToValueListener(){
+
 }
 function weaponListeners(){
     document.getElementById("uareg").addEventListener("change", (e) => {

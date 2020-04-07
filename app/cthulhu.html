@@ -7,25 +7,6 @@
 </head>
 <link rel="stylesheet" href="styles/main.css">
 <body>
-    <script>
-        onload = () => {
-          const webview = document.querySelector('webview')
-          const indicator = document.querySelector('.indicator')
-      
-          const loadstart = () => {
-            indicator.innerText = 'loading...'
-          }
-      
-          const loadstop = () => {
-            indicator.innerText = ''
-          }
-      
-          webview.addEventListener('did-start-loading', loadstart)
-          webview.addEventListener('did-stop-loading', loadstop)
-          console.log(webview);
-          
-        }
-      </script>
     <div id="loadingscreen"></div>
     <header>
         <button id="calculate">Calculate values</button>
