@@ -15,8 +15,15 @@ body{
   margin:0;
   padding: 0;
 }
+#exitapp{
+  position: absolute;
+  right: 15px;
+  top: 4px;
+  height: 24px;
+}
 #nav-body-tabs{
-  background-color: #888;
+  background-color: #666;
+  padding-right: 80px;
 }
 #nav-body-views{
   height: calc(100% - 32px);
@@ -36,6 +43,7 @@ body{
 }
 </style>
 <body>
+  <button id="exitapp" onclick="window.close()">Exit</button>
   <!-- <div id="nav-body-ctrls"></div> -->
   <div id="nav-body-tabs"></div>
   <div id="nav-body-views"></div>
