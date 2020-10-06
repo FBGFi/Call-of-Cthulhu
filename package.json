@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/FBGFi/Call-of-Cthulhu#readme",
   "devDependencies": {
-    "electron": "^8.2.0",
+    "electron": "^8.5.1",
     "electron-builder": "^22.4.1"
   },
   "dependencies": {
