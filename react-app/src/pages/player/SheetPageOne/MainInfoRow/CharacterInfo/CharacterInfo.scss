@@ -1,0 +1,60 @@
+.CharacterInfo {
+  &.InfoBox {
+    .header {
+      background-color: black;
+      color: white;
+      font-size: 1.1em;
+      padding: 3px;
+    }
+  }
+
+  .form-row,
+  .form-column {
+    display: flex;
+  }
+
+  .form-column {
+    width: 50%;
+    flex: 1;
+    input,
+    select {
+      width: 100px;
+    }
+  }
+
+  .form-row:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .form-column:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  span {
+    margin-top: auto;
+    margin-right: 5px;
+  }
+
+  input,
+  select {
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    flex: 1;
+    text-align: center;
+    font-size: 1.2em;
+
+    &:focus{
+        box-shadow: none;
+    }
+  }
+
+  select {
+    text-align-last: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}

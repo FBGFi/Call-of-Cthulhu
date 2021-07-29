@@ -1,0 +1,34 @@
+.Characteristics{
+    width: 50%;
+
+    .StatsInput{
+        width: 50%;
+        height: 50px;
+    }
+
+    span{
+        font-weight: bold;
+        font-size: 1.2em;
+        margin: auto;
+        width: 50%;
+        text-align: center;
+    }
+
+    .stat-row, .stat-column{
+        display: flex;
+    }
+
+    .stat-column{
+        width: 33.33%;
+    }
+
+    .move-rate-input{
+        background-color: var(--opaque-white);
+        border: 1px solid var(--light-gray);       
+        border-radius: 50%;
+        width: 50%;
+        text-align: center;
+        font-size: 2.2em;
+        outline: none;
+    }
+}

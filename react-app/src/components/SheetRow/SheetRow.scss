@@ -1,0 +1,7 @@
+.SheetRow {
+  display: flex;
+
+  & > *:not(:last-child) {
+    margin-right: 3px;
+  }
+}

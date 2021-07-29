@@ -1,0 +1,39 @@
+.SanityAttributes{  
+    grid-area: sanity-attributes;
+    margin-top: -30px;
+    display: flex;
+
+    table{
+        width: 100%;
+        border-spacing: 0;
+
+        tbody{
+            display: flex;
+            flex-direction: column;
+        }
+
+        tr:first-child{
+            margin-left: auto;
+        }
+
+        tr{
+            display: flex;
+            background-color: var(--opaque-white);
+            td{
+                flex: 1;
+            }
+        }
+    }
+    .title-container{
+        background-color: var(--opaque-white);
+        width: 22px;
+        position: relative;
+        h3{
+            transform: rotate(90deg) translate(-50%, 60%);
+            transform-origin: bottom left;
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+.AttributeButton {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1em;
+
+  &.checked {
+      background-color: var(--dark-gray);
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  & > * {
+    pointer-events: none;
+  }
+
+  input {
+    display: none;
+  }
+}

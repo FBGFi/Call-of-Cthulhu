@@ -1,0 +1,43 @@
+$borderSettings: 1px solid var(--light-gray);
+
+.StatsInput {
+  display: flex;
+  max-width: 200px;
+  border: $borderSettings;
+
+  & > * {
+    flex: 1;
+  }
+
+  input{
+      padding: 5px;
+      border: none;
+      background-color: var(--opaque-white);
+  }
+
+  input.main-input {
+    width: 50%;
+    font-size: 2.2em;
+    border-right: $borderSettings;
+    z-index: 1;
+    padding: 0;
+  }
+
+  .stat-input {
+    text-align: center;
+  }
+
+  .half-and-fifth {
+      width: 50%;
+      input:first-child{
+          border-bottom: $borderSettings;
+      }
+      input {
+          font-size: 1.4em;
+          width: 100%;
+          height: 50%;
+          cursor: default;
+          outline: none;
+      }
+  }
+}

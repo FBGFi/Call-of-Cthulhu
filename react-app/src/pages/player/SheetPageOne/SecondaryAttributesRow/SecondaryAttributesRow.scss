@@ -1,0 +1,32 @@
+.SecondaryAttributesRow {
+  background-color: var(--header-bg);
+  display: grid;
+  grid-template-areas:
+    "secondary-header secondary-header secondary-header empty"
+    "hp-attributes sanity-attributes sanity-attributes sanity-attributes"
+    "hp-attributes title title mp-attributes"
+    "luck-attributes luck-attributes luck-attributes mp-attributes"
+    "luck-attributes luck-attributes luck-attributes mp-attributes";
+  gap: 2px;
+  padding: 2px;
+
+  div {
+    min-height: 30px;
+  }
+
+  .hp-attributes {
+    grid-area: hp-attributes;
+  }
+
+  .title {
+    grid-area: title;
+  }
+
+  .mp-attributes {
+    grid-area: mp-attributes;
+  }
+
+  .luck-attributes {
+    grid-area: luck-attributes;
+  }
+}

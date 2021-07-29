@@ -1,0 +1,24 @@
+.InfoBox {
+  border: 2px solid var(--dark-gray);
+  display: flex;
+  flex-direction: column;
+
+  &>*:nth-child(2){
+    margin-top: auto;
+  }
+
+  &>*:last-child{
+    margin-bottom: auto;
+  }
+
+  .header {
+    background-color: var(--header-bg);
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  & > * {
+      padding: 10px;
+  }
+}

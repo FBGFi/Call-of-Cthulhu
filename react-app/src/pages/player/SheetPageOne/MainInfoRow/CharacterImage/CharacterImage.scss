@@ -1,0 +1,36 @@
+.CharacterImage {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 20%;
+  overflow: hidden;
+
+  & > * {
+    padding: 0;
+  }
+
+  img {
+    flex: 1;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  label{
+      z-index: 1;
+      margin-top: auto;
+      margin-bottom: 0 !important;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 2px 2px 1px 2px;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+  }
+  input{
+      display: none;
+  }
+}

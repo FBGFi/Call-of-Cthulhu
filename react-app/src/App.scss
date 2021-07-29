@@ -1,0 +1,9 @@
+@import "./constants/styles/base.scss";
+.App {
+  min-height: 100vh;
+  height: 200vh;
+  background-image: url(./assets/images/paper_dark.jpeg);
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 3vw;
+}
