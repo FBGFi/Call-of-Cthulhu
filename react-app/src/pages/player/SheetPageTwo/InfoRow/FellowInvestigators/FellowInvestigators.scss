@@ -1,0 +1,48 @@
+.FellowInvestigators{
+    flex: 1;
+    .header{
+        font-size: 2.5em;
+    }
+    .investigator-container{
+        display: grid;
+        gap: 30px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        flex: 1;
+        background-image: url(../../../../../assets/images/tentacles.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        background-position-y: 135%;
+
+        .me-container{
+            color: #fff;
+            display: flex;
+            h1{
+                margin: auto;
+            }
+        }
+        &>*:not(.me-container){
+            border: 2px solid var(--light-gray);
+            background-image: url(../../../../../assets/images/paper_small.jpg);
+            background-size: cover;
+        }
+
+        .player-container{
+            display: flex;
+            flex-direction: column;
+            .row{
+                flex: 1;
+                display: flex;
+                padding: 10px;
+                &>*{
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
+                input{
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

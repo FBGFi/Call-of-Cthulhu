@@ -16,7 +16,7 @@ const StatButtonRow: React.FC<StatButtonRowProps> = (props) => {
 
         for (let i = 0; i < props.cells.length; i++) {
             cells.push(
-                <td>
+                <td key={props.attributeType + i}>
                     <AttributeButton
                         checked={props.cells[i].checked}
                         setValue={props.setValue}

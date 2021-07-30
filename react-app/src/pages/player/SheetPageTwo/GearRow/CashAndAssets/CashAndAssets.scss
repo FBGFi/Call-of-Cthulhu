@@ -1,0 +1,16 @@
+.CashAndAssets {
+  .asset-container {
+      display: grid;
+      gap: 5px;
+    .row {
+      display: flex;
+      span{
+          margin: auto;
+      }
+      input {
+        flex: 1;
+        min-width: 250px;
+      }
+    }
+  }
+}

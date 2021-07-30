@@ -25,9 +25,9 @@ const LuckAttributes: React.FC = () => {
     return (
         <div className='LuckAttributes'>
             <table>
-                <thead className="title-container">
+                <div className="title-container">
                     <h4>Luck</h4>
-                </thead>
+                </div>
                 <tbody>
                     <StatButtonRow cells={tableCells.slice(0, 8)} setValue={setCurrentValue} attributeType="luck" />
                     <StatButtonRow cells={tableCells.slice(8, 31)} setValue={setCurrentValue} attributeType="luck" />

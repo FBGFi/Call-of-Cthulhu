@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 
 import SheetPageOne from './pages/player/SheetPageOne';
+import SheetPageTwo from './pages/player/SheetPageTwo';
 
 const App: React.FC = () => {
   const [transformScale, setTransformScale] = useState(1.0);
@@ -27,6 +28,7 @@ const App: React.FC = () => {
   return (
     <div style={{transform: 'scale(' + transformScale +')'}} className="App">
       <SheetPageOne />
+      <SheetPageTwo />
     </div>
   );
 }

@@ -7,15 +7,15 @@ const Combat: React.FC = () => {
     return(
         <InfoBox title="Combat" className='Combat'>
             <div className="row">
-                <h2>Damage<br/>Bonus</h2>
+                <h3>Damage<br/>Bonus</h3>
                 <input type="number" />
             </div>
             <div className="row">
-                <h2>Build</h2>
+                <h3>Build</h3>
                 <input type="number" />
             </div>
             <div className="row">
-                <h2>Dodge</h2>
+                <h3>Dodge</h3>
                 <StatsInput size="big" />
             </div>
         </InfoBox>

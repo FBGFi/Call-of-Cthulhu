@@ -2,6 +2,7 @@
     grid-area: secondary-header;
     display: flex;
     height: 18px;
+    z-index: 1;
 
     .column{
         display: flex;

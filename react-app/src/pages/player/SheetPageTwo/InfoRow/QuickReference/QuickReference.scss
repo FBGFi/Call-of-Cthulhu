@@ -1,0 +1,30 @@
+.QuickReference {
+  text-align: center;
+
+  .row {
+    display: flex;
+    &>*{
+        margin: auto;
+    }
+    &:not(:last-child){
+      padding-bottom: 0;
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    padding-inline-start: 0;
+    margin-left: 10px !important;
+    border: 1px solid var(--light-gray);
+    li {
+      flex: 1;
+      padding: 5px;
+      width: 75px;
+      font-size: 0.9em;
+    }
+    li:not(:first-child){
+        border-left: 1px solid var(--light-gray);
+    }
+  }
+}

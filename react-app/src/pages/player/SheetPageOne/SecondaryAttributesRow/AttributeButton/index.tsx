@@ -13,7 +13,7 @@ const AttributeButton: React.FC<AttributeButtonProps> = (props) => {
     return (
         <button onClick={() => props.setValue(props.value)} className={props.checked ? "AttributeButton checked" : "AttributeButton"}>
             <label htmlFor={props.attributeType + "-value-" + props.value}>{props.text}</label>
-            <input checked={props.checked} type="radio" name={props.attributeType + "-value"} value={props.value} />
+            <input onChange={() => {}} checked={props.checked} type="radio" name={props.attributeType + "-value"} value={props.value} />
         </button>
     );
 }
