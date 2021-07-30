@@ -1,7 +1,7 @@
 import React from 'react';
 import './AttributeButton.css';
 
-type AttributeButton = {
+type AttributeButtonProps = {
     setValue: React.Dispatch<React.SetStateAction<number | null>>;
     attributeType: string;
     value: number;
@@ -9,11 +9,11 @@ type AttributeButton = {
     checked?: boolean;
 }
 
-const AttributeButton: React.FC<AttributeButton> = (props) => {
+const AttributeButton: React.FC<AttributeButtonProps> = (props) => {
     return (
         <button onClick={() => props.setValue(props.value)} className={props.checked ? "AttributeButton checked" : "AttributeButton"}>
             <label htmlFor={props.attributeType + "-value-" + props.value}>{props.text}</label>
-            <input type="radio" name={props.attributeType + "-value-" + props.value} value={props.value} />
+            <input checked={props.checked} type="radio" name={props.attributeType + "-value"} value={props.value} />
         </button>
     );
 }

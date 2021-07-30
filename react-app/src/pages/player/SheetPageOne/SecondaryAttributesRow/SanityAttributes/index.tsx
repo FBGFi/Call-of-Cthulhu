@@ -1,49 +1,42 @@
 import React, { useState } from 'react';
 import { formatNumberToLength } from '../../../../../constants/constants';
-import AttributeButton from '../AttributeButton';
+import { TableCellData } from '../../../../../constants/types';
+import StatButtonRow from '../StatButtonRow';
 import './SanityAttributes.css';
-
-const maxSanity = new Array(99);
-for (let i = 1; i <= maxSanity.length; i++) {
-    maxSanity[i - 1] = i;
-}
 
 const SanityAttributes: React.FC = () => {
     const [currentValue, setCurrentValue] = useState<number | null>(null);
 
-    const RenderRows = (start: number, end: number): JSX.Element => {
-        return <tr>
-            {maxSanity.slice(start - 1, end).map(RenderButtons)}
-        </tr>;
+    const tableCells: TableCellData[] = new Array(100);
+
+    tableCells[0] = {
+        text: 'Insane',
+        value: 0,
+        checked: currentValue === 0
     }
 
-    const RenderButtons = (value: number): JSX.Element => {
-        return <td key={value}>
-            <AttributeButton
-                checked={currentValue === value}
-                setValue={setCurrentValue}
-                attributeType="sanity"
-                value={value}
-                text={formatNumberToLength(value, maxSanity.length.toString().length)} />
-        </td>
+    for (let i = 1; i < tableCells.length; i++) {
+        tableCells[i] = {
+            text: formatNumberToLength(i, "99".length),
+            value: i,
+            checked: currentValue === i
+        }
+        
     }
 
     return (
         <div className='SanityAttributes'>
             <table>
                 <tbody>
-                    <tr>
-                        <td><AttributeButton checked={currentValue === 0} setValue={setCurrentValue} attributeType="sanity" value={0} text="Insane" /></td>
-                        {maxSanity.slice(0, -92).map(RenderButtons)}
-                    </tr>
-                    {RenderRows(8, 30)}
-                    {RenderRows(31, 53)}
-                    {RenderRows(54, 76)}
-                    {RenderRows(77, 99)}
+                    <StatButtonRow cells={tableCells.slice(0, 8)} setValue={setCurrentValue} attributeType="sanity" />
+                    <StatButtonRow cells={tableCells.slice(8, 31)} setValue={setCurrentValue} attributeType="sanity" />
+                    <StatButtonRow cells={tableCells.slice(31, 54)} setValue={setCurrentValue} attributeType="sanity" />
+                    <StatButtonRow cells={tableCells.slice(54, 77)} setValue={setCurrentValue} attributeType="sanity" />
+                    <StatButtonRow cells={tableCells.slice(77, 100)} setValue={setCurrentValue} attributeType="sanity" />
                 </tbody>
             </table>
             <div className="title-container">
-                <h3>Sanity</h3>
+                <h4>Sanity</h4>
             </div>
         </div>
     );

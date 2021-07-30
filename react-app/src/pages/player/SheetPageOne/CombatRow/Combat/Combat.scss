@@ -1,0 +1,23 @@
+.Combat {
+  text-align: center;
+
+  .row {
+    display: flex;
+    & > *:last-child {
+      margin-right: 0;
+      width: 90px;
+      height: 60px;
+    }
+    &>input[type="number"]{
+        border-radius: 20%;
+        border: 1px solid var(--light-gray);
+        background-color: var(--opaque-white);
+        text-align: center;
+        font-size: 2.2em;
+    }
+  }
+  h2 {
+    margin: auto 10px;
+    flex: 1;
+  }
+}

@@ -1,7 +1,33 @@
-.SheetPage{
-    border: 8px solid var(--dark-gray);
-    background-image: url(../../../assets/images/paper_small.jpg);
-    background-size: 200px;
-    padding: 15px;
-    width: 1200px;
+.SheetPage {
+  border: 8px solid var(--dark-gray);
+  background-image: url(../../../assets/images/paper_small.jpg);
+  background-size: 200px;
+  padding: 15px;
+  width: 1200px;
+  box-sizing: content-box;
+
+  &>*{
+      width: 1200px;
+  }
+
+  & > *:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  input[type="text"],
+  select {
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 1.2em;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  select {
+    text-align-last: center;
+  }
 }

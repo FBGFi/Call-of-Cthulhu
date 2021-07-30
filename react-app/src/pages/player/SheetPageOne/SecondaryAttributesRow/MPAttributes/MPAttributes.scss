@@ -1,0 +1,33 @@
+.mp-header {
+  display: flex;
+  grid-area: mp-header;
+
+  span {
+    margin: auto 5px auto auto;
+  }
+  input {
+    margin: auto auto auto 0;
+  }
+}
+.MPAttributes {
+  grid-area: mp-attributes;
+  .mp-stats {
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+  }
+
+  .title-container {
+    width: 22px;
+    position: relative;
+
+    h4 {
+      transform: rotate(90deg) translate(-50%, 60%);
+      transform-origin: bottom left;
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      width: 110px;
+      text-align: center;
+    }
+  }
+}

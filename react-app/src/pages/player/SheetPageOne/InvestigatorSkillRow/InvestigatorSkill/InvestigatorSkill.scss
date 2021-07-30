@@ -1,0 +1,27 @@
+.InvestigatorSkill {
+  display: flex;
+  text-align: center;
+
+  & > * {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  input[type="checkbox"]{
+      margin-left: auto;
+      margin-right: 5px;
+  }
+
+  input[type="text"]{
+      width: 150px;
+  }
+
+  .title-container{
+      flex: 1;
+  }
+
+  .StatsInput{
+      margin-right: 0;
+      margin-left: 5px;
+  }
+}

@@ -19,7 +19,7 @@ const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
     }
 
     return (
-        <div className='StatsInput' style={{ fontSize: props.size === "small" ? "10px" : "14px" }}>
+        <div className={'StatsInput ' + props.size}>
             <input onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
             <div className="half-and-fifth">
                 <input ref={halfInputRef} type="number" className="stat-input half-input" readOnly />

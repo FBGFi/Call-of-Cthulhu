@@ -1,9 +1,25 @@
 @import "./constants/styles/base.scss";
+
+body{
+  background-image: url(./assets/images/paper_dark.jpeg);
+}
+
 .App {
   min-height: 100vh;
-  height: 200vh;
-  background-image: url(./assets/images/paper_dark.jpeg);
   background-size: cover;
   background-attachment: fixed;
-  padding: 3vw;
+  padding: 30px 0;
+  display: flex;
+  &>*{
+    margin: 0 auto;
+  }
+}
+
+@media(max-width: 1330px){
+  body{
+    overflow-x: hidden;
+  }
+  .App{
+    transform-origin: top left;
+  }
 }

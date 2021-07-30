@@ -1,0 +1,57 @@
+.HPAttributes {
+    grid-area: hp-attributes;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    
+    .title-container{     
+        width: 22px;
+        position: relative;
+
+        h4{
+            transform: rotate(-90deg) translate(-50%, 60%);
+            transform-origin: bottom left;
+            position: absolute;
+            left: 50%;
+            bottom: 55%;
+            width: 100px;
+        }
+    }
+
+    .hp-stats{
+        flex: 1;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+
+        .hp-header{
+            display: flex;
+
+            span{
+                margin-left: auto;
+                margin-right: 5px;
+            }
+
+            input{
+                margin-right: auto;
+            }
+        }
+        table{
+            flex: 1;
+            display: flex;
+
+            tbody{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            tr{
+                margin: auto 0;
+                display: flex;
+            }
+
+            td{
+                margin: auto;
+            }
+        }
+    }
+}

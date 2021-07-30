@@ -2,11 +2,18 @@ $borderSettings: 1px solid var(--light-gray);
 
 .StatsInput {
   display: flex;
-  max-width: 200px;
   border: $borderSettings;
 
-  & > * {
-    flex: 1;
+  &.small{
+    font-size: 10px;
+    width: 70px;
+    height: calc(70px * (2/3));
+  }
+
+  &.big{
+    font-size: 14px;
+    width: 90px;
+    height: 60px;
   }
 
   input{
@@ -16,7 +23,8 @@ $borderSettings: 1px solid var(--light-gray);
   }
 
   input.main-input {
-    width: 50%;
+    width: calc(100% * (2/3));
+    height: 100%;
     font-size: 2.2em;
     border-right: $borderSettings;
     z-index: 1;
@@ -28,7 +36,7 @@ $borderSettings: 1px solid var(--light-gray);
   }
 
   .half-and-fifth {
-      width: 50%;
+      width: calc(100% / 3);
       input:first-child{
           border-bottom: $borderSettings;
       }

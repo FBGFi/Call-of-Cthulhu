@@ -18,13 +18,4 @@
     &>*:not(:last-child){
         margin-right: 15px;
     }
-
-    input[type="number"]{
-        background-color: var(--opaque-white);
-        text-align: center;
-        width: 74px;
-        height: 26px;
-        font-size: 1em;
-        border: 2px solid var(--dark-gray);
-    }
 }
