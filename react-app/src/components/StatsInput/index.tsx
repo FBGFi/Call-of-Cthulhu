@@ -7,6 +7,13 @@ type StatsInputProps = {
     defaultValue?: number | undefined;
 }
 
+/**
+ * @author FBGFi
+ * @description Component for 3 fielded stat input with autofills for half and fifth values
+ * @param size - small or big
+ * @param onBlur - callback function to be called when out of focus
+ * @param defaultValue - value to show by default
+ */
 const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
     const mainInputRef = useRef<HTMLInputElement>(null);
     const halfInputRef = useRef<HTMLInputElement>(null);

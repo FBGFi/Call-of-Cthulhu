@@ -1,43 +1,54 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { PlayerActions } from '../../../../../actions';
 import { formatNumberToLength } from '../../../../../constants/constants';
 import { TableCellData } from '../../../../../constants/types';
+import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import StatButtonRow from '../StatButtonRow';
 import './MPAttributes.css';
 
 const MPAttributes: React.FC = () => {
-    const [currentValue, setCurrentValue] = useState<number | null>(null);
-
+    const { state, dispatch } = useContext(PlayerContext);
 
     const tableCells: TableCellData[] = new Array(25);
 
     tableCells[0] = {
         text: '00',
         value: 0,
-        checked: currentValue === 0
+        checked: state.SECONDARY_STATS.MP.INITIAL_VALUE !== undefined && state.SECONDARY_STATS.MP.INITIAL_VALUE + state.SECONDARY_STATS.MP.ADDED_VALUE === 0
     }
 
     for (let i = 1; i < tableCells.length; i++) {
         tableCells[i] = {
             text: formatNumberToLength(i, "21".length),
             value: i,
-            checked: currentValue === i
+            checked: state.SECONDARY_STATS.MP.INITIAL_VALUE !== undefined && state.SECONDARY_STATS.MP.INITIAL_VALUE + state.SECONDARY_STATS.MP.ADDED_VALUE === i
+
         }
     }
+
+    const setCurrentValue = (value: number) => {
+        dispatch({ type: PlayerActions.SET_SECONDARY_STATS.MP.SET_MP, value: value });
+    }
+
+    const setMaxMP = (e: React.FocusEvent<HTMLInputElement>) => {
+        dispatch({ type: PlayerActions.SET_SECONDARY_STATS.MP.MAX_MP, value: e.target.value });
+    }
+
     return (
         <>
             <div className="mp-header">
                 <span>Max MP</span>
-                <input type="number" placeholder="Max MP" />
+                <input onBlur={setMaxMP} defaultValue={state.SECONDARY_STATS.MP.INITIAL_VALUE ? state.SECONDARY_STATS.MP.INITIAL_VALUE + state.SECONDARY_STATS.MP.ADDED_VALUE: undefined } type="number" placeholder="Max MP" />
             </div>
             <div className='MPAttributes'>
                 <div className="mp-stats">
                     <table>
                         <tbody>
-                            <StatButtonRow cells={tableCells.slice(0, 5)} setValue={setCurrentValue} attributeType="mp" />
-                            <StatButtonRow cells={tableCells.slice(5, 10)} setValue={setCurrentValue} attributeType="mp" />
-                            <StatButtonRow cells={tableCells.slice(10, 15)} setValue={setCurrentValue} attributeType="mp" />
-                            <StatButtonRow cells={tableCells.slice(15, 20)} setValue={setCurrentValue} attributeType="mp" />
-                            <StatButtonRow cells={tableCells.slice(20, 25)} setValue={setCurrentValue} attributeType="mp" />
+                            <StatButtonRow cells={tableCells.slice(0, 5)} setValue={setCurrentValue} attributeType="MP" />
+                            <StatButtonRow cells={tableCells.slice(5, 10)} setValue={setCurrentValue} attributeType="MP" />
+                            <StatButtonRow cells={tableCells.slice(10, 15)} setValue={setCurrentValue} attributeType="MP" />
+                            <StatButtonRow cells={tableCells.slice(15, 20)} setValue={setCurrentValue} attributeType="MP" />
+                            <StatButtonRow cells={tableCells.slice(20, 25)} setValue={setCurrentValue} attributeType="MP" />
                         </tbody>
                     </table>
                     <div className="title-container">

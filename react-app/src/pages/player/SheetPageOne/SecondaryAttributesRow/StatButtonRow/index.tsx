@@ -5,8 +5,8 @@ import './StatButtonRow.css';
 
 type StatButtonRowProps = {
     cells: TableCellData[];
-    setValue: React.Dispatch<React.SetStateAction<number | null>>;
-    attributeType: string;
+    setValue: (value: number) => void;
+    attributeType: "HP" | "LUCK" | "MP" | "SANITY";
 }
 
 const StatButtonRow: React.FC<StatButtonRowProps> = (props) => {

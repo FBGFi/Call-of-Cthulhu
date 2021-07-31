@@ -4,4 +4,4 @@ type TableCellData = {
     checked: boolean
 }
 
-export type { TableCellData }
+export type { TableCellData}

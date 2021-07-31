@@ -2,7 +2,7 @@ import React from 'react';
 import './AttributeButton.css';
 
 type AttributeButtonProps = {
-    setValue: React.Dispatch<React.SetStateAction<number | null>>;
+    setValue: (value: number) => void;
     attributeType: string;
     value: number;
     text: string;
