@@ -3,9 +3,14 @@ $borderSettings: 1px solid var(--light-gray);
 .StatsInput {
   display: flex;
   border: $borderSettings;
+  background-color: rgba(255,255,255, 0.7);
+
+  &.disabled{
+    background-color: rgba(170, 170, 170, 0.2);
+  }
 
   &.small {
-    font-size: 10px;
+    font-size: 9px;
     width: 70px;
     height: calc(70px * (2 / 3));
   }
@@ -19,7 +24,7 @@ $borderSettings: 1px solid var(--light-gray);
   input {
     padding: 5px;
     border: none;
-    background-color: var(--opaque-white);
+    background: none;
   }
 
   input.main-input {

@@ -19,7 +19,11 @@ type TPlayerState = {
         AGE: number | undefined,
         SEX: "MALE" | "FEMALE" | "OTHER" | "NONE",
         RESIDENCE: string,
-        BIRTHPLACE: string
+        BIRTHPLACE: string,
+        IMAGE: {
+            SRC: undefined | string,
+            TITLE: undefined | string,
+        }
     },
     CHARACTERISTICS: {
         STR: TCharacteristicsValue,
@@ -72,6 +76,10 @@ const InitialPlayerState: TPlayerState = {
         SEX: "NONE",
         RESIDENCE: "",
         BIRTHPLACE: "",
+        IMAGE: {
+            SRC: undefined,
+            TITLE: undefined
+        }
     },
     CHARACTERISTICS: {
         STR: {
@@ -212,6 +220,13 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
 
         case PlayerActions.SET_CHARACTER_INFO.BIRTHPLACE:
             state.CHARACTER_INFO.BIRTHPLACE = action.value;
+            break;
+        
+        case PlayerActions.SET_CHARACTER_INFO.IMAGE:
+            if(action.value.SRC && action.value.TITLE){
+                state.CHARACTER_INFO.IMAGE.SRC = action.value.SRC;
+                state.CHARACTER_INFO.IMAGE.TITLE = action.value.TITLE;
+            }
             break;
 
         // Characteristics setting

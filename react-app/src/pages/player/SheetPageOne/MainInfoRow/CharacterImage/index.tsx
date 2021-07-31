@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useContext } from 'react';
+import { PlayerActions } from '../../../../../actions';
 import InfoBox from '../../../../../components/InfoBox';
+import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import './CharacterImage.css';
 
 const CharacterImage: React.FC = () => {
-    const imageRef = useRef<HTMLImageElement>(null);
+    const { state, dispatch } = useContext(PlayerContext);
     const imageInputRef = useRef<HTMLInputElement>(null);
-    const [imageInputTitle, setImageInputTitle] = useState("Choose Image")
 
     const clickImageInput = () => {
         imageInputRef.current?.click();
@@ -14,22 +15,21 @@ const CharacterImage: React.FC = () => {
     const changeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         let reader = new FileReader();
         reader.onload = (frEvent) => {
-            if (imageRef.current) {
-                imageRef.current.src = frEvent.target?.result as string;            
+            if (e.target.files) {
+                dispatch({ type: PlayerActions.SET_CHARACTER_INFO.IMAGE, value: {SRC: frEvent.target?.result as string, TITLE: e.target.files[0].name}})
             }
         }
         if (e.target.files) {
-            setImageInputTitle(e.target.files[0].name);
             reader.readAsDataURL(e.target.files[0]);
         }
     }
 
     return (
         <InfoBox className='CharacterImage'>
-            <img ref={imageRef} />
+            <img src={state.CHARACTER_INFO.IMAGE.SRC} />
             <label onClick={clickImageInput} htmlFor="image-input">
                 <input ref={imageInputRef} name="image-input" onChange={(e) => changeImage(e)} type="file" className="character-image-input" />
-                {imageInputTitle}
+                {state.CHARACTER_INFO.IMAGE.TITLE !== undefined ? state.CHARACTER_INFO.IMAGE.TITLE : "Choose an Image"}
             </label>
 
         </InfoBox>

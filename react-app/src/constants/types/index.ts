@@ -4,4 +4,65 @@ type TableCellData = {
     checked: boolean
 }
 
-export type { TableCellData}
+type TInvestigatorSkill = 'ACCOUNTING' |
+'FAST_TALK' |
+'LAW' |
+'SCIENCE' |
+'ANTHROPOLOGY' |
+'FIGHTING_BRAWL' |
+'LIBRARY_USE' |
+'CUSTOM_1' |
+'CUSTOM_2' |
+'CUSTOM_3' |
+'CUSTOM_4' |
+'CUSTOM_5' |
+'CUSTOM_6' |
+'CUSTOM_7' |
+'CUSTOM_8' |
+'CUSTOM_9' |
+'CUSTOM_10' |
+'CUSTOM_11' |
+'CUSTOM_12' |
+'CUSTOM_13' |
+'CUSTOM_14' |
+'APPRAISE' |
+'LISTEN' |
+'ARCHAEOLOGY' |
+'LOCKSMITH' |
+'SLEIGHT_OF_HAND' |
+'ART_CRAFT' |
+'FIREARMS_HANDGUN' |
+'MECH_REPAIR' |
+'SPOT_HIDDEN' |
+'FIREARMS_RIFLE_SHOTGUN' |
+'MEDICINE' |
+'STEALTH' |
+'NATURAL_WORLD' |
+'SURVIVAL' |
+'CHARM' |
+'FIRST_AID' |
+'NAVIGATE' |
+'SWIM' |
+'CLIMB' |
+'HISTORY' |
+'OCCULT' |
+'THROW' |
+'CREDIT_RATING' |
+'INTIMIDATE' |
+'OP_HV_MACHINE' |
+'TRACK' |
+'CTHULHU_MYTHOS' |
+'JUMP' |
+'PERSUADE' |
+'DISGUISE' |
+'LANGUAGE_OTHER' |
+'PILOT' |
+'DODGE' |
+'PSYCHOLOGY' |
+'DRIVE_AUTO' |
+'PSYCHOANALYSIS' |
+'ELEC_REPAIR' |
+'LANGUAGE_OWN' |
+'RIDE';
+
+export type { TableCellData, TInvestigatorSkill}
