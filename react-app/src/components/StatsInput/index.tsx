@@ -2,8 +2,9 @@ import React, { useRef } from 'react';
 import './StatsInput.css';
 
 type StatsInputProps = {
-    size: "small" | "big",
-    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+    size: "small" | "big";
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+    defaultValue?: number | undefined;
 }
 
 const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
@@ -21,10 +22,10 @@ const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
 
     return (
         <div className={'StatsInput ' + props.size}>
-            <input onBlur={props.onBlur} onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
+            <input defaultValue={props.defaultValue} onBlur={props.onBlur} onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
             <div className="half-and-fifth">
-                <input ref={halfInputRef} type="number" className="stat-input half-input" readOnly />
-                <input ref={fifthInputRef} type="number" className="stat-input fifth-input" readOnly />
+                <input defaultValue={props.defaultValue ? Math.floor(props.defaultValue / 2) : undefined} ref={halfInputRef} type="number" className="stat-input half-input" readOnly />
+                <input defaultValue={props.defaultValue ? Math.floor(props.defaultValue / 5) : undefined} ref={fifthInputRef} type="number" className="stat-input fifth-input" readOnly />
             </div>
         </div>
     );

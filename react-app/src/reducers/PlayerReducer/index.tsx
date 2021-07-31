@@ -30,13 +30,9 @@ type TPlayerState = {
         EDU: TCharacteristicsValue,
         SIZ: TCharacteristicsValue,
         INT: TCharacteristicsValue,
-        MOVE: TCharacteristicsValue
+        MOVE: TCharacteristicsValue,
+        AGE_MODS_ADDED: boolean,
     }
-}
-
-const InitialCharacteristicsValue: TCharacteristicsValue = {
-    INITIAL_VALUE: undefined,
-    ADDED_VALUE: 0
 }
 
 const InitialPlayerState: TPlayerState = {
@@ -51,15 +47,43 @@ const InitialPlayerState: TPlayerState = {
         BIRTHPLACE: "",
     },
     CHARACTERISTICS: {
-        STR: Object.create(InitialCharacteristicsValue),
-        DEX: Object.create(InitialCharacteristicsValue),
-        POW: Object.create(InitialCharacteristicsValue),
-        CON: Object.create(InitialCharacteristicsValue),
-        APP: Object.create(InitialCharacteristicsValue),
-        EDU: Object.create(InitialCharacteristicsValue),
-        SIZ: Object.create(InitialCharacteristicsValue),
-        INT: Object.create(InitialCharacteristicsValue),
-        MOVE: Object.create(InitialCharacteristicsValue)
+        STR: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        DEX: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        POW: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        CON: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        APP: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        EDU: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        SIZ: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        INT: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        MOVE: {
+            INITIAL_VALUE: undefined,
+            ADDED_VALUE: 0
+        },
+        AGE_MODS_ADDED: false
     }
 }
 
@@ -67,36 +91,109 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
     switch (action.type) {
         // Character info setting
         case PlayerActions.SET_CHARACTER_INFO.NAME:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{NAME: action.value}}}};   
+            state.CHARACTER_INFO.NAME = action.value;
+            break;
 
         case PlayerActions.SET_CHARACTER_INFO.PLAYER:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{PLAYER: action.value}}}};   
+            state.CHARACTER_INFO.PLAYER = action.value;
+            break
 
         case PlayerActions.SET_CHARACTER_INFO.OCCUPATICE:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{OCCUPATICE: action.value}}}};  
+            state.CHARACTER_INFO.OCCUPATICE = action.value;
+            break
 
         case PlayerActions.SET_CHARACTER_INFO.AGE:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{AGE: action.value}}}};   
+            state.CHARACTER_INFO.AGE = action.value;
+            break
 
         case PlayerActions.SET_CHARACTER_INFO.SEX:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{SEX: action.value}}}};   
+            state.CHARACTER_INFO.SEX = action.value;
+            break
 
         case PlayerActions.SET_CHARACTER_INFO.RESIDENCE:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{RESIDENCE: action.value}}}};   
+            state.CHARACTER_INFO.RESIDENCE = action.value;
+            break
 
         case PlayerActions.SET_CHARACTER_INFO.BIRTHPLACE:
-            return {...state, ...{CHARACTER_INFO:{...state.CHARACTER_INFO, ...{BIRTHPLACE: action.value}}}};   
+            state.CHARACTER_INFO.BIRTHPLACE = action.value;
+            break;
 
         // Characteristics setting
         case PlayerActions.SET_CHARACTERISTICS.STR:
-            if(state.CHARACTERISTICS.STR === undefined) return state;
-            return {...state, ...{CHARACTERISTICS:{...state.CHARACTERISTICS, ...{STR: action.value}}}};
+            if (state.CHARACTERISTICS.STR.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.STR.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.STR.ADDED_VALUE = action.value - state.CHARACTERISTICS.STR.INITIAL_VALUE;
+            }
+            break;
+
+        case PlayerActions.SET_CHARACTERISTICS.DEX:
+            if (state.CHARACTERISTICS.DEX.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.DEX.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.DEX.ADDED_VALUE = action.value - state.CHARACTERISTICS.DEX.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.POW:
+            if (state.CHARACTERISTICS.POW.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.POW.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.POW.ADDED_VALUE = action.value - state.CHARACTERISTICS.POW.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.CON:
+            if (state.CHARACTERISTICS.CON.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.CON.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.CON.ADDED_VALUE = action.value - state.CHARACTERISTICS.CON.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.APP:
+            if (state.CHARACTERISTICS.APP.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.APP.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.APP.ADDED_VALUE = action.value - state.CHARACTERISTICS.APP.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.EDU:
+            if (state.CHARACTERISTICS.EDU.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.EDU.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.EDU.ADDED_VALUE = action.value - state.CHARACTERISTICS.EDU.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.SIZ:
+            if (state.CHARACTERISTICS.SIZ.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.SIZ.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.SIZ.ADDED_VALUE = action.value - state.CHARACTERISTICS.SIZ.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.INT:
+            if (state.CHARACTERISTICS.INT.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.INT.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.INT.ADDED_VALUE = action.value - state.CHARACTERISTICS.INT.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.MOVE:
+            if (state.CHARACTERISTICS.MOVE.INITIAL_VALUE === undefined) {
+                state.CHARACTERISTICS.MOVE.INITIAL_VALUE = action.value;
+            } else {
+                state.CHARACTERISTICS.MOVE.ADDED_VALUE = action.value - state.CHARACTERISTICS.MOVE.INITIAL_VALUE;
+            }
+            break;
+        case PlayerActions.SET_CHARACTERISTICS.SET_AGE_MODS:
+            state.CHARACTERISTICS.AGE_MODS_ADDED = true;
+            break;
+
         default:
-            return state;
+            break;
     }
+    return Object.create(state);
 }
 
-const PlayerContext = createContext<{state: TPlayerState, dispatch: React.Dispatch<TAction>}>({state: InitialPlayerState, dispatch: () => {}});
+const PlayerContext = createContext<{ state: TPlayerState, dispatch: React.Dispatch<TAction> }>({ state: InitialPlayerState, dispatch: () => { } });
 
 export {
     playerReducer,

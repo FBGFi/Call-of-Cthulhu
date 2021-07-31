@@ -1,0 +1,32 @@
+.AgeModAlert{   
+    background-image: url(../../../assets/images/paper_small.jpg);
+    border: 2px solid var(--dark-gray);
+    padding: 30px;
+    box-shadow: 0 0 5px black;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    text-align: center;
+
+    &>*:not(:last-child){
+        margin-bottom: 10px;
+    }
+
+    span,button{
+        font-size: 1.1em;
+    }
+
+    button{
+        background-color: #000;
+        color: #FFF;
+        border: 2px solid var(--dark-gray);
+
+        &:hover{
+            filter: invert(0.8);
+        }
+    }
+}

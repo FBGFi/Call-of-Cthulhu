@@ -1,84 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useContext } from 'react';
 import './Footer.css';
 
-import d20 from '../../assets/images/d20.svg';
+import DiceContainer from './DiceContainer';
+import AgeModAlert from './AgeModAlert';
+import { PlayerContext } from '../../reducers/PlayerReducer';
 
-type DiceRefs = {
-    [key: string]: React.RefObject<HTMLInputElement>
-}
-
-type DiceValue = 4 | 6 | 8 | 10 | 12 | 20 | 100;
 
 const Footer: React.FC = () => {
-    const rollTimesRef = useRef<HTMLInputElement>(null);
+    const {state, dispatch} = useContext(PlayerContext);
 
-    const diceRefs: DiceRefs = {
-        "D4": useRef<HTMLInputElement>(null),
-        "D6": useRef<HTMLInputElement>(null),
-        "D8": useRef<HTMLInputElement>(null),
-        "D10": useRef<HTMLInputElement>(null),
-        "D12": useRef<HTMLInputElement>(null),
-        "D20": useRef<HTMLInputElement>(null),
-        "D100": useRef<HTMLInputElement>(null),
-    }
-
-    const rollDice = (diceValue: DiceValue) => {
-        let diceKey = 'D' + diceValue;
-        if (diceRefs[diceKey]) {
-            if (diceRefs[diceKey].current) {
-                let value = 0;
-                if(rollTimesRef.current){
-                    for (let i = 0; i < parseInt(rollTimesRef.current.value); i++) {
-                        value += Math.ceil(Math.random() * diceValue);                       
-                    }
-                }
-
-                // TypeScript is fucking stupid
-                // @ts-ignore
-                diceRefs[diceKey].current.value = value;
-            }
-        }
+    const ageModsNotAdded = (): boolean => {
+        return state.CHARACTER_INFO.AGE !== undefined && !state.CHARACTERISTICS.AGE_MODS_ADDED;
     }
 
     return (
         <footer className='Footer'>
-            <div className="dice-container">
-                <button className="open-button"><img src={d20} /></button>
-                <div className="dice-rolls">
-                    <div className="row">
-                        <span>Times to roll:</span>
-                        <input ref={rollTimesRef} defaultValue={1} type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(4)}>Roll D4</button>
-                        <input ref={diceRefs['D4']} disabled type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(6)}>Roll D6</button>
-                        <input ref={diceRefs['D6']} disabled type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(8)}>Roll D8</button>
-                        <input ref={diceRefs['D8']} disabled type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(10)}>Roll D10</button>
-                        <input ref={diceRefs['D10']} disabled type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(12)}>Roll D12</button>
-                        <input ref={diceRefs['D12']} disabled type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(20)}>Roll D20</button>
-                        <input ref={diceRefs['D20']} disabled type="number" />
-                    </div>
-                    <div className="row">
-                        <button onClick={() => rollDice(100)}>Roll D100</button>
-                        <input ref={diceRefs['D100']} disabled type="number" />
-                    </div>
-                </div>
-            </div>
+            <DiceContainer />
+            {ageModsNotAdded() ? <AgeModAlert /> : null}
         </footer>
     );
 }

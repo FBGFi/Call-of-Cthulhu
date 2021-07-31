@@ -18,9 +18,9 @@ const App: React.FC = () => {
         <PlayerContext.Provider value={{ state: playerState, dispatch: playerDispatch }}>
           <SheetPageOne />
           <SheetPageTwo />
+          <Footer />
         </PlayerContext.Provider>
       </AppContext.Provider>
-      <Footer />
     </div>
   );
 }
