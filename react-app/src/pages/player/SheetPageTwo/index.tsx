@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import SheetPage from '../SheetPage';
 import BackstoryRow from './BackstoryRow';
 import GearRow from './GearRow';
 import InfoRow from './InfoRow';
 import './SheetPageTwo.css';
 
-const SheetPageTwo: React.FC = () => {
+type SheetPageTwoProps = {
+    style?: CSSProperties;
+}
+
+const SheetPageTwo: React.FC<SheetPageTwoProps> = (props) => {
     return(
-        <SheetPage className="SheetPageTwo">
+        <SheetPage style={props.style} className="SheetPageTwo">
             <BackstoryRow />
             <GearRow />
             <InfoRow />

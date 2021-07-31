@@ -19,12 +19,3 @@ body{
     margin-bottom: 30px;
   }
 }
-
-@media(max-width: 1330px){
-  body{
-    overflow-x: hidden;
-  }
-  .App{
-    transform-origin: top left;
-  }
-}

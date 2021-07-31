@@ -1,34 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useReducer } from 'react';
 import './App.css';
+import Footer from './components/Footer';
 
 import SheetPageOne from './pages/player/SheetPageOne';
 import SheetPageTwo from './pages/player/SheetPageTwo';
 
 const App: React.FC = () => {
-  const [transformScale, setTransformScale] = useState(1.0);
 
-  const scaleForMobile = () => {
-    if(window.innerWidth > 1330 && transformScale === 1.0){ 
-      return;
-    } else if (window.innerWidth > 1330){
-      setTransformScale(1.0);
-      return;
-    }
-    setTransformScale(window.innerWidth / 1330);
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', scaleForMobile);
-    scaleForMobile();
-    return () => {
-      window.removeEventListener('resize', scaleForMobile);
-    }
-  }, []);
 
   return (
-    <div style={{transform: 'scale(' + transformScale +')'}} className="App">
+    <div className="App">
       <SheetPageOne />
       <SheetPageTwo />
+      <Footer />
     </div>
   );
 }

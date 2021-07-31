@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import './SheetPageOne.css';
 
 import SheetPage from '../SheetPage';
@@ -7,9 +7,13 @@ import SecondaryAttributesRow from './SecondaryAttributesRow';
 import InvestigatorSkillRow from './InvestigatorSkillRow';
 import CombatRow from './CombatRow';
 
-const SheetPageOne: React.FC = () => {
+type SheetPageOneProps = {  
+    style?: CSSProperties;
+}
+
+const SheetPageOne: React.FC<SheetPageOneProps> = (props) => {
     return (
-        <SheetPage className="SheetPageOne">
+        <SheetPage style={props.style} className="SheetPageOne">
             <MainInfoRow />
             <SecondaryAttributesRow />
             <InvestigatorSkillRow />
