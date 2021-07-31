@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import './StatsInput.css';
 
 type StatsInputProps = {
-    size: "small" | "big"
+    size: "small" | "big",
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
 const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
@@ -20,7 +21,7 @@ const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
 
     return (
         <div className={'StatsInput ' + props.size}>
-            <input onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
+            <input onBlur={props.onBlur} onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
             <div className="half-and-fifth">
                 <input ref={halfInputRef} type="number" className="stat-input half-input" readOnly />
                 <input ref={fifthInputRef} type="number" className="stat-input fifth-input" readOnly />

@@ -5,13 +5,21 @@ import Footer from './components/Footer';
 import SheetPageOne from './pages/player/SheetPageOne';
 import SheetPageTwo from './pages/player/SheetPageTwo';
 
-const App: React.FC = () => {
+import { appReducer, InitialState, AppContext } from './reducers';
+import { playerReducer, InitialPlayerState, PlayerContext } from './reducers/PlayerReducer';
 
+const App: React.FC = () => {
+  const [appState, appDispatch] = useReducer(appReducer, InitialState);
+  const [playerState, playerDispatch] = useReducer(playerReducer, InitialPlayerState);
 
   return (
     <div className="App">
-      <SheetPageOne />
-      <SheetPageTwo />
+      <AppContext.Provider value={{ state: appState, dispatch: appDispatch }}>
+        <PlayerContext.Provider value={{ state: playerState, dispatch: playerDispatch }}>
+          <SheetPageOne />
+          <SheetPageTwo />
+        </PlayerContext.Provider>
+      </AppContext.Provider>
       <Footer />
     </div>
   );
