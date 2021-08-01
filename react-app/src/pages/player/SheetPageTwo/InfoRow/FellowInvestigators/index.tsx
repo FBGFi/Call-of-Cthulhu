@@ -1,99 +1,56 @@
-import React from 'react';
+import React, { useReducer, useContext } from 'react';
+import { FellowInvestigatorsActions } from '../../../../../actions';
 import InfoBox from '../../../../../components/InfoBox';
+import { fellowInvestigatorsReducer, InitialFellowInvestigatorsState, FellowInvestigatorsContext } from '../../../../../reducers/FellowInvestigatorsReducer';
 import './FellowInvestigators.css';
 
+type FellowInvestigatorProps = {
+    playerKey: "PLAYER_1" | "PLAYER_2" | "PLAYER_3" | "PLAYER_4" | "PLAYER_5" | "PLAYER_6" | "PLAYER_7" | "PLAYER_8"
+}
+
+const FellowInvestigator: React.FC<FellowInvestigatorProps> = (props) => {
+    const { state, dispatch } = useContext(FellowInvestigatorsContext);
+    const setCharForReducer = (e: React.FocusEvent<HTMLInputElement>) => {
+        dispatch({type: FellowInvestigatorsActions[props.playerKey].SET_CHAR, value: e.target.value});
+    }
+    const setPlayerForReducer = (e: React.FocusEvent<HTMLInputElement>) => {
+        dispatch({type: FellowInvestigatorsActions[props.playerKey].SET_PLAYER, value: e.target.value});
+    }
+    return (
+        <div className={`player-container ${props.playerKey}`}>
+            <div className="row">
+                <span>Char.</span>
+                <input onBlur={setCharForReducer} defaultValue={state[props.playerKey].CHAR} type="text" size={1} />
+            </div>
+            <div className="row">
+                <span>Player.</span>
+                <input onBlur={setPlayerForReducer} defaultValue={state[props.playerKey].PLAYER} type="text" size={1} />
+            </div>
+        </div>
+    );
+}
+
 const FellowInvestigators: React.FC = () => {
-    return(
+    const [state, dispatch] = useReducer(fellowInvestigatorsReducer, InitialFellowInvestigatorsState);
+    
+    return (
         <InfoBox title="Fellow Investigators" className='FellowInvestigators'>
             <div className="investigator-container">
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
+                <FellowInvestigatorsContext.Provider value={{ state, dispatch }}>
+                    <FellowInvestigator playerKey="PLAYER_1" />
+                    <FellowInvestigator playerKey="PLAYER_2" />
+                    <FellowInvestigator playerKey="PLAYER_3" />
+                    <FellowInvestigator playerKey="PLAYER_4" />
 
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
+                    <div className="me-container">
+                        <h1>ME</h1>
                     </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
-                
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
 
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
-
-                <div className="me-container">
-                    <h1>ME</h1>
-                </div>
-
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
-                <div className="player-container">
-                    <div className="row">
-                        <span>Char.</span>
-                        <input type="text" size={1} />
-                    </div>
-                    <div className="row">
-                        <span>Player.</span>
-                        <input type="text" size={1} />
-                    </div>
-                </div>
+                    <FellowInvestigator playerKey="PLAYER_5" />
+                    <FellowInvestigator playerKey="PLAYER_6" />
+                    <FellowInvestigator playerKey="PLAYER_7" />
+                    <FellowInvestigator playerKey="PLAYER_8" />
+                </FellowInvestigatorsContext.Provider>
             </div>
         </InfoBox>
     );

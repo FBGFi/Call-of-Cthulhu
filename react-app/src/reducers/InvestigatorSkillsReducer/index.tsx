@@ -1,5 +1,4 @@
 import React, { createContext } from 'react';
-import { InvestigatorSkillsActions } from '../../actions';
 import { TInvestigatorSkill } from '../../constants/types';
 
 type TAction = {

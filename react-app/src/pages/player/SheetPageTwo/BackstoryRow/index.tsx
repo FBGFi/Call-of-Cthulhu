@@ -1,53 +1,59 @@
-import React from 'react';
+import React, { useReducer, useContext } from 'react';
+import { BackstoryActions } from '../../../../actions';
 import InfoBox from '../../../../components/InfoBox';
 import SheetRow from '../../../../components/SheetRow';
+import { backstoryReducer, InitialBackstoryState, BackstoryContext } from '../../../../reducers/BackstoryReducer';
 import './BackstoryRow.css';
 
+type BackstoryContainerProps = {
+    title: string,
+    backstoryKey:
+    "PERSONAL_DESCRIPTION" |
+    "TRAITS" |
+    "IDEOLOGY_BELIEFS" |
+    "INJURIES_SCARS" |
+    "SIGNIFICANT_PEOPLE" |
+    "PHOBIAS_MANIAS" |
+    "MEANINGFUL_LOCATIONS" |
+    "ARCANE_TOMES_SPELLS_ARTIFACTS" |
+    "TREASURED_POSSESSIONS" |
+    "ENCOUNTERS_WITH_STRANGE_ENTITIES"
+}
+
+const BackStoryContainer: React.FC<BackstoryContainerProps> = (props) => {
+    const { state, dispatch } = useContext(BackstoryContext);
+
+    const setValueForReducer = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+        dispatch({ type: BackstoryActions[props.backstoryKey], value: e.target.value});
+    }
+
+    return (
+        <div className="story-container">
+            <h3>{props.title}</h3>
+            <textarea onBlur={setValueForReducer} defaultValue={state[props.backstoryKey]}></textarea>
+        </div>
+    );
+}
+
 const BackstoryRow: React.FC = () => {
-    return(
+    const [state, dispatch] = useReducer(backstoryReducer, InitialBackstoryState);
+    
+    return (
         <SheetRow className='BackstoryRow'>
-            <InfoBox title='Backstory' className='Backstory'>
-                <div className="story-container">
-                    <h3>Personal Description</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Traits</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Ideology/Beliefs</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Injuries & Scars</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Significant People</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Phobias and Manias</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Meaningful Locations</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Arcane Tomes, Spells & Artifacts</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Treasured Possessions</h3>
-                    <textarea></textarea>
-                </div>
-                <div className="story-container">
-                    <h3>Encounters with Strange Entities</h3>
-                    <textarea></textarea>
-                </div>
-            </InfoBox>
+            <BackstoryContext.Provider value={{ state, dispatch }}>
+                <InfoBox title='Backstory' className='Backstory'>
+                    <BackStoryContainer title="Personal Description" backstoryKey="PERSONAL_DESCRIPTION" />
+                    <BackStoryContainer title="Traits" backstoryKey="TRAITS" />
+                    <BackStoryContainer title="Ideology/Beliefs" backstoryKey="IDEOLOGY_BELIEFS" />
+                    <BackStoryContainer title="Injuries & Scars" backstoryKey="INJURIES_SCARS" />
+                    <BackStoryContainer title="Significant People" backstoryKey="SIGNIFICANT_PEOPLE" />
+                    <BackStoryContainer title="Phobias and Manias" backstoryKey="PHOBIAS_MANIAS" />
+                    <BackStoryContainer title="Meaningful Locations" backstoryKey="MEANINGFUL_LOCATIONS" />
+                    <BackStoryContainer title="Arcane Tomes, Spells & Artifacts" backstoryKey="ARCANE_TOMES_SPELLS_ARTIFACTS" />
+                    <BackStoryContainer title="Treasured Possessions" backstoryKey="TREASURED_POSSESSIONS" />
+                    <BackStoryContainer title="Encounters with Strange Entities" backstoryKey="ENCOUNTERS_WITH_STRANGE_ENTITIES" />
+                </InfoBox>
+            </BackstoryContext.Provider>
         </SheetRow>
     );
 }

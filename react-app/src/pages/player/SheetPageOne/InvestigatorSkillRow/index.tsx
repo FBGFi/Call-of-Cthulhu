@@ -1,14 +1,11 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import InfoBox from '../../../../components/InfoBox';
-import { investigatorSkillsReducer, InitialInvestigatorSkillsState, InvestigatorSkillsContext } from '../../../../reducers/InvestigatorSkillsReducer';
 import InvestigatorSkill from './InvestigatorSkill';
 import './InvestigatorSkillRow.css';
 
 const InvestigatorSkillRow: React.FC = () => {
-    const [investigatorSkillsState, investigatorSkillsDispatch] = useReducer(investigatorSkillsReducer, InitialInvestigatorSkillsState);
       
     return (
-        <InvestigatorSkillsContext.Provider value={{ state: investigatorSkillsState, dispatch: investigatorSkillsDispatch }}>
             <div className='InvestigatorSkillRow'>
                 <InfoBox className='InvestigatorSkills' title='Investigator Skills'>
 
@@ -88,7 +85,6 @@ const InvestigatorSkillRow: React.FC = () => {
                     <InvestigatorSkill skill='CUSTOM_14' customText={true} />
                 </InfoBox>
             </div>
-        </InvestigatorSkillsContext.Provider>
     );
 }
 

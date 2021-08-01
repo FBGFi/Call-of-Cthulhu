@@ -9,7 +9,7 @@ type OpenableContainerProps = {
 const OpenableContainer: React.FC<OpenableContainerProps> = (props) => {
     return (
         <div className={'OpenableContainer ' + props.className}>
-            <button className="open-button"><img src={props.imgSrc} /></button>
+            <button className="open-button"><img alt="Fucking React errors" src={props.imgSrc} /></button>
             <div className="inner-container">
                 {props.children}
             </div>

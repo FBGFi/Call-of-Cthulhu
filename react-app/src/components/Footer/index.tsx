@@ -8,7 +8,7 @@ import NotesContainer from './NotesContainer';
 
 
 const Footer: React.FC = () => {
-    const { state, dispatch } = useContext(PlayerContext);
+    const { state } = useContext(PlayerContext);
 
     const ageModsNotAdded = (): boolean => {
         return state.CHARACTER_INFO.AGE !== undefined && !state.CHARACTERISTICS.AGE_MODS_ADDED;

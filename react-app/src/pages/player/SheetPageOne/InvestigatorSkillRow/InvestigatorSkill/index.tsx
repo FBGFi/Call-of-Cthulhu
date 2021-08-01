@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { InvestigatorSkillsActions } from '../../../../../actions';
 import StatsInput from '../../../../../components/StatsInput';
 import { TInvestigatorSkill } from '../../../../../constants/types';
 import { InvestigatorSkillsContext } from '../../../../../reducers/InvestigatorSkillsReducer';
@@ -17,7 +16,7 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
     const { state, dispatch } = useContext(InvestigatorSkillsContext);
     const playerState = useContext(PlayerContext);
 
-    const getDefaultValue = (): number | undefined => {
+    const getDefaultValue = (): number | undefined => {      
         // @ts-ignore
         if(Object.keys(state[props.skill]).includes('CHECKED') && state[props.skill].CHECKED){
             if (props.skill === 'DODGE' && playerState.state.CHARACTERISTICS.DODGE.INITIAL_VALUE) {
@@ -30,7 +29,7 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
                 // @ts-ignore
                 return state[props.skill].VALUE;
             }
-        } else {
+        } else if(!Object.keys(state[props.skill]).includes('CHECKED')) {
             // @ts-ignore
             return state[props.skill].VALUE;
         }

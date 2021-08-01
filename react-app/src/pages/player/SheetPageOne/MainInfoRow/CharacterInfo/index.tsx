@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import InfoBox from '../../../../../components/InfoBox';
 import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import { PlayerActions } from '../../../../../actions';

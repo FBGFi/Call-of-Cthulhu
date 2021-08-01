@@ -1,5 +1,4 @@
 import React, { createContext } from 'react';
-import actions from '../actions';
 
 type TAction = {
 
