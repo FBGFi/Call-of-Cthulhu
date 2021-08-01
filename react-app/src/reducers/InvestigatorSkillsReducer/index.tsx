@@ -89,280 +89,100 @@ type TInvestigatorSkillsState = {
     RIDE: TBasicSkill
 }
 
+const BasicSkill: TBasicSkill = {
+    CHECKED: false,
+    VALUE: undefined
+}
+
+const CustomSkill: TCustomSkill = {
+    CHECKED: false,
+    VALUE: undefined,
+    CUSTOM_TEXT: ""
+}
+
 const InitialInvestigatorSkillsState: TInvestigatorSkillsState = {
-    ACCOUNTING: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    FAST_TALK: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    LAW: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    SCIENCE: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    ANTHROPOLOGY: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    FIGHTING_BRAWL: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    LIBRARY_USE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    CUSTOM_1: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_2: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_3: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_4: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_5: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_6: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_7: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_8: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_9: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_10: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_11: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_12: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_13: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CUSTOM_14: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    APPRAISE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    LISTEN: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    ARCHAEOLOGY: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    LOCKSMITH: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    SLEIGHT_OF_HAND: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    ART_CRAFT: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    FIREARMS_HANDGUN: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    MECH_REPAIR: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    SPOT_HIDDEN: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    FIREARMS_RIFLE_SHOTGUN: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    MEDICINE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    STEALTH: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    NATURAL_WORLD: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    SURVIVAL: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    CHARM: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    FIRST_AID: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    NAVIGATE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    SWIM: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    CLIMB: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    HISTORY: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    OCCULT: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    THROW: {
-        CHECKED: false,
-        VALUE: undefined
-    },
+    ACCOUNTING: { ...BasicSkill },
+    FAST_TALK: { ...BasicSkill },
+    LAW: { ...BasicSkill },
+    SCIENCE: {...CustomSkill},
+    ANTHROPOLOGY: { ...BasicSkill },
+    FIGHTING_BRAWL: { ...BasicSkill },
+    LIBRARY_USE: { ...BasicSkill },
+    CUSTOM_1: {...CustomSkill},
+    CUSTOM_2: {...CustomSkill},
+    CUSTOM_3: {...CustomSkill},
+    CUSTOM_4: {...CustomSkill},
+    CUSTOM_5: {...CustomSkill},
+    CUSTOM_6: {...CustomSkill},
+    CUSTOM_7: {...CustomSkill},
+    CUSTOM_8: {...CustomSkill},
+    CUSTOM_9: {...CustomSkill},
+    CUSTOM_10: {...CustomSkill},
+    CUSTOM_11: {...CustomSkill},
+    CUSTOM_12: {...CustomSkill},
+    CUSTOM_13: {...CustomSkill},
+    CUSTOM_14: {...CustomSkill},
+    APPRAISE: { ...BasicSkill },
+    LISTEN: { ...BasicSkill },
+    ARCHAEOLOGY: { ...BasicSkill },
+    LOCKSMITH: { ...BasicSkill },
+    SLEIGHT_OF_HAND: { ...BasicSkill },
+    ART_CRAFT: {...CustomSkill},
+    FIREARMS_HANDGUN: { ...BasicSkill },
+    MECH_REPAIR: { ...BasicSkill },
+    SPOT_HIDDEN: { ...BasicSkill },
+    FIREARMS_RIFLE_SHOTGUN: { ...BasicSkill },
+    MEDICINE: { ...BasicSkill },
+    STEALTH: { ...BasicSkill },
+    NATURAL_WORLD: { ...BasicSkill },
+    SURVIVAL: {...CustomSkill},
+    CHARM: { ...BasicSkill },
+    FIRST_AID: { ...BasicSkill },
+    NAVIGATE: { ...BasicSkill },
+    SWIM: { ...BasicSkill },
+    CLIMB: { ...BasicSkill },
+    HISTORY: { ...BasicSkill },
+    OCCULT: { ...BasicSkill },
+    THROW: { ...BasicSkill },
     CREDIT_RATING: {
         VALUE: undefined
     },
-    INTIMIDATE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    OP_HV_MACHINE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    TRACK: {
-        CHECKED: false,
-        VALUE: undefined
-    },
+    INTIMIDATE: { ...BasicSkill },
+    OP_HV_MACHINE: { ...BasicSkill },
+    TRACK: { ...BasicSkill },
     CTHULHU_MYTHOS: {
         VALUE: undefined
     },
-    JUMP: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    PERSUADE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    DISGUISE: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    LANGUAGE_OTHER: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
-    PILOT: {
-        CHECKED: false,
-        VALUE: undefined,
-        CUSTOM_TEXT: ""
-    },
+    JUMP: { ...BasicSkill },
+    PERSUADE: { ...BasicSkill },
+    DISGUISE: { ...BasicSkill },
+    LANGUAGE_OTHER: {...CustomSkill},
+    PILOT: {...CustomSkill},
     DODGE: {
         CHECKED: false
     },
-    PSYCHOLOGY: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    DRIVE_AUTO: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    PSYCHOANALYSIS: {
-        CHECKED: false,
-        VALUE: undefined
-    },
-    ELEC_REPAIR: {
-        CHECKED: false,
-        VALUE: undefined
-    },
+    PSYCHOLOGY: { ...BasicSkill },
+    DRIVE_AUTO: { ...BasicSkill },
+    PSYCHOANALYSIS: { ...BasicSkill },
+    ELEC_REPAIR: { ...BasicSkill },
     LANGUAGE_OWN: {
         CHECKED: false
     },
-    RIDE: {
-        CHECKED: false,
-        VALUE: undefined
-    }
+    RIDE: { ...BasicSkill }
 }
 
 function investigatorSkillsReducer(state: TInvestigatorSkillsState, action: TAction): TInvestigatorSkillsState {
     if (typeof (action.value) === "string") {
-        console.log('Setting value to ' + action.type);
-        
         // @ts-ignore
         state[action.type].CUSTOM_TEXT = action.value;
     } else if (typeof (action.value) === "number") {
-        console.log('Setting value to ' + action.type);
-        
         // @ts-ignore
         state[action.type].VALUE = action.value;
     } else if (typeof (action.value) === "boolean") {
         // @ts-ignore
         state[action.type].CHECKED = action.value;
     }
-    return Object.create(state);
+    return { ...state };
 }
 
 const InvestigatorSkillsContext = createContext<{ state: TInvestigatorSkillsState, dispatch: React.Dispatch<TAction> }>({ state: InitialInvestigatorSkillsState, dispatch: () => { } });

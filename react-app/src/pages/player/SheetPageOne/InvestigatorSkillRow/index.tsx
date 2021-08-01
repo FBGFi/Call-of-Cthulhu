@@ -6,6 +6,7 @@ import './InvestigatorSkillRow.css';
 
 const InvestigatorSkillRow: React.FC = () => {
     const [investigatorSkillsState, investigatorSkillsDispatch] = useReducer(investigatorSkillsReducer, InitialInvestigatorSkillsState);
+      
     return (
         <InvestigatorSkillsContext.Provider value={{ state: investigatorSkillsState, dispatch: investigatorSkillsDispatch }}>
             <div className='InvestigatorSkillRow'>

@@ -1,34 +1,8 @@
 .DiceContainer {
-  position: relative;
-  &:focus-within {
-    .dice-rolls {
-      display: flex;
-      flex-direction: column;
-    }
-    .open-button {
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-    }
-  }
-
-  .dice-rolls {
-    display: none;
-    width: 100%;
-    background-image: url(../../../assets/images/paper_small.jpg);
-    border: 2px solid var(--dark-gray);
-    padding: 10px;
-    box-shadow: 0 0 5px black;
-
-    & > *:not(:last-child) {
-      margin-bottom: 10px;
-    }
-
+  .inner-container {
     * {
       font-size: 1.2em;
     }
-
     .row {
       display: flex;
     }
@@ -54,16 +28,3 @@
   }
 }
 
-.open-button {
-  padding: 0;
-  display: block;
-  appearance: none;
-  border: 0;
-  height: 80px;
-  background: none;
-  border-radius: 50%;
-  transition: transform 0.1s ease-in-out;
-  &:hover {
-    transform: scale(1.1);
-  }
-}

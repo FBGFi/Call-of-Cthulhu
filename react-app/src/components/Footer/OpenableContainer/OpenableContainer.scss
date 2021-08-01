@@ -1,0 +1,44 @@
+.OpenableContainer {
+  &:focus-within {
+    .inner-container {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    .open-button {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+  }
+
+  .open-button {
+    padding: 0;
+    display: block;
+    appearance: none;
+    border: 0;
+    height: 80px;
+    background: none;
+    border-radius: 50%;
+    transition: transform 0.1s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .inner-container {
+    display: none;
+    background-image: url(../../../assets/images/paper_small.jpg);
+    border: 2px solid var(--dark-gray);
+    padding: 10px;
+    box-shadow: 0 0 5px black;
+
+    & > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+  }
+}

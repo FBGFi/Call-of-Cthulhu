@@ -66,6 +66,11 @@ type TPlayerState = {
     }
 }
 
+const CharacteristicsValue: TCharacteristicsValue = {
+    INITIAL_VALUE: undefined,
+    ADDED_VALUE: 0
+}
+
 const InitialPlayerState: TPlayerState = {
     CHARACTER_ID: "",
     CHARACTER_INFO: {
@@ -82,48 +87,18 @@ const InitialPlayerState: TPlayerState = {
         }
     },
     CHARACTERISTICS: {
-        STR: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        DEX: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        POW: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        CON: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        APP: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        EDU: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        SIZ: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        INT: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
-        MOVE: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
+        STR: {...CharacteristicsValue},
+        DEX: {...CharacteristicsValue},
+        POW: {...CharacteristicsValue},
+        CON: {...CharacteristicsValue},
+        APP: {...CharacteristicsValue},
+        EDU: {...CharacteristicsValue},
+        SIZ: {...CharacteristicsValue},
+        INT: {...CharacteristicsValue},
+        MOVE: {...CharacteristicsValue},
         DMG_BONUS: "",
         BUILD: "",
-        DODGE: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
+        DODGE: {...CharacteristicsValue},
         AGE_MODS_ADDED: false
     },
     SECONDARY_STATS: {
@@ -143,10 +118,7 @@ const InitialPlayerState: TPlayerState = {
             INITIAL_VALUE: undefined,
             ADDED_VALUE: 0
         },
-        LUCK: {
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
-        },
+        LUCK: {...CharacteristicsValue},
         MP: {
             MAX_MP: undefined,
             INITIAL_VALUE: undefined,
@@ -191,6 +163,8 @@ function setInitialHP(SIZ: number, CON: number): number {
     return Math.floor((SIZ + CON) / 10);
 }
 
+
+
 function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
     switch (action.type) {
         // Character info setting
@@ -221,9 +195,9 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTER_INFO.BIRTHPLACE:
             state.CHARACTER_INFO.BIRTHPLACE = action.value;
             break;
-        
+
         case PlayerActions.SET_CHARACTER_INFO.IMAGE:
-            if(action.value.SRC && action.value.TITLE){
+            if (action.value.SRC && action.value.TITLE) {
                 state.CHARACTER_INFO.IMAGE.SRC = action.value.SRC;
                 state.CHARACTER_INFO.IMAGE.TITLE = action.value.TITLE;
             }
@@ -233,10 +207,6 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTERISTICS.STR:
             if (state.CHARACTERISTICS.STR.INITIAL_VALUE === undefined) {
                 state.CHARACTERISTICS.STR.INITIAL_VALUE = action.value;
-                if (state.CHARACTERISTICS.SIZ.INITIAL_VALUE !== undefined) {
-                    state.CHARACTERISTICS.DMG_BONUS = setDmgBonus(action.value, state.CHARACTERISTICS.SIZ.INITIAL_VALUE);
-                    state.CHARACTERISTICS.BUILD = setBuildStat(action.value, state.CHARACTERISTICS.SIZ.INITIAL_VALUE);
-                }
             } else {
                 state.CHARACTERISTICS.STR.ADDED_VALUE = action.value - state.CHARACTERISTICS.STR.INITIAL_VALUE;
             }
@@ -245,7 +215,6 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTERISTICS.DEX:
             if (state.CHARACTERISTICS.DEX.INITIAL_VALUE === undefined) {
                 state.CHARACTERISTICS.DEX.INITIAL_VALUE = action.value;
-                state.CHARACTERISTICS.DODGE.INITIAL_VALUE = Math.floor(action.value / 2);
             } else {
                 state.CHARACTERISTICS.DEX.ADDED_VALUE = action.value - state.CHARACTERISTICS.DEX.INITIAL_VALUE;
             }
@@ -253,10 +222,6 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTERISTICS.POW:
             if (state.CHARACTERISTICS.POW.INITIAL_VALUE === undefined) {
                 state.CHARACTERISTICS.POW.INITIAL_VALUE = action.value;
-                state.SECONDARY_STATS.MP.INITIAL_VALUE = Math.floor(action.value / 5);
-                state.SECONDARY_STATS.SANITY.INITIAL_VALUE = action.value;
-                state.SECONDARY_STATS.SANITY.MAX_SANITY = action.value;
-                state.SECONDARY_STATS.SANITY.START_SANITY = action.value;
             } else {
                 state.CHARACTERISTICS.POW.ADDED_VALUE = action.value - state.CHARACTERISTICS.POW.INITIAL_VALUE;
             }
@@ -264,11 +229,6 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTERISTICS.CON:
             if (state.CHARACTERISTICS.CON.INITIAL_VALUE === undefined) {
                 state.CHARACTERISTICS.CON.INITIAL_VALUE = action.value;
-
-                if (state.CHARACTERISTICS.SIZ.INITIAL_VALUE !== undefined) {
-                    state.SECONDARY_STATS.HP.MAX_HP = setInitialHP(state.CHARACTERISTICS.SIZ.INITIAL_VALUE, action.value)
-                    state.SECONDARY_STATS.HP.INITIAL_VALUE = setInitialHP(state.CHARACTERISTICS.SIZ.INITIAL_VALUE, action.value)
-                }
             } else {
                 state.CHARACTERISTICS.CON.ADDED_VALUE = action.value - state.CHARACTERISTICS.CON.INITIAL_VALUE;
             }
@@ -290,14 +250,6 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTERISTICS.SIZ:
             if (state.CHARACTERISTICS.SIZ.INITIAL_VALUE === undefined) {
                 state.CHARACTERISTICS.SIZ.INITIAL_VALUE = action.value;
-                if (state.CHARACTERISTICS.STR.INITIAL_VALUE !== undefined) {
-                    state.CHARACTERISTICS.DMG_BONUS = setDmgBonus(state.CHARACTERISTICS.STR.INITIAL_VALUE, action.value);
-                    state.CHARACTERISTICS.BUILD = setBuildStat(state.CHARACTERISTICS.STR.INITIAL_VALUE, action.value);
-                }
-                if (state.CHARACTERISTICS.CON.INITIAL_VALUE !== undefined) {
-                    state.SECONDARY_STATS.HP.MAX_HP = setInitialHP(action.value, state.CHARACTERISTICS.CON.INITIAL_VALUE);
-                    state.SECONDARY_STATS.HP.INITIAL_VALUE = setInitialHP(action.value, state.CHARACTERISTICS.CON.INITIAL_VALUE);
-                }
             } else {
                 state.CHARACTERISTICS.SIZ.ADDED_VALUE = action.value - state.CHARACTERISTICS.SIZ.INITIAL_VALUE;
             }
@@ -330,7 +282,29 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.SET_AGE_MODS:
-            state.CHARACTERISTICS.AGE_MODS_ADDED = true;
+            // TypeScript is stupid again, cant make this a function...
+            if (
+                state.CHARACTERISTICS.STR.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.DEX.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.POW.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.CON.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.APP.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.EDU.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.SIZ.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.INT.INITIAL_VALUE !== undefined &&
+                state.CHARACTERISTICS.MOVE.INITIAL_VALUE !== undefined
+            ) {
+                state.SECONDARY_STATS.MP.INITIAL_VALUE = Math.floor((state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE) / 5);
+                state.SECONDARY_STATS.SANITY.INITIAL_VALUE = state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE;
+                state.SECONDARY_STATS.SANITY.MAX_SANITY = state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE;
+                state.SECONDARY_STATS.SANITY.START_SANITY = state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE;
+                state.SECONDARY_STATS.HP.MAX_HP = setInitialHP(state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE, state.CHARACTERISTICS.CON.INITIAL_VALUE + state.CHARACTERISTICS.CON.ADDED_VALUE);
+                state.SECONDARY_STATS.HP.INITIAL_VALUE = setInitialHP(state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE, state.CHARACTERISTICS.CON.INITIAL_VALUE + state.CHARACTERISTICS.CON.ADDED_VALUE);
+                state.CHARACTERISTICS.DMG_BONUS = setDmgBonus(state.CHARACTERISTICS.STR.INITIAL_VALUE + state.CHARACTERISTICS.STR.ADDED_VALUE, state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE);
+                state.CHARACTERISTICS.BUILD = setBuildStat(state.CHARACTERISTICS.STR.INITIAL_VALUE + state.CHARACTERISTICS.STR.ADDED_VALUE, state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE);
+                state.CHARACTERISTICS.DODGE.INITIAL_VALUE = Math.floor((state.CHARACTERISTICS.DEX.INITIAL_VALUE + state.CHARACTERISTICS.DEX.ADDED_VALUE) / 2);
+                state.CHARACTERISTICS.AGE_MODS_ADDED = true;
+            }
             break;
 
         // Secondary stats setting
@@ -392,7 +366,7 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         default:
             break;
     }
-    return Object.create(state);
+    return { ...state };
 }
 
 const PlayerContext = createContext<{ state: TPlayerState, dispatch: React.Dispatch<TAction> }>({ state: InitialPlayerState, dispatch: () => { } });

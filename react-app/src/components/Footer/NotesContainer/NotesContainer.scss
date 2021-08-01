@@ -1,0 +1,24 @@
+.NotesContainer {
+  .inner-container {
+    padding: 0;
+    max-width: 700px;
+    height: 350px;
+    width: 50%;
+  }
+  h2 {
+    background-color: var(--header-bg);
+    text-align: center;
+    width: 100%;
+  }
+
+  .text-container{
+    flex: 1;
+    padding: 0 10px 10px 10px;
+
+  }
+
+  textarea {
+      width: 100%;
+      height: 100%;
+  }
+}

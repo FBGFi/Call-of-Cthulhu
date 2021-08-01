@@ -4,10 +4,36 @@
   left: 0;
   width: 100%;
   z-index: 1;
-  display: flex;
   padding: 30px;
+  pointer-events: none;
 
-  img {
-    height: 80px;
+  .inner-container {
+    pointer-events: none;
+    display: flex;
+    position: relative;
+    & > * {
+      pointer-events: all;
+    }
+
+    img {
+      height: 80px;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+
+    .OpenableContainer {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 1450px) {
+      flex-direction: row;
+
+      .OpenableContainer {
+        margin-right: 10px;
+      }
+    }
   }
 }

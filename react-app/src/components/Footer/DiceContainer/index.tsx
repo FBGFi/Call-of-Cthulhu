@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import './DiceContainer.css';
 
 import d20 from '../../../assets/images/d20.svg';
+import OpenableContainer from '../OpenableContainer';
 
 type DiceRefs = {
     [key: string]: React.RefObject<HTMLInputElement>
@@ -40,43 +41,40 @@ const DiceContainer: React.FC = () => {
         }
     }
     return (
-        <div className='DiceContainer'>
-            <button className="open-button"><img src={d20} /></button>
-            <div className="dice-rolls">
-                <div className="row">
-                    <span>Times to roll:</span>
-                    <input ref={rollTimesRef} defaultValue={1} type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(4)}>Roll D4</button>
-                    <input ref={diceRefs['D4']} disabled type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(6)}>Roll D6</button>
-                    <input ref={diceRefs['D6']} disabled type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(8)}>Roll D8</button>
-                    <input ref={diceRefs['D8']} disabled type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(10)}>Roll D10</button>
-                    <input ref={diceRefs['D10']} disabled type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(12)}>Roll D12</button>
-                    <input ref={diceRefs['D12']} disabled type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(20)}>Roll D20</button>
-                    <input ref={diceRefs['D20']} disabled type="number" />
-                </div>
-                <div className="row">
-                    <button onClick={() => rollDice(100)}>Roll D100</button>
-                    <input ref={diceRefs['D100']} disabled type="number" />
-                </div>
+        <OpenableContainer className='DiceContainer' imgSrc={d20}>
+            <div className="row">
+                <span>Times to roll:</span>
+                <input ref={rollTimesRef} defaultValue={1} type="number" />
             </div>
-        </div>
+            <div className="row">
+                <button onClick={() => rollDice(4)}>Roll D4</button>
+                <input ref={diceRefs['D4']} disabled type="number" />
+            </div>
+            <div className="row">
+                <button onClick={() => rollDice(6)}>Roll D6</button>
+                <input ref={diceRefs['D6']} disabled type="number" />
+            </div>
+            <div className="row">
+                <button onClick={() => rollDice(8)}>Roll D8</button>
+                <input ref={diceRefs['D8']} disabled type="number" />
+            </div>
+            <div className="row">
+                <button onClick={() => rollDice(10)}>Roll D10</button>
+                <input ref={diceRefs['D10']} disabled type="number" />
+            </div>
+            <div className="row">
+                <button onClick={() => rollDice(12)}>Roll D12</button>
+                <input ref={diceRefs['D12']} disabled type="number" />
+            </div>
+            <div className="row">
+                <button onClick={() => rollDice(20)}>Roll D20</button>
+                <input ref={diceRefs['D20']} disabled type="number" />
+            </div>
+            <div className="row">
+                <button onClick={() => rollDice(100)}>Roll D100</button>
+                <input ref={diceRefs['D100']} disabled type="number" />
+            </div>
+        </OpenableContainer>
     );
 }
 

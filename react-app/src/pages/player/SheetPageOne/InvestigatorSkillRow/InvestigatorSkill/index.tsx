@@ -20,11 +20,14 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
     const getDefaultValue = (): number | undefined => {
         // @ts-ignore
         if(Object.keys(state[props.skill]).includes('CHECKED') && state[props.skill].CHECKED){
-            if (props.skill === 'DODGE') {
-                return playerState.state.CHARACTERISTICS.DODGE.INITIAL_VALUE;
-            } else if (props.skill === 'LANGUAGE_OWN') {
-                return playerState.state.CHARACTERISTICS.EDU.INITIAL_VALUE;
-            } else if (state[props.skill].VALUE !== undefined) {
+            if (props.skill === 'DODGE' && playerState.state.CHARACTERISTICS.DODGE.INITIAL_VALUE) {
+                return playerState.state.CHARACTERISTICS.DODGE.INITIAL_VALUE + playerState.state.CHARACTERISTICS.DODGE.ADDED_VALUE;
+            } else if (props.skill === 'LANGUAGE_OWN' && playerState.state.CHARACTERISTICS.EDU.INITIAL_VALUE) {
+                return playerState.state.CHARACTERISTICS.EDU.INITIAL_VALUE + playerState.state.CHARACTERISTICS.EDU.ADDED_VALUE;
+            } 
+            // @ts-ignore
+            else if (state[props.skill].VALUE !== undefined) {
+                // @ts-ignore
                 return state[props.skill].VALUE;
             }
         } else {
@@ -42,19 +45,36 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
         }
     }
 
+    const setValue = (e: React.FocusEvent<HTMLInputElement>) => {       
+        // @ts-ignore
+        if(Object.keys(state[props.skill]).includes('VALUE')) {
+            // @ts-ignore
+            dispatch({type: props.skill, value: parseInt(e.target.value)});
+        }
+    }
+
+    const setCustomText = (e: React.FocusEvent<HTMLInputElement>) => {
+        // @ts-ignore
+        if(state[props.skill].CUSTOM_TEXT !== undefined) {
+            // @ts-ignore
+            dispatch({type: props.skill, value: e.target.value});
+        }
+    }
+
     return (
         <div className='InvestigatorSkill'>
             {props.nonOptional ? null : <input onClick={setChecked} type="checkbox" />}
             <div className="title-container">
                 {props.title ? <span>{props.title}</span> : null}
-                {props.customText ? <input type="text" /> : null}
+                {props.customText ? <input onBlur={setCustomText} type="text" /> : null}
             </div>
             <StatsInput 
                 defaultValue={getDefaultValue()} 
                 size="small"
+                onBlur={setValue}
                 disabled={
                     // @ts-ignore
-                    !state[props.skill].CHECKED
+                    !state[props.skill].CHECKED && !props.nonOptional
                 } />
         </div>
     );
