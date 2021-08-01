@@ -12,6 +12,7 @@ type TPlayer = {
 }
 
 type TFellowInvestigatorsState = {
+    CHARACTER_ID: string;
     PLAYER_1: TPlayer;
     PLAYER_2: TPlayer;
     PLAYER_3: TPlayer;
@@ -27,15 +28,34 @@ const Player: TPlayer = {
     PLAYER: ""
 }
 
-const InitialFellowInvestigatorsState: TFellowInvestigatorsState = {
-    PLAYER_1: {...Player},
-    PLAYER_2: {...Player},
-    PLAYER_3: {...Player},
-    PLAYER_4: {...Player},
-    PLAYER_5: {...Player},
-    PLAYER_6: {...Player},
-    PLAYER_7: {...Player},
-    PLAYER_8: {...Player}
+const InitialFellowInvestigatorsState = (id?: string): TFellowInvestigatorsState => {
+    let state: TFellowInvestigatorsState = {
+        CHARACTER_ID: "",
+        PLAYER_1: { ...Player },
+        PLAYER_2: { ...Player },
+        PLAYER_3: { ...Player },
+        PLAYER_4: { ...Player },
+        PLAYER_5: { ...Player },
+        PLAYER_6: { ...Player },
+        PLAYER_7: { ...Player },
+        PLAYER_8: { ...Player }
+    }
+    if (id) {
+        state.CHARACTER_ID = id;
+        let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+        if (savedCharacters.LOCAL_SAVES === undefined) {
+            savedCharacters.LOCAL_SAVES = {};
+        } else if (savedCharacters.LOCAL_SAVES[id]) {
+            let keys = Object.keys(state);
+            for (let key of keys) {
+                if (savedCharacters.LOCAL_SAVES[id][key]) {
+                    // @ts-ignore
+                    state[key] = savedCharacters.LOCAL_SAVES[id][key];
+                }
+            }
+        }
+    }
+    return state;
 }
 
 function fellowInvestigatorsReducer(state: TFellowInvestigatorsState, action: TAction): TFellowInvestigatorsState {
@@ -46,7 +66,7 @@ function fellowInvestigatorsReducer(state: TFellowInvestigatorsState, action: TA
         case FellowInvestigatorsActions.PLAYER_1.SET_PLAYER:
             state.PLAYER_1.PLAYER = action.value;
             break;
-            
+
         case FellowInvestigatorsActions.PLAYER_2.SET_CHAR:
             state.PLAYER_2.CHAR = action.value;
             break;
@@ -99,10 +119,16 @@ function fellowInvestigatorsReducer(state: TFellowInvestigatorsState, action: TA
         default:
             break;
     }
-    return {...state};
+    let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+    if (savedCharacters.LOCAL_SAVES === undefined) {
+        savedCharacters.LOCAL_SAVES = {};
+    }
+    savedCharacters.LOCAL_SAVES[state.CHARACTER_ID] = { ...savedCharacters.LOCAL_SAVES[state.CHARACTER_ID], ...state };
+    localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(savedCharacters));
+    return { ...state };
 }
 
-const FellowInvestigatorsContext = createContext<{ state: TFellowInvestigatorsState, dispatch: React.Dispatch<TAction> }>({ state: InitialFellowInvestigatorsState, dispatch: () => { } });
+const FellowInvestigatorsContext = createContext<{ state: TFellowInvestigatorsState, dispatch: React.Dispatch<TAction> }>({ state: InitialFellowInvestigatorsState(), dispatch: () => { } });
 
 export {
     fellowInvestigatorsReducer,

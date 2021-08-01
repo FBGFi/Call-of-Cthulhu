@@ -16,7 +16,7 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
     const { state, dispatch } = useContext(InvestigatorSkillsContext);
     const playerState = useContext(PlayerContext);
 
-    const getDefaultValue = (): number | undefined => {      
+    const getDefaultValue = (): number | undefined => {   
         // @ts-ignore
         if(Object.keys(state[props.skill]).includes('CHECKED') && state[props.skill].CHECKED){
             if (props.skill === 'DODGE' && playerState.state.CHARACTERISTICS.DODGE.INITIAL_VALUE) {
@@ -62,10 +62,16 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
 
     return (
         <div className='InvestigatorSkill'>
-            {props.nonOptional ? null : <input onClick={setChecked} type="checkbox" />}
+            {props.nonOptional ? null : <input checked={
+                // @ts-ignore
+                state[props.skill].CHECKED
+            } onClick={setChecked} onChange={() => {}} type="checkbox" />}
             <div className="title-container">
                 {props.title ? <span>{props.title}</span> : null}
-                {props.customText ? <input onBlur={setCustomText} type="text" /> : null}
+                {props.customText ? <input defaultValue={
+                    // @ts-ignore
+                    state[props.skill].CUSTOM_TEXT
+                } onBlur={setCustomText} type="text" /> : null}
             </div>
             <StatsInput 
                 defaultValue={getDefaultValue()} 

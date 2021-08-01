@@ -20,6 +20,7 @@ type TWeapon = {
 }
 
 type TWeaponsAndGearState = {
+    CHARACTER_ID: string;
     WEAPONS: {
         WEAPON1: TWeapon,
         WEAPON2: TWeapon,
@@ -77,54 +78,77 @@ const Weapon: TWeapon = {
     MALF: "",
 }
 
-const InitialWeaponsAndGearState: TWeaponsAndGearState = {
-    WEAPONS: {
-        WEAPON1: {...Weapon},
-        WEAPON2: {...Weapon},
-        WEAPON3: {...Weapon},
-        WEAPON4: {...Weapon},
-        WEAPON5: {...Weapon},
-    },
-    GEAR_AND_POSSESSIONS: {
-        GEAR_AND_POSSESSIONS_1: "",
-        GEAR_AND_POSSESSIONS_2: "",
-        GEAR_AND_POSSESSIONS_3: "",
-        GEAR_AND_POSSESSIONS_4: "",
-        GEAR_AND_POSSESSIONS_5: "",
-        GEAR_AND_POSSESSIONS_6: "",
-        GEAR_AND_POSSESSIONS_7: "",
-        GEAR_AND_POSSESSIONS_8: "",
-        GEAR_AND_POSSESSIONS_9: "",
-        GEAR_AND_POSSESSIONS_10: "",
-        GEAR_AND_POSSESSIONS_11: "",
-        GEAR_AND_POSSESSIONS_12: "",
-        GEAR_AND_POSSESSIONS_13: "",
-        GEAR_AND_POSSESSIONS_14: "",
-        GEAR_AND_POSSESSIONS_15: "",
-        GEAR_AND_POSSESSIONS_16: "",
-        GEAR_AND_POSSESSIONS_17: "",
-        GEAR_AND_POSSESSIONS_18: "",
-        GEAR_AND_POSSESSIONS_19: "",
-        GEAR_AND_POSSESSIONS_20: "",
-    },
-    CASH_AND_ASSETS: {
-        SPENDING_LEVEL: "",
-        CASH: "",
-        ASSETS: {
-            ASSET_1: "",
-            ASSET_2: "",
-            ASSET_3: "",
-            ASSET_4: "",
-            ASSET_5: "",
-            ASSET_6: "",
-            ASSET_7: "",
-            ASSET_8: "",
+const InitialWeaponsAndGearState = (id?: string): TWeaponsAndGearState => {
+    let state: TWeaponsAndGearState = {
+        CHARACTER_ID: "",
+        WEAPONS: {
+            WEAPON1: { ...Weapon },
+            WEAPON2: { ...Weapon },
+            WEAPON3: { ...Weapon },
+            WEAPON4: { ...Weapon },
+            WEAPON5: { ...Weapon },
+        },
+        GEAR_AND_POSSESSIONS: {
+            GEAR_AND_POSSESSIONS_1: "",
+            GEAR_AND_POSSESSIONS_2: "",
+            GEAR_AND_POSSESSIONS_3: "",
+            GEAR_AND_POSSESSIONS_4: "",
+            GEAR_AND_POSSESSIONS_5: "",
+            GEAR_AND_POSSESSIONS_6: "",
+            GEAR_AND_POSSESSIONS_7: "",
+            GEAR_AND_POSSESSIONS_8: "",
+            GEAR_AND_POSSESSIONS_9: "",
+            GEAR_AND_POSSESSIONS_10: "",
+            GEAR_AND_POSSESSIONS_11: "",
+            GEAR_AND_POSSESSIONS_12: "",
+            GEAR_AND_POSSESSIONS_13: "",
+            GEAR_AND_POSSESSIONS_14: "",
+            GEAR_AND_POSSESSIONS_15: "",
+            GEAR_AND_POSSESSIONS_16: "",
+            GEAR_AND_POSSESSIONS_17: "",
+            GEAR_AND_POSSESSIONS_18: "",
+            GEAR_AND_POSSESSIONS_19: "",
+            GEAR_AND_POSSESSIONS_20: "",
+        },
+        CASH_AND_ASSETS: {
+            SPENDING_LEVEL: "",
+            CASH: "",
+            ASSETS: {
+                ASSET_1: "",
+                ASSET_2: "",
+                ASSET_3: "",
+                ASSET_4: "",
+                ASSET_5: "",
+                ASSET_6: "",
+                ASSET_7: "",
+                ASSET_8: "",
+            }
+        }
+    };
+    if (id) {
+        state.CHARACTER_ID = id;
+        let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+        if (savedCharacters.LOCAL_SAVES === undefined) {
+            savedCharacters.LOCAL_SAVES = {};
+        } else if (savedCharacters.LOCAL_SAVES[id]) {
+            if (
+                savedCharacters.LOCAL_SAVES[id].CASH_AND_ASSETS
+                &&
+                savedCharacters.LOCAL_SAVES[id].GEAR_AND_POSSESSIONS
+                &&
+                savedCharacters.LOCAL_SAVES[id].CASH_AND_ASSETS
+            ) {
+                state.WEAPONS = savedCharacters.LOCAL_SAVES[id].WEAPONS;
+                state.GEAR_AND_POSSESSIONS = savedCharacters.LOCAL_SAVES[id].GEAR_AND_POSSESSIONS;
+                state.CASH_AND_ASSETS = savedCharacters.LOCAL_SAVES[id].CASH_AND_ASSETS;
+            }
         }
     }
+    return state;
 }
 
 function weaponsAndGearReducer(state: TWeaponsAndGearState, action: TAction): TWeaponsAndGearState {
-    switch(action.type){
+    switch (action.type) {
         // Setting weapons
         case WeaponsAndGearActions.SET_WEAPON.WEAPON1.NAME:
             state.WEAPONS.WEAPON1.NAME = action.value;
@@ -327,7 +351,7 @@ function weaponsAndGearReducer(state: TWeaponsAndGearState, action: TAction): TW
         case WeaponsAndGearActions.SET_GEAR_AND_POSSESSIONS.GEAR_AND_POSSESSIONS_20:
             state.GEAR_AND_POSSESSIONS.GEAR_AND_POSSESSIONS_20 = action.value;
             break;
-        
+
         // Setting Cash and Assets
         case WeaponsAndGearActions.SET_CASH_AND_ASSETS.SPENDING_LEVEL:
             state.CASH_AND_ASSETS.SPENDING_LEVEL = action.value;
@@ -362,10 +386,18 @@ function weaponsAndGearReducer(state: TWeaponsAndGearState, action: TAction): TW
         default:
             break;
     }
-    return {...state};
+
+    let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+    if (savedCharacters.LOCAL_SAVES === undefined) {
+        savedCharacters.LOCAL_SAVES = {};
+    }
+    savedCharacters.LOCAL_SAVES[state.CHARACTER_ID] = { ...savedCharacters.LOCAL_SAVES[state.CHARACTER_ID], ...state };
+    localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(savedCharacters));
+
+    return { ...state };
 }
 
-const WeaponsAndGearContext = createContext<{ state: TWeaponsAndGearState, dispatch: React.Dispatch<TAction> }>({ state: InitialWeaponsAndGearState, dispatch: () => { } });
+const WeaponsAndGearContext = createContext<{ state: TWeaponsAndGearState, dispatch: React.Dispatch<TAction> }>({ state: InitialWeaponsAndGearState(), dispatch: () => { } });
 
 export {
     InitialWeaponsAndGearState,

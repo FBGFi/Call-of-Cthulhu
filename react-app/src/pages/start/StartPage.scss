@@ -1,0 +1,49 @@
+.StartPage {
+  background-image: url(../../assets/images/paper_small.jpg);
+  margin: auto;
+
+  .InfoBox {
+    & > *:last-child {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      
+      *:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+
+    a {
+      flex: 1;
+    }
+
+    button {
+      background-color: #000;
+      color: #fff;
+      font-size: 1.2em;
+      border: 2px solid var(--dark-gray);
+      width: 100%;
+
+      &:hover {
+        filter: invert(0.8);
+      }
+    }
+
+    select {
+        background: none;
+        border: none;
+        border-bottom: 1px solid black;
+        text-align: center;
+        font-size: 1.2em;
+    
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    
+      select {
+        text-align-last: center;
+      }
+  }
+}

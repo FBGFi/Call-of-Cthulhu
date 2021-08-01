@@ -18,6 +18,7 @@ type TCustomSkill = {
 }
 
 type TInvestigatorSkillsState = {
+    CHARACTER_ID: string;
     ACCOUNTING: TBasicSkill,
     FAST_TALK: TBasicSkill,
     LAW: TBasicSkill,
@@ -99,75 +100,94 @@ const CustomSkill: TCustomSkill = {
     CUSTOM_TEXT: ""
 }
 
-const InitialInvestigatorSkillsState: TInvestigatorSkillsState = {
-    ACCOUNTING: { ...BasicSkill },
-    FAST_TALK: { ...BasicSkill },
-    LAW: { ...BasicSkill },
-    SCIENCE: {...CustomSkill},
-    ANTHROPOLOGY: { ...BasicSkill },
-    FIGHTING_BRAWL: { ...BasicSkill },
-    LIBRARY_USE: { ...BasicSkill },
-    CUSTOM_1: {...CustomSkill},
-    CUSTOM_2: {...CustomSkill},
-    CUSTOM_3: {...CustomSkill},
-    CUSTOM_4: {...CustomSkill},
-    CUSTOM_5: {...CustomSkill},
-    CUSTOM_6: {...CustomSkill},
-    CUSTOM_7: {...CustomSkill},
-    CUSTOM_8: {...CustomSkill},
-    CUSTOM_9: {...CustomSkill},
-    CUSTOM_10: {...CustomSkill},
-    CUSTOM_11: {...CustomSkill},
-    CUSTOM_12: {...CustomSkill},
-    CUSTOM_13: {...CustomSkill},
-    CUSTOM_14: {...CustomSkill},
-    APPRAISE: { ...BasicSkill },
-    LISTEN: { ...BasicSkill },
-    ARCHAEOLOGY: { ...BasicSkill },
-    LOCKSMITH: { ...BasicSkill },
-    SLEIGHT_OF_HAND: { ...BasicSkill },
-    ART_CRAFT: {...CustomSkill},
-    FIREARMS_HANDGUN: { ...BasicSkill },
-    MECH_REPAIR: { ...BasicSkill },
-    SPOT_HIDDEN: { ...BasicSkill },
-    FIREARMS_RIFLE_SHOTGUN: { ...BasicSkill },
-    MEDICINE: { ...BasicSkill },
-    STEALTH: { ...BasicSkill },
-    NATURAL_WORLD: { ...BasicSkill },
-    SURVIVAL: {...CustomSkill},
-    CHARM: { ...BasicSkill },
-    FIRST_AID: { ...BasicSkill },
-    NAVIGATE: { ...BasicSkill },
-    SWIM: { ...BasicSkill },
-    CLIMB: { ...BasicSkill },
-    HISTORY: { ...BasicSkill },
-    OCCULT: { ...BasicSkill },
-    THROW: { ...BasicSkill },
-    CREDIT_RATING: {
-        VALUE: undefined
-    },
-    INTIMIDATE: { ...BasicSkill },
-    OP_HV_MACHINE: { ...BasicSkill },
-    TRACK: { ...BasicSkill },
-    CTHULHU_MYTHOS: {
-        VALUE: undefined
-    },
-    JUMP: { ...BasicSkill },
-    PERSUADE: { ...BasicSkill },
-    DISGUISE: { ...BasicSkill },
-    LANGUAGE_OTHER: {...CustomSkill},
-    PILOT: {...CustomSkill},
-    DODGE: {
-        CHECKED: false
-    },
-    PSYCHOLOGY: { ...BasicSkill },
-    DRIVE_AUTO: { ...BasicSkill },
-    PSYCHOANALYSIS: { ...BasicSkill },
-    ELEC_REPAIR: { ...BasicSkill },
-    LANGUAGE_OWN: {
-        CHECKED: false
-    },
-    RIDE: { ...BasicSkill }
+const InitialInvestigatorSkillsState = (id?: string): TInvestigatorSkillsState => {
+    let state: TInvestigatorSkillsState = {
+        CHARACTER_ID: "",
+        ACCOUNTING: { ...BasicSkill },
+        FAST_TALK: { ...BasicSkill },
+        LAW: { ...BasicSkill },
+        SCIENCE: { ...CustomSkill },
+        ANTHROPOLOGY: { ...BasicSkill },
+        FIGHTING_BRAWL: { ...BasicSkill },
+        LIBRARY_USE: { ...BasicSkill },
+        CUSTOM_1: { ...CustomSkill },
+        CUSTOM_2: { ...CustomSkill },
+        CUSTOM_3: { ...CustomSkill },
+        CUSTOM_4: { ...CustomSkill },
+        CUSTOM_5: { ...CustomSkill },
+        CUSTOM_6: { ...CustomSkill },
+        CUSTOM_7: { ...CustomSkill },
+        CUSTOM_8: { ...CustomSkill },
+        CUSTOM_9: { ...CustomSkill },
+        CUSTOM_10: { ...CustomSkill },
+        CUSTOM_11: { ...CustomSkill },
+        CUSTOM_12: { ...CustomSkill },
+        CUSTOM_13: { ...CustomSkill },
+        CUSTOM_14: { ...CustomSkill },
+        APPRAISE: { ...BasicSkill },
+        LISTEN: { ...BasicSkill },
+        ARCHAEOLOGY: { ...BasicSkill },
+        LOCKSMITH: { ...BasicSkill },
+        SLEIGHT_OF_HAND: { ...BasicSkill },
+        ART_CRAFT: { ...CustomSkill },
+        FIREARMS_HANDGUN: { ...BasicSkill },
+        MECH_REPAIR: { ...BasicSkill },
+        SPOT_HIDDEN: { ...BasicSkill },
+        FIREARMS_RIFLE_SHOTGUN: { ...BasicSkill },
+        MEDICINE: { ...BasicSkill },
+        STEALTH: { ...BasicSkill },
+        NATURAL_WORLD: { ...BasicSkill },
+        SURVIVAL: { ...CustomSkill },
+        CHARM: { ...BasicSkill },
+        FIRST_AID: { ...BasicSkill },
+        NAVIGATE: { ...BasicSkill },
+        SWIM: { ...BasicSkill },
+        CLIMB: { ...BasicSkill },
+        HISTORY: { ...BasicSkill },
+        OCCULT: { ...BasicSkill },
+        THROW: { ...BasicSkill },
+        CREDIT_RATING: {
+            VALUE: undefined
+        },
+        INTIMIDATE: { ...BasicSkill },
+        OP_HV_MACHINE: { ...BasicSkill },
+        TRACK: { ...BasicSkill },
+        CTHULHU_MYTHOS: {
+            VALUE: undefined
+        },
+        JUMP: { ...BasicSkill },
+        PERSUADE: { ...BasicSkill },
+        DISGUISE: { ...BasicSkill },
+        LANGUAGE_OTHER: { ...CustomSkill },
+        PILOT: { ...CustomSkill },
+        DODGE: {
+            CHECKED: false
+        },
+        PSYCHOLOGY: { ...BasicSkill },
+        DRIVE_AUTO: { ...BasicSkill },
+        PSYCHOANALYSIS: { ...BasicSkill },
+        ELEC_REPAIR: { ...BasicSkill },
+        LANGUAGE_OWN: {
+            CHECKED: false
+        },
+        RIDE: { ...BasicSkill }
+    }
+    if (id) {
+        state.CHARACTER_ID = id;
+        let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+        if (savedCharacters.LOCAL_SAVES === undefined) {
+            savedCharacters.LOCAL_SAVES = {};
+        } else if (savedCharacters.LOCAL_SAVES[id]) {
+            let keys = Object.keys(state);
+            for (let key of keys) {
+                if (savedCharacters.LOCAL_SAVES[id][key]) {
+                    // @ts-ignore
+                    state[key] = savedCharacters.LOCAL_SAVES[id][key];
+                }
+            }
+        }
+    }
+    return state;
 }
 
 function investigatorSkillsReducer(state: TInvestigatorSkillsState, action: TAction): TInvestigatorSkillsState {
@@ -181,10 +201,17 @@ function investigatorSkillsReducer(state: TInvestigatorSkillsState, action: TAct
         // @ts-ignore
         state[action.type].CHECKED = action.value;
     }
+    let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+    if (savedCharacters.LOCAL_SAVES === undefined) {
+        savedCharacters.LOCAL_SAVES = {};
+    }
+    savedCharacters.LOCAL_SAVES[state.CHARACTER_ID] = { ...savedCharacters.LOCAL_SAVES[state.CHARACTER_ID], ...state };
+    localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(savedCharacters));
+
     return { ...state };
 }
 
-const InvestigatorSkillsContext = createContext<{ state: TInvestigatorSkillsState, dispatch: React.Dispatch<TAction> }>({ state: InitialInvestigatorSkillsState, dispatch: () => { } });
+const InvestigatorSkillsContext = createContext<{ state: TInvestigatorSkillsState, dispatch: React.Dispatch<TAction> }>({ state: InitialInvestigatorSkillsState(), dispatch: () => { } });
 
 export {
     investigatorSkillsReducer,

@@ -1,7 +1,7 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import { FellowInvestigatorsActions } from '../../../../../actions';
 import InfoBox from '../../../../../components/InfoBox';
-import { fellowInvestigatorsReducer, InitialFellowInvestigatorsState, FellowInvestigatorsContext } from '../../../../../reducers/FellowInvestigatorsReducer';
+import { FellowInvestigatorsContext } from '../../../../../reducers/FellowInvestigatorsReducer';
 import './FellowInvestigators.css';
 
 type FellowInvestigatorProps = {
@@ -31,12 +31,9 @@ const FellowInvestigator: React.FC<FellowInvestigatorProps> = (props) => {
 }
 
 const FellowInvestigators: React.FC = () => {
-    const [state, dispatch] = useReducer(fellowInvestigatorsReducer, InitialFellowInvestigatorsState);
-    
     return (
         <InfoBox title="Fellow Investigators" className='FellowInvestigators'>
             <div className="investigator-container">
-                <FellowInvestigatorsContext.Provider value={{ state, dispatch }}>
                     <FellowInvestigator playerKey="PLAYER_1" />
                     <FellowInvestigator playerKey="PLAYER_2" />
                     <FellowInvestigator playerKey="PLAYER_3" />
@@ -50,7 +47,6 @@ const FellowInvestigators: React.FC = () => {
                     <FellowInvestigator playerKey="PLAYER_6" />
                     <FellowInvestigator playerKey="PLAYER_7" />
                     <FellowInvestigator playerKey="PLAYER_8" />
-                </FellowInvestigatorsContext.Provider>
             </div>
         </InfoBox>
     );

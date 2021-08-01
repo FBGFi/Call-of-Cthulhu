@@ -7,6 +7,7 @@ type TAction = {
 }
 
 type TBackstoryState = {
+    CHARACTER_ID: string;
     PERSONAL_DESCRIPTION: string;
     TRAITS: string;
     IDEOLOGY_BELIEFS: string;
@@ -19,20 +20,39 @@ type TBackstoryState = {
     ENCOUNTERS_WITH_STRANGE_ENTITIES: string;
 }
 
-const InitialBackstoryState: TBackstoryState = {
-    PERSONAL_DESCRIPTION: "",
-    TRAITS: "",
-    IDEOLOGY_BELIEFS: "",
-    INJURIES_SCARS: "",
-    SIGNIFICANT_PEOPLE: "",
-    PHOBIAS_MANIAS: "",
-    MEANINGFUL_LOCATIONS: "",
-    ARCANE_TOMES_SPELLS_ARTIFACTS: "",
-    TREASURED_POSSESSIONS: "",
-    ENCOUNTERS_WITH_STRANGE_ENTITIES: "",
+const InitialBackstoryState = (id?: string): TBackstoryState => {
+    let state: TBackstoryState = {
+        CHARACTER_ID: "",
+        PERSONAL_DESCRIPTION: "",
+        TRAITS: "",
+        IDEOLOGY_BELIEFS: "",
+        INJURIES_SCARS: "",
+        SIGNIFICANT_PEOPLE: "",
+        PHOBIAS_MANIAS: "",
+        MEANINGFUL_LOCATIONS: "",
+        ARCANE_TOMES_SPELLS_ARTIFACTS: "",
+        TREASURED_POSSESSIONS: "",
+        ENCOUNTERS_WITH_STRANGE_ENTITIES: "",
+    };
+    if (id) {
+        state.CHARACTER_ID = id;
+        let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+        if (savedCharacters.LOCAL_SAVES === undefined) {
+            savedCharacters.LOCAL_SAVES = {};
+        } else if (savedCharacters.LOCAL_SAVES[id]) {
+            let keys = Object.keys(state);
+            for (let key of keys) {
+                if (savedCharacters.LOCAL_SAVES[id][key]) {
+                    // @ts-ignore
+                    state[key] = savedCharacters.LOCAL_SAVES[id][key];
+                }
+            }
+        }
+    }
+    return state;
 }
 
-function backstoryReducer(state:TBackstoryState, action: TAction): TBackstoryState {
+function backstoryReducer(state: TBackstoryState, action: TAction): TBackstoryState {
     switch (action.type) {
         case BackstoryActions.PERSONAL_DESCRIPTION:
             state.PERSONAL_DESCRIPTION = action.value;
@@ -67,10 +87,18 @@ function backstoryReducer(state:TBackstoryState, action: TAction): TBackstorySta
         default:
             break;
     }
-    return {...state};
+
+    let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+    if (savedCharacters.LOCAL_SAVES === undefined) {
+        savedCharacters.LOCAL_SAVES = {};
+    }
+    savedCharacters.LOCAL_SAVES[state.CHARACTER_ID] = { ...savedCharacters.LOCAL_SAVES[state.CHARACTER_ID], ...state };
+    localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(savedCharacters));
+
+    return { ...state };
 }
 
-const BackstoryContext = createContext<{ state: TBackstoryState, dispatch: React.Dispatch<TAction> }>({ state: InitialBackstoryState, dispatch: () => { } });
+const BackstoryContext = createContext<{ state: TBackstoryState, dispatch: React.Dispatch<TAction> }>({ state: InitialBackstoryState(), dispatch: () => { } });
 
 export {
     backstoryReducer,

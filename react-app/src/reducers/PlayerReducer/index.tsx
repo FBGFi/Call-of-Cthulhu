@@ -1,5 +1,7 @@
 import React, { createContext } from 'react';
 import { PlayerActions } from "../../actions";
+import md5 from 'md5';
+
 type TAction = {
     type: string;
     value?: any;
@@ -71,60 +73,78 @@ const CharacteristicsValue: TCharacteristicsValue = {
     ADDED_VALUE: 0
 }
 
-const InitialPlayerState: TPlayerState = {
-    CHARACTER_ID: "",
-    CHARACTER_INFO: {
-        NAME: "",
-        PLAYER: "",
-        OCCUPATICE: "",
-        AGE: undefined,
-        SEX: "NONE",
-        RESIDENCE: "",
-        BIRTHPLACE: "",
-        IMAGE: {
-            SRC: undefined,
-            TITLE: undefined
-        }
-    },
-    CHARACTERISTICS: {
-        STR: {...CharacteristicsValue},
-        DEX: {...CharacteristicsValue},
-        POW: {...CharacteristicsValue},
-        CON: {...CharacteristicsValue},
-        APP: {...CharacteristicsValue},
-        EDU: {...CharacteristicsValue},
-        SIZ: {...CharacteristicsValue},
-        INT: {...CharacteristicsValue},
-        MOVE: {...CharacteristicsValue},
-        DMG_BONUS: "",
-        BUILD: "",
-        DODGE: {...CharacteristicsValue},
-        AGE_MODS_ADDED: false
-    },
-    SECONDARY_STATS: {
-        HP: {
-            M_WOUND: false,
-            MAX_HP: undefined,
-            DYING: false,
-            UNCONSCIOUS: false,
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
+const InitialPlayerState = (id?: string): TPlayerState => {
+    let state: TPlayerState = {
+        CHARACTER_ID: md5(Date.now().toString()),
+        CHARACTER_INFO: {
+            NAME: "",
+            PLAYER: "",
+            OCCUPATICE: "",
+            AGE: undefined,
+            SEX: "NONE",
+            RESIDENCE: "",
+            BIRTHPLACE: "",
+            IMAGE: {
+                SRC: undefined,
+                TITLE: undefined
+            }
         },
-        SANITY: {
-            TEMP_INSANE: false,
-            INDEF_INSANE: false,
-            START_SANITY: undefined,
-            MAX_SANITY: undefined,
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
+        CHARACTERISTICS: {
+            STR: { ...CharacteristicsValue },
+            DEX: { ...CharacteristicsValue },
+            POW: { ...CharacteristicsValue },
+            CON: { ...CharacteristicsValue },
+            APP: { ...CharacteristicsValue },
+            EDU: { ...CharacteristicsValue },
+            SIZ: { ...CharacteristicsValue },
+            INT: { ...CharacteristicsValue },
+            MOVE: { ...CharacteristicsValue },
+            DMG_BONUS: "",
+            BUILD: "",
+            DODGE: { ...CharacteristicsValue },
+            AGE_MODS_ADDED: false
         },
-        LUCK: {...CharacteristicsValue},
-        MP: {
-            MAX_MP: undefined,
-            INITIAL_VALUE: undefined,
-            ADDED_VALUE: 0
+        SECONDARY_STATS: {
+            HP: {
+                M_WOUND: false,
+                MAX_HP: undefined,
+                DYING: false,
+                UNCONSCIOUS: false,
+                INITIAL_VALUE: undefined,
+                ADDED_VALUE: 0
+            },
+            SANITY: {
+                TEMP_INSANE: false,
+                INDEF_INSANE: false,
+                START_SANITY: undefined,
+                MAX_SANITY: undefined,
+                INITIAL_VALUE: undefined,
+                ADDED_VALUE: 0
+            },
+            LUCK: { ...CharacteristicsValue },
+            MP: {
+                MAX_MP: undefined,
+                INITIAL_VALUE: undefined,
+                ADDED_VALUE: 0
+            }
         }
     }
+    if (id) {
+        state.CHARACTER_ID = id;
+        let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+        if (savedCharacters.LOCAL_SAVES === undefined) {
+            savedCharacters.LOCAL_SAVES = {};
+        } else if (savedCharacters.LOCAL_SAVES[id]) {
+            let keys = Object.keys(state);
+            for (let key of keys) {
+                if (savedCharacters.LOCAL_SAVES[id][key]) {
+                    // @ts-ignore
+                    state[key] = savedCharacters.LOCAL_SAVES[id][key];
+                }
+            }
+        }
+    }
+    return state;
 }
 
 function setDmgBonus(STR: number, SIZ: number): string {
@@ -366,10 +386,17 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         default:
             break;
     }
+
+    let savedCharacters = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+    if (savedCharacters.LOCAL_SAVES === undefined) {
+        savedCharacters.LOCAL_SAVES = {};
+    }
+    savedCharacters.LOCAL_SAVES[state.CHARACTER_ID] = { ...savedCharacters.LOCAL_SAVES[state.CHARACTER_ID], ...state };
+    localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(savedCharacters));
     return { ...state };
 }
 
-const PlayerContext = createContext<{ state: TPlayerState, dispatch: React.Dispatch<TAction> }>({ state: InitialPlayerState, dispatch: () => { } });
+const PlayerContext = createContext<{ state: TPlayerState, dispatch: React.Dispatch<TAction> }>({ state: InitialPlayerState(), dispatch: () => { } });
 
 export {
     playerReducer,

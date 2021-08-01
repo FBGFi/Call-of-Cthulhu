@@ -1,8 +1,8 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BackstoryActions } from '../../../../actions';
 import InfoBox from '../../../../components/InfoBox';
 import SheetRow from '../../../../components/SheetRow';
-import { backstoryReducer, InitialBackstoryState, BackstoryContext } from '../../../../reducers/BackstoryReducer';
+import { BackstoryContext } from '../../../../reducers/BackstoryReducer';
 import './BackstoryRow.css';
 
 type BackstoryContainerProps = {
@@ -24,7 +24,7 @@ const BackStoryContainer: React.FC<BackstoryContainerProps> = (props) => {
     const { state, dispatch } = useContext(BackstoryContext);
 
     const setValueForReducer = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-        dispatch({ type: BackstoryActions[props.backstoryKey], value: e.target.value});
+        dispatch({ type: BackstoryActions[props.backstoryKey], value: e.target.value });
     }
 
     return (
@@ -36,24 +36,21 @@ const BackStoryContainer: React.FC<BackstoryContainerProps> = (props) => {
 }
 
 const BackstoryRow: React.FC = () => {
-    const [state, dispatch] = useReducer(backstoryReducer, InitialBackstoryState);
-    
+
     return (
         <SheetRow className='BackstoryRow'>
-            <BackstoryContext.Provider value={{ state, dispatch }}>
-                <InfoBox title='Backstory' className='Backstory'>
-                    <BackStoryContainer title="Personal Description" backstoryKey="PERSONAL_DESCRIPTION" />
-                    <BackStoryContainer title="Traits" backstoryKey="TRAITS" />
-                    <BackStoryContainer title="Ideology/Beliefs" backstoryKey="IDEOLOGY_BELIEFS" />
-                    <BackStoryContainer title="Injuries & Scars" backstoryKey="INJURIES_SCARS" />
-                    <BackStoryContainer title="Significant People" backstoryKey="SIGNIFICANT_PEOPLE" />
-                    <BackStoryContainer title="Phobias and Manias" backstoryKey="PHOBIAS_MANIAS" />
-                    <BackStoryContainer title="Meaningful Locations" backstoryKey="MEANINGFUL_LOCATIONS" />
-                    <BackStoryContainer title="Arcane Tomes, Spells & Artifacts" backstoryKey="ARCANE_TOMES_SPELLS_ARTIFACTS" />
-                    <BackStoryContainer title="Treasured Possessions" backstoryKey="TREASURED_POSSESSIONS" />
-                    <BackStoryContainer title="Encounters with Strange Entities" backstoryKey="ENCOUNTERS_WITH_STRANGE_ENTITIES" />
-                </InfoBox>
-            </BackstoryContext.Provider>
+            <InfoBox title='Backstory' className='Backstory'>
+                <BackStoryContainer title="Personal Description" backstoryKey="PERSONAL_DESCRIPTION" />
+                <BackStoryContainer title="Traits" backstoryKey="TRAITS" />
+                <BackStoryContainer title="Ideology/Beliefs" backstoryKey="IDEOLOGY_BELIEFS" />
+                <BackStoryContainer title="Injuries & Scars" backstoryKey="INJURIES_SCARS" />
+                <BackStoryContainer title="Significant People" backstoryKey="SIGNIFICANT_PEOPLE" />
+                <BackStoryContainer title="Phobias and Manias" backstoryKey="PHOBIAS_MANIAS" />
+                <BackStoryContainer title="Meaningful Locations" backstoryKey="MEANINGFUL_LOCATIONS" />
+                <BackStoryContainer title="Arcane Tomes, Spells & Artifacts" backstoryKey="ARCANE_TOMES_SPELLS_ARTIFACTS" />
+                <BackStoryContainer title="Treasured Possessions" backstoryKey="TREASURED_POSSESSIONS" />
+                <BackStoryContainer title="Encounters with Strange Entities" backstoryKey="ENCOUNTERS_WITH_STRANGE_ENTITIES" />
+            </InfoBox>
         </SheetRow>
     );
 }
