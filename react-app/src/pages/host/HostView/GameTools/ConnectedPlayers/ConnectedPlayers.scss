@@ -4,7 +4,7 @@
   flex-direction: column;
 
   .players{
-      flex: 1;
       overflow-y: auto;
+      height: calc(30vh + 42px);
   }
 }

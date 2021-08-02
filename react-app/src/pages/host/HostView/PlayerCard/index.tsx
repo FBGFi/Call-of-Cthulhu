@@ -12,14 +12,14 @@ type PlayerCardProps = {
 
 const PlayerCard: React.FC<PlayerCardProps> = (props) => {
     return (
-        <Link to={'/host/game/' + props.playerId}>
-            <div className='PlayerCard'>
+        <div className='PlayerCard'>
+            <Link to={'/host/game/' + props.playerId}>
                 <img src={profileImg} alt="player" />
                 <div className="player-name-container">
                     <h3>{props.character} - {props.player}</h3>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     );
 }
 

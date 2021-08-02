@@ -2,6 +2,9 @@
     padding: 10px;
     display: flex;
     border-bottom: 1px solid var(--dark-gray);
+    &:last-child{
+        border: 0;
+    }
     span{
         font-size: 1.3em;
         margin: auto 0;

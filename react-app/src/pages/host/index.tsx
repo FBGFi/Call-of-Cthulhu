@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useState, useRef } from 'react';
 import { Link, Route, useLocation } from 'react-router-dom';
 import { GameHostActions } from '../../actions';
 import InfoBox from '../../components/InfoBox';
@@ -10,18 +10,68 @@ import PlayerCharacterSheet from './HostView/PlayerCharacterSheet';
 
 const HostPage: React.FC = () => {
     const { state, dispatch } = useContext(AppContext);
+    const selectionRef = useRef<HTMLSelectElement>(null);
+    const [selectedRoom, setSelectedRoom] = useState<string | undefined>(undefined);
     const [gameHostState, gameHostDispatch] = useReducer(gameHostReducer, InitialGameHostState);
     const location = useLocation();
-    
+
     const setGameInformation = (e: React.FocusEvent<HTMLInputElement>, key: "SET_PORT" | "SET_ROOM_CODE") => {
         gameHostDispatch({ type: GameHostActions[key], value: e.target.value });
     }
 
+    const checkIfPortSet = (): boolean => {
+        return gameHostState.PORT > 0 && gameHostState.PORT <= 65535;
+    }
+
     const startGame = (): string => {
-        if (gameHostState.PORT > 0 && gameHostState.PORT <= 65535 && gameHostState.ROOM_CODE !== "") {
+        if (checkIfPortSet() && gameHostState.ROOM_CODE !== "") {
             return "/host/game";
         }
         return "/host";
+    }
+
+    const setSavedRoom = () => {
+        if(selectedRoom){
+            gameHostDispatch({ type: GameHostActions.SET_ROOM_CODE, value: selectedRoom });
+        }
+    }
+
+    const deleteSavedRoom = () => {
+        if(selectionRef.current && selectionRef.current.value !== ""){
+            let value = selectionRef.current.value;
+            let localSaves = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+            if(localSaves.SAVED_ROOMS[value]){
+                delete localSaves.SAVED_ROOMS[value];
+                localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(localSaves));  
+                setSelectedRoom(undefined);            
+            }                  
+        }
+    }
+
+    const getSavedRooms = (): JSX.Element | null => {
+        let options: JSX.Element[] = [];
+        let localSaves = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
+        if (localSaves) {
+            if (localSaves.SAVED_ROOMS) {
+                for (let roomId in localSaves.SAVED_ROOMS) {
+                    options.push(<option key={roomId} value={roomId}>{roomId}</option>);
+                }
+                if (options.length > 0) {
+                    options.unshift(<option style={{ display: "none" }} key="" value=""></option>);
+                    return <>
+                        <span>Saved Rooms:</span>
+                        <select ref={selectionRef} onChange={(e) => setSelectedRoom(e.target.value)}>
+                            {options}
+                        </select>
+                        <Link to={selectedRoom && checkIfPortSet() ? '/host/game' : '/host'}>
+                            <button onClick={setSavedRoom}>Load Room</button>
+                        </Link>
+                        <button onClick={deleteSavedRoom}>Delete Room</button>
+                    </>
+                }
+            }
+        }
+        return null;
     }
 
     return (
@@ -42,6 +92,7 @@ const HostPage: React.FC = () => {
                             <Link to={startGame}>
                                 <button>Start</button>
                             </Link>
+                            {getSavedRooms()}
                         </div>
                     </InfoBox>
                 </Route>

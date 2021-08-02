@@ -4,6 +4,7 @@ const GameHostActions = {
     SET_PLAYER_DATA: "SET_PLAYER_DATA",
     REMOVE_PLAYER_DATA: "REMOVE_PLAYER_DATA",
     SET_CHAT_MESSAGES: "SET_CHAT_MESSAGES",
+    SET_HOST_IP: "SET_HOST_IP",
 }
 
 export default GameHostActions;

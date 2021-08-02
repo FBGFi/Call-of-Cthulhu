@@ -52,7 +52,7 @@ const PlayerCharacterSheet: React.FC = () => {
         sendMessage({message: "Host rolled " + result.toString(), type: 'roll', sender: 'Host', timeStamp: Date.now()})
     }
 
-    // Spaghetti-O, just for re-rendering purposes
+    // Spaghetti-O, just for re-rendering purposes to scroll the chat
     const chatIconWasClicked = (e: React.FocusEvent<HTMLDivElement>) => {
         setChatClicked(chatClicked + 1);
     }

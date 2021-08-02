@@ -10,7 +10,7 @@ const ChooseGameType: React.FC = () => {
                 <button>Local Game</button>
             </Link>
             <Link to='/hosted'>
-                <button>Hosted Game</button>
+                <button>Join a Game</button>
             </Link>
             <Link to='/host'>
                 <button>Host a Game</button>

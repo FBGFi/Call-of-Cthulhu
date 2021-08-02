@@ -20,7 +20,8 @@ type TGameHostState = {
     ROOM_CODE: string;
     PORT: number;
     PLAYERS: TPlayers;
-    CHAT_MESSAGES: TChatMessage[]
+    CHAT_MESSAGES: TChatMessage[];
+    IP_ADDRESS: string;
 }
 
 const removeThisAfterTesting = (): TPlayers => {
@@ -31,12 +32,29 @@ const removeThisAfterTesting = (): TPlayers => {
     return {};
 }
 
-const getRecentRoomCode = (): string => {
-    let code = document.cookie.split('CALL_OF_CTHULHU_RECENT_ROOM=');
-    if (code.length === 2) {
-        return code[1];
+const getCookieValue = (name: string): string => {
+    let cookies = document.cookie.split('; ');
+    let splitCookie: string[];
+    if(cookies.length > 1){
+        console.log(cookies);
+        
+        for(let cookie of cookies){
+            splitCookie = cookie.split(name + '=');
+            if(splitCookie.length > 1){
+                return splitCookie[1];
+            }
+        }      
+    } else {
+        cookies = document.cookie.split(name + '=');
+        if(cookies.length === 2){
+            return cookies[1];
+        }
     }
     return "";
+}
+
+const getRecentRoomPort = ():number => {
+    return parseInt(getCookieValue('CALL_OF_CTHULHU_RECENT_PORT'));
 }
 
 const getSavedChatMessages = (roomCode: string): TChatMessage[] => {
@@ -51,21 +69,24 @@ const getSavedChatMessages = (roomCode: string): TChatMessage[] => {
 }
 
 const InitialGameHostState: TGameHostState = {
-    ROOM_CODE: getRecentRoomCode(),
-    PORT: 0,
+    ROOM_CODE: getCookieValue('CALL_OF_CTHULHU_RECENT_ROOM'),
+    PORT: getRecentRoomPort(),
     PLAYERS: removeThisAfterTesting(),
-    CHAT_MESSAGES: getSavedChatMessages(getRecentRoomCode())
+    CHAT_MESSAGES: getSavedChatMessages(getCookieValue('CALL_OF_CTHULHU_RECENT_ROOM')),
+    IP_ADDRESS: ""
 }
 
 function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState {
     switch (action.type) {
         case GameHostActions.SET_ROOM_CODE:
             state.ROOM_CODE = action.value;
-            document.cookie = `CALL_OF_CTHULHU_RECENT_ROOM=${action.value}`;
+            state.CHAT_MESSAGES = getSavedChatMessages(state.ROOM_CODE);
+            document.cookie = `CALL_OF_CTHULHU_RECENT_ROOM=${action.value}; path=/host`;
             break;
         case GameHostActions.SET_PORT:
             if (!isNaN(parseInt(action.value))) {
                 state.PORT = parseInt(action.value);
+                document.cookie = `CALL_OF_CTHULHU_RECENT_PORT=${action.value}; path=/host`;
             }
             break;
         case GameHostActions.SET_PLAYER_DATA:
@@ -95,6 +116,9 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
                 localValues.SAVED_ROOMS[state.ROOM_CODE].CHAT_MESSAGES = state.CHAT_MESSAGES;
                 localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(localValues));
             }
+            break;
+        case GameHostActions.SET_HOST_IP:
+            state.IP_ADDRESS = action.value;
             break;
         default:
             break;

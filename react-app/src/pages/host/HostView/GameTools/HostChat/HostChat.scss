@@ -8,7 +8,7 @@
     flex-direction: column;
 
     .chat-messages {
-      height: 35vh;
+      height: 30vh;
       overflow-y: auto;
       padding: 10px;
       & > * {
@@ -20,6 +20,7 @@
       margin-top: auto;
       display: flex;
       border-top: 4px solid var(--dark-gray);
+      height: 42px;
       * {
         font-size: 1.2em;
       }
