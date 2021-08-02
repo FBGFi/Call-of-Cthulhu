@@ -1,7 +1,9 @@
 import React, { createContext } from 'react';
+import actions from '../actions';
 
 type TAction = {
-
+    type: string;
+    value: any;
 }
 
 type TState = {
@@ -13,7 +15,14 @@ const InitialState: TState = {
 }
 
 function appReducer(state: TState, action: TAction): TState {
-    return state;
+    switch (action.type){
+        case actions.SET_CLIENT:
+            state.CLIENT = action.value;
+            break;
+        default:
+            break;
+    }
+    return {...state};
 }
 
 const AppContext = createContext<{state: TState, dispatch: React.Dispatch<TAction>}>({state: InitialState, dispatch: () => {}});

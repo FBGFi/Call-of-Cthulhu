@@ -404,3 +404,5 @@ export {
     weaponsAndGearReducer,
     WeaponsAndGearContext
 }
+
+export type { TWeaponsAndGearState }

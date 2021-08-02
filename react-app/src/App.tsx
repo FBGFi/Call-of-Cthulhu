@@ -6,6 +6,7 @@ import StartPage from './pages/start';
 import Game from './pages/game';
 
 import { appReducer, InitialState, AppContext } from './reducers';
+import HostPage from './pages/host';
 
 const App: React.FC = () => {
   const [appState, appDispatch] = useReducer(appReducer, InitialState);
@@ -33,6 +34,9 @@ const App: React.FC = () => {
           <Switch>
             <Route path={["/local/game/:playerId", "/local/game"]}>
               <Game />
+            </Route>
+            <Route path="/host">
+              <HostPage />
             </Route>
             <Route path="/">
               <StartPage />

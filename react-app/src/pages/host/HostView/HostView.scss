@@ -1,0 +1,25 @@
+.App{
+    padding: 0;
+    height: 100vh;
+}
+
+.HostPage{
+    margin: 0;
+    background: none;
+    height: 100vh;
+}
+
+.HostView{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .player-card-container{
+        display: flex;
+        justify-content: center;
+        padding: 0 30px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        flex: 1;
+        overflow-y: auto;
+    }
+}

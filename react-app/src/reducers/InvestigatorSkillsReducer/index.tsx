@@ -218,3 +218,5 @@ export {
     InitialInvestigatorSkillsState,
     InvestigatorSkillsContext
 }
+
+export type { TInvestigatorSkillsState }

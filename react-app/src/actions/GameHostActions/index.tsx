@@ -1,0 +1,9 @@
+const GameHostActions = {
+    SET_PORT: "SET_PORT",
+    SET_ROOM_CODE: "SET_ROOM_CODE",
+    SET_PLAYER_DATA: "SET_PLAYER_DATA",
+    REMOVE_PLAYER_DATA: "REMOVE_PLAYER_DATA",
+    SET_CHAT_MESSAGES: "SET_CHAT_MESSAGES",
+}
+
+export default GameHostActions;

@@ -1,0 +1,10 @@
+.ConnectedPlayers {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+
+  .players{
+      flex: 1;
+      overflow-y: auto;
+  }
+}

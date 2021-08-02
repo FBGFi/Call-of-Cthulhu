@@ -1,0 +1,20 @@
+.ConnectedPlayer{
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid var(--dark-gray);
+    span{
+        font-size: 1.3em;
+        margin: auto 0;
+
+    }
+    button{
+        margin: auto 0 auto auto;
+        background-color: #000;
+        color: #fff;
+        font-size: 1.2em;
+        border: 2px solid var(--dark-gray);
+        &:hover {
+            filter: invert(0.8);
+        }
+    }
+}

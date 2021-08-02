@@ -1,0 +1,30 @@
+.HostPage {
+
+  &[class*="/host/game/"] {
+    height: auto;
+  }
+
+  .back-button {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    border: 2px solid var(--dark-gray);
+    background-color: #000;
+    color: #fff;
+    font-size: 1.2em;
+    z-index: 2;
+    box-shadow: 0 0 10px #000;
+    &:hover {
+      filter: invert(0.8);
+    }
+  }
+
+  .SheetPage {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    &:last-of-type {
+      margin-bottom: 30px;
+    }
+  }
+}

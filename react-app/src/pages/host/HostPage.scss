@@ -1,0 +1,58 @@
+.HostPage{
+  display: flex;
+  flex-direction: column;
+
+    &>.InfoBox {
+      background-image: url(../../assets/images/paper_small.jpg);
+      margin: auto;
+        & > *:last-child {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          padding: 30px;
+          
+          *:not(:last-child):not(label) {
+            margin-bottom: 10px;
+          }
+        }
+
+        input{
+            border: 1px solid var(--light-gray);
+            background-color: var(--opaque-white);
+            text-align: center;
+            font-size: 1.2em;
+        }
+    
+        a {
+          flex: 1;
+        }
+    
+        button {
+          background-color: #000;
+          color: #fff;
+          font-size: 1.2em;
+          border: 2px solid var(--dark-gray);
+          width: 100%;
+    
+          &:hover {
+            filter: invert(0.8);
+          }
+        }
+    
+        select {
+            background: none;
+            border: none;
+            border-bottom: 1px solid black;
+            text-align: center;
+            font-size: 1.2em;
+        
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        
+          select {
+            text-align-last: center;
+          }
+      }
+}

@@ -135,3 +135,6 @@ export {
     InitialFellowInvestigatorsState,
     FellowInvestigatorsContext
 }
+
+
+export type { TFellowInvestigatorsState }

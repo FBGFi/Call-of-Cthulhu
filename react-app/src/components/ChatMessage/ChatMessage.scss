@@ -1,0 +1,16 @@
+.ChatMessage {
+  margin-bottom: 10px;
+  span {
+    font-weight: bold;
+    width: 100%;
+  }
+  p {
+    width: 100%;
+  }
+  .alert{
+    color: red;
+  }
+  .roll{
+    color: green;
+  }
+}

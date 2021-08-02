@@ -1,0 +1,28 @@
+$borderOptions: 4px solid var(--dark-gray);
+.GameTools {
+//   flex: 1;
+  max-height: 50vh;
+  background-image: url(../../../../assets/images/paper_small.jpg);
+  border: $borderOptions;
+  display: flex;
+  margin-top: auto;
+  box-shadow: 0px 0px 20px #000;
+  z-index: 1;
+
+  & > *:not(:last-child) {
+    border-right: $borderOptions;
+  }
+
+  .title-container {
+    background-color: var(--header-bg);
+    width: 100%;
+    display: flex;
+    border-bottom: $borderOptions;
+    h2 {
+      text-align: center;
+      margin: auto;
+    }
+  }
+
+
+}

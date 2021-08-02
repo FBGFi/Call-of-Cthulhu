@@ -403,3 +403,5 @@ export {
     InitialPlayerState,
     PlayerContext
 }
+
+export type { TPlayerState }

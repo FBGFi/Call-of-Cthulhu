@@ -10,7 +10,11 @@ type DiceRefs = {
 
 type DiceValue = 4 | 6 | 8 | 10 | 12 | 20 | 100;
 
-const DiceContainer: React.FC = () => {
+type DiceContainerProps = {
+    diceRollCallback?: (result: number) => void;
+}
+
+const DiceContainer: React.FC<DiceContainerProps> = (props) => {
     const rollTimesRef = useRef<HTMLInputElement>(null);
 
     const diceRefs: DiceRefs = {
@@ -37,6 +41,9 @@ const DiceContainer: React.FC = () => {
                 // TypeScript is fucking stupid
                 // @ts-ignore
                 diceRefs[diceKey].current.value = value;
+                if(props.diceRollCallback){
+                    props.diceRollCallback(value);
+                }
             }
         }
     }

@@ -1,0 +1,53 @@
+.ChatContainer {
+  .inner-container {
+    padding: 0;
+    width: 70vw;
+    max-width: 800px;
+    &>*{
+        margin-bottom: 0 !important;
+    }
+  }
+
+  .chat {
+    flex: 1;
+    padding: 10px;
+    height: 60vh;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .header {
+    background-color: var(--header-bg);
+    border-bottom: 2px solid var(--dark-gray);
+    h2 {
+      text-align: center;
+      padding: 10px;
+    }
+  }
+
+  .input-container {
+    width: 100%;
+    display: flex;
+    border-top: 2px solid var(--dark-gray);
+
+    input {
+      flex: 1;
+      font-size: 1.2em;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: none;
+    }
+
+    button {
+        font-size: 1.2em;    
+        background-color: #000;
+        color: #fff;
+        padding: 5px 15px;
+        border: 0;
+        border-left: 2px solid var(--dark-gray);
+        &:hover{
+            filter: invert(0.8);
+        }
+    }
+  }
+}

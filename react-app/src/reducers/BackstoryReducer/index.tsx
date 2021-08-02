@@ -105,3 +105,5 @@ export {
     InitialBackstoryState,
     BackstoryContext
 }
+
+export type { TBackstoryState }

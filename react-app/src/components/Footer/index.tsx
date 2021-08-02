@@ -6,8 +6,11 @@ import AgeModAlert from './AgeModAlert';
 import { PlayerContext } from '../../reducers/PlayerReducer';
 import NotesContainer from './NotesContainer';
 
+type FooterProps = {
+    diceRollCallback?: (result: number) => void;
+}
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = (props) => {
     const { state } = useContext(PlayerContext);
 
     const ageModsNotAdded = (): boolean => {
@@ -19,7 +22,8 @@ const Footer: React.FC = () => {
             <div className="inner-container">
                 <div className="button-container">
                     <NotesContainer />
-                    <DiceContainer />
+                    <DiceContainer diceRollCallback={props.diceRollCallback} />
+                    {props.children}
                 </div>
                 {ageModsNotAdded() ? <AgeModAlert /> : null}
             </div>
