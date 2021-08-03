@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import StartPage from './pages/start';
 

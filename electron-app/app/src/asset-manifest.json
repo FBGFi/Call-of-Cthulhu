@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "./static/css/main.2e951ab5.chunk.css",
+    "main.js": "./static/js/main.b589c2dd.chunk.js",
+    "main.js.map": "./static/js/main.b589c2dd.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.5be7c889.js",
+    "runtime-main.js.map": "./static/js/runtime-main.5be7c889.js.map",
+    "static/js/2.6b279227.chunk.js": "./static/js/2.6b279227.chunk.js",
+    "static/js/2.6b279227.chunk.js.map": "./static/js/2.6b279227.chunk.js.map",
+    "static/js/3.23b09a49.chunk.js": "./static/js/3.23b09a49.chunk.js",
+    "static/js/3.23b09a49.chunk.js.map": "./static/js/3.23b09a49.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.2e951ab5.chunk.css.map": "./static/css/main.2e951ab5.chunk.css.map",
+    "static/js/2.6b279227.chunk.js.LICENSE.txt": "./static/js/2.6b279227.chunk.js.LICENSE.txt",
+    "static/media/chat.9ffcc604.svg": "./static/media/chat.9ffcc604.svg",
+    "static/media/d20.362b25ab.svg": "./static/media/d20.362b25ab.svg",
+    "static/media/notes.d42ff299.svg": "./static/media/notes.d42ff299.svg",
+    "static/media/App.css": "./static/media/paper_dark.5a26f69f.jpeg",
+    "static/media/PlayerCard.css": "./static/media/paper_small.d2a7ed39.jpg",
+    "static/media/FellowInvestigators.css": "./static/media/tentacles.c28ea123.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5be7c889.js",
+    "static/js/2.6b279227.chunk.js",
+    "static/css/main.2e951ab5.chunk.css",
+    "static/js/main.b589c2dd.chunk.js"
+  ]
+}

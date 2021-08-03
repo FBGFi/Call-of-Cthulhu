@@ -3,12 +3,14 @@ const { app, BrowserWindow } = require('electron')
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1920,
-    height:1080,
-    tabbingIdentifier: "cthulhu",
-    icon: "./app/images/icon.ico",
+    width: 1280,
+    height: 774,
+    icon: "app/src/favicon.ico",
     backgroundColor: '#111',
+    icon: "app/src/icon.ico",
     fullscreenable: true,
+    frame: true,
+    resizable: true,
     webPreferences: {
       nodeIntegration: true,
       webviewTag: true
@@ -16,11 +18,11 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  win.loadFile('app/index.html');
+  win.loadFile('app/src/index.html');
 
   // Open the DevTools.
   
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
   win.setMenu(null);
 
 }
