@@ -1,4 +1,5 @@
 const WeaponsAndGearActions = {
+    SET_EVERYTHING: 'SET_EVERYTHING',
     SET_WEAPON: {
         WEAPON1: {
             NAME: "SET_WEAPON1_NAME",

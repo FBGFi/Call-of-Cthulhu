@@ -1,8 +1,8 @@
-.StartPage {
+.StartPage:not([class*="/game"]) {
   background-image: url(../../assets/images/paper_small.jpg);
   margin: auto;
 
-  .InfoBox {
+  &>.InfoBox {
     & > *:last-child {
       text-align: center;
       display: flex;

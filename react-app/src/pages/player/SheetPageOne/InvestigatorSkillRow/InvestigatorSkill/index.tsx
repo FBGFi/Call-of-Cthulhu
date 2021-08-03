@@ -44,7 +44,9 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
         }
     }
 
-    const setValue = (e: React.FocusEvent<HTMLInputElement>) => {       
+    const setValue = (e: React.FocusEvent<HTMLInputElement>) => {     
+        console.log(state[props.skill]);
+          
         // @ts-ignore
         if(Object.keys(state[props.skill]).includes('VALUE')) {
             // @ts-ignore

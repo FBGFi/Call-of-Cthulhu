@@ -1,23 +1,25 @@
 import React, { createContext } from 'react';
+import { InvestigatorSkillsActions } from '../../actions';
 import { TInvestigatorSkill } from '../../constants/types';
 
 type TAction = {
-    type: TInvestigatorSkill,
-    value: boolean | number | string
+    type: any,
+    value: any
 }
 
 type TBasicSkill = {
     CHECKED: boolean;
-    VALUE: number | undefined;
+    VALUE: number | null;
 }
 
 type TCustomSkill = {
     CHECKED: boolean;
-    VALUE: number | undefined;
+    VALUE: number | null;
     CUSTOM_TEXT: string;
 }
 
 type TInvestigatorSkillsState = {
+    [key: string]: any;
     CHARACTER_ID: string;
     ACCOUNTING: TBasicSkill,
     FAST_TALK: TBasicSkill,
@@ -63,13 +65,13 @@ type TInvestigatorSkillsState = {
     OCCULT: TBasicSkill,
     THROW: TBasicSkill,
     CREDIT_RATING: {
-        VALUE: number | undefined;
+        VALUE: number | null;
     },
     INTIMIDATE: TBasicSkill,
     OP_HV_MACHINE: TBasicSkill,
     TRACK: TBasicSkill,
     CTHULHU_MYTHOS: {
-        VALUE: number | undefined;
+        VALUE: number | null;
     },
     JUMP: TBasicSkill,
     PERSUADE: TBasicSkill,
@@ -91,12 +93,12 @@ type TInvestigatorSkillsState = {
 
 const BasicSkill: TBasicSkill = {
     CHECKED: false,
-    VALUE: undefined
+    VALUE: null
 }
 
 const CustomSkill: TCustomSkill = {
     CHECKED: false,
-    VALUE: undefined,
+    VALUE: null,
     CUSTOM_TEXT: ""
 }
 
@@ -147,13 +149,13 @@ const InitialInvestigatorSkillsState = (id?: string): TInvestigatorSkillsState =
         OCCULT: { ...BasicSkill },
         THROW: { ...BasicSkill },
         CREDIT_RATING: {
-            VALUE: undefined
+            VALUE: null
         },
         INTIMIDATE: { ...BasicSkill },
         OP_HV_MACHINE: { ...BasicSkill },
         TRACK: { ...BasicSkill },
         CTHULHU_MYTHOS: {
-            VALUE: undefined
+            VALUE: null
         },
         JUMP: { ...BasicSkill },
         PERSUADE: { ...BasicSkill },
@@ -191,6 +193,15 @@ const InitialInvestigatorSkillsState = (id?: string): TInvestigatorSkillsState =
 }
 
 function investigatorSkillsReducer(state: TInvestigatorSkillsState, action: TAction): TInvestigatorSkillsState {
+
+    if (action.type === InvestigatorSkillsActions.SET_EVERYTHING) {
+        for (let key in state) {          
+            if (action.value[key]) {
+                state[key] = action.value[key];
+            }
+        }
+        return { ...state };
+    }
     if (typeof (action.value) === "string") {
         // @ts-ignore
         state[action.type].CUSTOM_TEXT = action.value;

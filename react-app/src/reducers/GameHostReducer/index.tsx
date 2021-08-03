@@ -6,10 +6,11 @@ import { TFellowInvestigatorsState } from '../FellowInvestigatorsReducer';
 import { TInvestigatorSkillsState } from '../InvestigatorSkillsReducer';
 import { TPlayerState } from '../PlayerReducer';
 import { TChatMessage } from '../../components/ChatMessage';
+import { Socket, io } from 'socket.io-client';
 
 type TAction = {
     type: string;
-    value: any;
+    value?: any;
 }
 
 type TPlayers = {
@@ -22,38 +23,29 @@ type TGameHostState = {
     PLAYERS: TPlayers;
     CHAT_MESSAGES: TChatMessage[];
     IP_ADDRESS: string;
-}
-
-const removeThisAfterTesting = (): TPlayers => {
-    let localValues = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
-    if (localValues.LOCAL_SAVES) {
-        return localValues.LOCAL_SAVES;
-    }
-    return {};
+    SOCKET: Socket | undefined;
 }
 
 const getCookieValue = (name: string): string => {
     let cookies = document.cookie.split('; ');
     let splitCookie: string[];
-    if(cookies.length > 1){
-        console.log(cookies);
-        
-        for(let cookie of cookies){
+    if (cookies.length > 1) {
+        for (let cookie of cookies) {
             splitCookie = cookie.split(name + '=');
-            if(splitCookie.length > 1){
+            if (splitCookie.length > 1) {
                 return splitCookie[1];
             }
-        }      
+        }
     } else {
         cookies = document.cookie.split(name + '=');
-        if(cookies.length === 2){
+        if (cookies.length === 2) {
             return cookies[1];
         }
     }
     return "";
 }
 
-const getRecentRoomPort = ():number => {
+const getRecentRoomPort = (): number => {
     return parseInt(getCookieValue('CALL_OF_CTHULHU_RECENT_PORT'));
 }
 
@@ -71,9 +63,10 @@ const getSavedChatMessages = (roomCode: string): TChatMessage[] => {
 const InitialGameHostState: TGameHostState = {
     ROOM_CODE: getCookieValue('CALL_OF_CTHULHU_RECENT_ROOM'),
     PORT: getRecentRoomPort(),
-    PLAYERS: removeThisAfterTesting(),
+    PLAYERS: {},
     CHAT_MESSAGES: getSavedChatMessages(getCookieValue('CALL_OF_CTHULHU_RECENT_ROOM')),
-    IP_ADDRESS: ""
+    IP_ADDRESS: "",
+    SOCKET: undefined,
 }
 
 function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState {
@@ -101,10 +94,20 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
             }
             break;
         case GameHostActions.REMOVE_PLAYER_DATA:
+            let kickedPlayer = state.PLAYERS[action.value]?.CHARACTER_ID;
+            delete state.PLAYERS[action.value];
+            if(state.SOCKET && kickedPlayer){
+                state.SOCKET.emit('kick-player', kickedPlayer);
+            }
+            break;
+        case GameHostActions.PLAYER_DISCONNECTED:
             delete state.PLAYERS[action.value];
             break;
         case GameHostActions.SET_CHAT_MESSAGES:
-            state.CHAT_MESSAGES = action.value;
+            state.CHAT_MESSAGES = action.value;        
+            if(state.SOCKET){
+                state.SOCKET.emit('host-send-messages', action.value);
+            }
             if (state.ROOM_CODE !== "") {
                 let localValues = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
                 if (!localValues.SAVED_ROOMS) {
@@ -119,6 +122,25 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
             break;
         case GameHostActions.SET_HOST_IP:
             state.IP_ADDRESS = action.value;
+            break;
+        case GameHostActions.SET_WEBSOCKET:
+            
+            if (!state.SOCKET && state.IP_ADDRESS !== "" && state.PORT > 0 && state.PORT < 65536) {
+                state.SOCKET = io(`http://localhost:${state.PORT}`);
+                state.SOCKET.on('connect', () => {
+                    console.log('Connected');
+                    if(state.SOCKET){
+                        state.SOCKET.emit('connect-host');
+                        state.SOCKET.emit('host-send-messages', state.CHAT_MESSAGES);
+                    }
+                });
+                state.SOCKET.on("connect_error", () => {
+                    console.log("Error connecting");
+                });
+                state.SOCKET.on("disconnect", () => {
+                    console.log("disconnected");
+                });
+            }
             break;
         default:
             break;

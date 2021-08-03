@@ -15,7 +15,7 @@ import OpenableContainer from '../../../../components/Footer/OpenableContainer';
 
 import chatSVG from '../../../../assets/images/chat.svg';
 import GameChat from '../../../../components/GameChat';
-import { GameHostActions } from '../../../../actions';
+import { BackstoryActions, FellowInvestigatorsActions, GameHostActions, InvestigatorSkillsActions, PlayerActions, WeaponsAndGearActions } from '../../../../actions';
 
 const PlayerCharacterSheet: React.FC = () => {
     const [chatClicked, setChatClicked] = useState(0);
@@ -44,12 +44,12 @@ const PlayerCharacterSheet: React.FC = () => {
 
     const sendChatMessage = (chatMessage: string) => {
         if (chatMessage !== "") {
-            sendMessage({message: chatMessage, type: 'message', sender: 'Host', timeStamp: Date.now()})
+            sendMessage({ message: chatMessage, type: 'message', sender: 'Host', timeStamp: Date.now() })
         }
     }
 
     const sendDiceRollMessage = (result: number) => {
-        sendMessage({message: "Host rolled " + result.toString(), type: 'roll', sender: 'Host', timeStamp: Date.now()})
+        sendMessage({ message: "Host rolled " + result.toString(), type: 'roll', sender: 'Host', timeStamp: Date.now() })
     }
 
     // Spaghetti-O, just for re-rendering purposes to scroll the chat
@@ -58,8 +58,17 @@ const PlayerCharacterSheet: React.FC = () => {
     }
 
     useEffect(() => {
-        console.log(state);
-    }, [state])
+        console.log("Player did updates");
+        if (state.PLAYERS[params.playerId]) {
+            
+            playerDispatch({ type: PlayerActions.SET_EVERYTHING, value: state.PLAYERS[params.playerId] });
+            weaponsAndGearDispatch({ type: WeaponsAndGearActions.SET_EVERYTHING, value: state.PLAYERS[params.playerId] })
+            investigatorSkillsDispatch({ type: InvestigatorSkillsActions.SET_EVERYTHING, value: state.PLAYERS[params.playerId] })
+            fellowInvestigatorsDispatch({ type: FellowInvestigatorsActions.SET_EVERYTHING, value: state.PLAYERS[params.playerId] })
+            backstoryDispatch({ type: BackstoryActions.SET_EVERYTHING, value: state.PLAYERS[params.playerId] })
+        }
+
+    }, [state]);
 
     return (
         <PlayerContext.Provider value={{ state: playerState, dispatch: playerDispatch }}>

@@ -14,7 +14,7 @@ const ConnectedPlayers: React.FC = () => {
                 <ConnectedPlayer 
                     key={id}
                     player={state.PLAYERS[id].CHARACTER_INFO.PLAYER}
-                    character={state.PLAYERS[id].CHARACTER_INFO.NAME}
+                    character={state.PLAYERS[id].CHARACTER_INFO.NAME !== "" ? state.PLAYERS[id].CHARACTER_INFO.NAME : "Unnamed Character"}
                     playerId={id} />
                 );            
         }

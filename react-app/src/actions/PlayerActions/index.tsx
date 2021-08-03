@@ -1,4 +1,5 @@
 const PlayerActions = {
+    SET_EVERYTHING: 'SET_EVERYTHING',
     SET_CHARACTER_INFO: {
         ALL: "SET_CHARACTER_INFO_ALL",
         NAME: "SET_CHARACTER_INFO_NAME",

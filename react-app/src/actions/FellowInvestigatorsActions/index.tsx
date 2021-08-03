@@ -1,4 +1,5 @@
 const FellowInvestigatorsActions = {
+    SET_EVERYTHING: 'SET_EVERYTHING',
     PLAYER_1: {
         SET_CHAR: 'SET_NAME_CHAR_1',
         SET_PLAYER: 'SET_PLAYER_PLAYER_1'

@@ -4,6 +4,7 @@ import WeaponsAndGearActions from "./WeaponsAndGearActions";
 import FellowInvestigatorsActions from "./FellowInvestigatorsActions";
 import BackstoryActions from "./BackstoryActions";
 import GameHostActions from "./GameHostActions";
+import HostedGameActions from "./HostedGameActions";
 
 const actions = {
     SET_CLIENT: "CHANGE_CLIENT_TO",
@@ -16,6 +17,7 @@ export {
     WeaponsAndGearActions,
     FellowInvestigatorsActions,
     BackstoryActions,
-    GameHostActions
+    GameHostActions,
+    HostedGameActions
 }
 export default actions;

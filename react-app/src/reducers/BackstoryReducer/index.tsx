@@ -3,10 +3,11 @@ import { BackstoryActions } from '../../actions';
 
 type TAction = {
     type: string;
-    value: string;
+    value: any;
 }
 
 type TBackstoryState = {
+    [key: string]: string;
     CHARACTER_ID: string;
     PERSONAL_DESCRIPTION: string;
     TRAITS: string;
@@ -54,6 +55,13 @@ const InitialBackstoryState = (id?: string): TBackstoryState => {
 
 function backstoryReducer(state: TBackstoryState, action: TAction): TBackstoryState {
     switch (action.type) {
+        case BackstoryActions.SET_EVERYTHING:
+            for(let key in state){
+                if(action.value[key]){
+                    state[key] = action.value[key];
+                }
+            }
+            break;
         case BackstoryActions.PERSONAL_DESCRIPTION:
             state.PERSONAL_DESCRIPTION = action.value;
             break;

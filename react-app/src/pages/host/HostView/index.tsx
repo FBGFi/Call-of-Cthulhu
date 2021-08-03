@@ -5,6 +5,10 @@ import './HostView.css';
 import PlayerCard from './PlayerCard';
 import publicIp from 'public-ip'
 import { GameHostActions } from '../../../actions';
+import { TChatMessage } from '../../../components/ChatMessage';
+
+// fucking redux...
+let chatMessages: TChatMessage[];
 
 const HostView: React.FC = () => {
     const { state, dispatch } = useContext(GameHostContext);
@@ -17,7 +21,8 @@ const HostView: React.FC = () => {
                 <PlayerCard
                     key={id}
                     player={state.PLAYERS[id].CHARACTER_INFO.PLAYER}
-                    character={state.PLAYERS[id].CHARACTER_INFO.NAME}
+                    character={state.PLAYERS[id].CHARACTER_INFO.NAME !== "" ? state.PLAYERS[id].CHARACTER_INFO.NAME : "Unnamed Character"}
+                    playerImg={state.PLAYERS[id].CHARACTER_INFO.IMAGE.SRC}
                     playerId={id} />
             );
         }
@@ -26,16 +31,57 @@ const HostView: React.FC = () => {
         return cards;
     }
 
-    const getYourIp = async () => {
+    const setUpWebSocket = async () => {
         let data = await publicIp.v4({
             fallbackUrls: ["https://ifconfig.co/ip"]
         });
-        dispatch({type: GameHostActions.SET_HOST_IP, value: data});
+        await dispatch({ type: GameHostActions.SET_HOST_IP, value: data });
+        await dispatch({ type: GameHostActions.SET_WEBSOCKET });
     }
 
     useEffect(() => {
-        getYourIp();
+        setUpWebSocket();
     }, []);
+
+    useEffect(() => {
+        chatMessages = state.CHAT_MESSAGES;
+    }, [state.CHAT_MESSAGES]);
+
+    useEffect(() => {
+        if (state.SOCKET) {
+            state.SOCKET.on('player-connected', data => {
+                if (data) {
+                    dispatch({ type: GameHostActions.SET_PLAYER_DATA, value: data });
+                }
+            });
+            state.SOCKET.on('player-disconnected', data => {
+                if(data){                    
+                    if(data.CHARACTER_ID){
+                        if(state.PLAYERS[data.CHARACTER_ID as string]){
+                            dispatch({ type: GameHostActions.PLAYER_DISCONNECTED, value: data.CHARACTER_ID});
+                        }
+                    }
+                }
+            });
+            state.SOCKET.on('player-data-update', data => {
+                if (data) {
+                    console.log("Updating player data");
+                    dispatch({ type: GameHostActions.SET_PLAYER_DATA, value: data });
+                }
+            });
+            state.SOCKET.on('new-player-message', message => {
+                chatMessages.push(message);
+                if (chatMessages.length > 30) {
+                    chatMessages.shift();
+                }
+                dispatch(
+                    {
+                        type: GameHostActions.SET_CHAT_MESSAGES,
+                        value: chatMessages
+                    });
+            })
+        }
+    }, [state.SOCKET]);
 
     return (
         <div className='HostView'>

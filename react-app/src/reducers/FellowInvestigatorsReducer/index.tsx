@@ -3,7 +3,7 @@ import { FellowInvestigatorsActions } from '../../actions';
 
 type TAction = {
     type: string;
-    value: string;
+    value: any;
 }
 
 type TPlayer = {
@@ -12,6 +12,7 @@ type TPlayer = {
 }
 
 type TFellowInvestigatorsState = {
+    [key: string]: any;
     CHARACTER_ID: string;
     PLAYER_1: TPlayer;
     PLAYER_2: TPlayer;
@@ -60,6 +61,13 @@ const InitialFellowInvestigatorsState = (id?: string): TFellowInvestigatorsState
 
 function fellowInvestigatorsReducer(state: TFellowInvestigatorsState, action: TAction): TFellowInvestigatorsState {
     switch (action.type) {
+        case FellowInvestigatorsActions.SET_EVERYTHING:
+            for(let key in state){
+                if(action.value[key]){
+                    state[key] = action.value[key];
+                }
+            }
+            break;
         case FellowInvestigatorsActions.PLAYER_1.SET_CHAR:
             state.PLAYER_1.CHAR = action.value;
             break;

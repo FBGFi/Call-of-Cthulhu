@@ -13,6 +13,7 @@ type TCharacteristicsValue = {
 }
 
 type TPlayerState = {
+    [key: string]: any;
     CHARACTER_ID: string,
     CHARACTER_INFO: {
         NAME: string,
@@ -187,6 +188,14 @@ function setInitialHP(SIZ: number, CON: number): number {
 
 function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
     switch (action.type) {
+        case PlayerActions.SET_EVERYTHING:
+            for (let key in state) {
+                
+                if (action.value[key]) {
+                    state[key] = action.value[key];
+                }
+            }
+            break;
         // Character info setting
         case PlayerActions.SET_CHARACTER_INFO.NAME:
             state.CHARACTER_INFO.NAME = action.value;
@@ -225,7 +234,7 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
 
         // Characteristics setting
         case PlayerActions.SET_CHARACTERISTICS.STR:
-            if (state.CHARACTERISTICS.STR.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.STR.INITIAL_VALUE) {
                 state.CHARACTERISTICS.STR.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.STR.ADDED_VALUE = action.value - state.CHARACTERISTICS.STR.INITIAL_VALUE;
@@ -233,56 +242,56 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
             break;
 
         case PlayerActions.SET_CHARACTERISTICS.DEX:
-            if (state.CHARACTERISTICS.DEX.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.DEX.INITIAL_VALUE) {
                 state.CHARACTERISTICS.DEX.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.DEX.ADDED_VALUE = action.value - state.CHARACTERISTICS.DEX.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.POW:
-            if (state.CHARACTERISTICS.POW.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.POW.INITIAL_VALUE) {
                 state.CHARACTERISTICS.POW.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.POW.ADDED_VALUE = action.value - state.CHARACTERISTICS.POW.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.CON:
-            if (state.CHARACTERISTICS.CON.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.CON.INITIAL_VALUE) {
                 state.CHARACTERISTICS.CON.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.CON.ADDED_VALUE = action.value - state.CHARACTERISTICS.CON.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.APP:
-            if (state.CHARACTERISTICS.APP.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.APP.INITIAL_VALUE) {
                 state.CHARACTERISTICS.APP.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.APP.ADDED_VALUE = action.value - state.CHARACTERISTICS.APP.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.EDU:
-            if (state.CHARACTERISTICS.EDU.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.EDU.INITIAL_VALUE) {
                 state.CHARACTERISTICS.EDU.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.EDU.ADDED_VALUE = action.value - state.CHARACTERISTICS.EDU.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.SIZ:
-            if (state.CHARACTERISTICS.SIZ.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.SIZ.INITIAL_VALUE) {
                 state.CHARACTERISTICS.SIZ.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.SIZ.ADDED_VALUE = action.value - state.CHARACTERISTICS.SIZ.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.INT:
-            if (state.CHARACTERISTICS.INT.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.INT.INITIAL_VALUE) {
                 state.CHARACTERISTICS.INT.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.INT.ADDED_VALUE = action.value - state.CHARACTERISTICS.INT.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_CHARACTERISTICS.MOVE:
-            if (state.CHARACTERISTICS.MOVE.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.MOVE.INITIAL_VALUE) {
                 state.CHARACTERISTICS.MOVE.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.MOVE.ADDED_VALUE = action.value - state.CHARACTERISTICS.MOVE.INITIAL_VALUE;
@@ -295,7 +304,7 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
             state.CHARACTERISTICS.BUILD = action.value;
             break;
         case PlayerActions.SET_CHARACTERISTICS.DODGE:
-            if (state.CHARACTERISTICS.DODGE.INITIAL_VALUE === undefined) {
+            if (!state.CHARACTERISTICS.DODGE.INITIAL_VALUE) {
                 state.CHARACTERISTICS.DODGE.INITIAL_VALUE = action.value;
             } else {
                 state.CHARACTERISTICS.DODGE.ADDED_VALUE = action.value - state.CHARACTERISTICS.DODGE.INITIAL_VALUE;
@@ -304,25 +313,35 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
         case PlayerActions.SET_CHARACTERISTICS.SET_AGE_MODS:
             // TypeScript is stupid again, cant make this a function...
             if (
-                state.CHARACTERISTICS.STR.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.DEX.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.POW.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.CON.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.APP.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.EDU.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.SIZ.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.INT.INITIAL_VALUE !== undefined &&
-                state.CHARACTERISTICS.MOVE.INITIAL_VALUE !== undefined
+                state.CHARACTERISTICS.STR.INITIAL_VALUE &&
+                state.CHARACTERISTICS.DEX.INITIAL_VALUE &&
+                state.CHARACTERISTICS.POW.INITIAL_VALUE &&
+                state.CHARACTERISTICS.CON.INITIAL_VALUE &&
+                state.CHARACTERISTICS.APP.INITIAL_VALUE &&
+                state.CHARACTERISTICS.EDU.INITIAL_VALUE &&
+                state.CHARACTERISTICS.SIZ.INITIAL_VALUE &&
+                state.CHARACTERISTICS.INT.INITIAL_VALUE &&
+                state.CHARACTERISTICS.MOVE.INITIAL_VALUE
             ) {
+                // @ts-ignore
                 state.SECONDARY_STATS.MP.INITIAL_VALUE = Math.floor((state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE) / 5);
+                // @ts-ignore
                 state.SECONDARY_STATS.SANITY.INITIAL_VALUE = state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE;
+                // @ts-ignore
                 state.SECONDARY_STATS.SANITY.MAX_SANITY = state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE;
+                // @ts-ignore
                 state.SECONDARY_STATS.SANITY.START_SANITY = state.CHARACTERISTICS.POW.INITIAL_VALUE + state.CHARACTERISTICS.POW.ADDED_VALUE;
+                // @ts-ignore
                 state.SECONDARY_STATS.HP.MAX_HP = setInitialHP(state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE, state.CHARACTERISTICS.CON.INITIAL_VALUE + state.CHARACTERISTICS.CON.ADDED_VALUE);
+                // @ts-ignore
                 state.SECONDARY_STATS.HP.INITIAL_VALUE = setInitialHP(state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE, state.CHARACTERISTICS.CON.INITIAL_VALUE + state.CHARACTERISTICS.CON.ADDED_VALUE);
+                // @ts-ignore
                 state.CHARACTERISTICS.DMG_BONUS = setDmgBonus(state.CHARACTERISTICS.STR.INITIAL_VALUE + state.CHARACTERISTICS.STR.ADDED_VALUE, state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE);
+                // @ts-ignore
                 state.CHARACTERISTICS.BUILD = setBuildStat(state.CHARACTERISTICS.STR.INITIAL_VALUE + state.CHARACTERISTICS.STR.ADDED_VALUE, state.CHARACTERISTICS.SIZ.INITIAL_VALUE + state.CHARACTERISTICS.SIZ.ADDED_VALUE);
+                // @ts-ignore
                 state.CHARACTERISTICS.DODGE.INITIAL_VALUE = Math.floor((state.CHARACTERISTICS.DEX.INITIAL_VALUE + state.CHARACTERISTICS.DEX.ADDED_VALUE) / 2);
+                // @ts-ignore
                 state.CHARACTERISTICS.AGE_MODS_ADDED = true;
             }
             break;
@@ -341,7 +360,7 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
             state.SECONDARY_STATS.HP.UNCONSCIOUS = action.value;
             break;
         case PlayerActions.SET_SECONDARY_STATS.HP.SET_HP:
-            if (state.SECONDARY_STATS.HP.INITIAL_VALUE === undefined) {
+            if (!state.SECONDARY_STATS.HP.INITIAL_VALUE) {
                 state.SECONDARY_STATS.HP.INITIAL_VALUE = action.value;
             } else {
                 state.SECONDARY_STATS.HP.ADDED_VALUE = action.value - state.SECONDARY_STATS.HP.INITIAL_VALUE;
@@ -354,7 +373,7 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
             state.SECONDARY_STATS.SANITY.INDEF_INSANE = action.value;
             break;
         case PlayerActions.SET_SECONDARY_STATS.SANITY.SET_SANITY:
-            if (state.SECONDARY_STATS.SANITY.INITIAL_VALUE === undefined) {
+            if (!state.SECONDARY_STATS.SANITY.INITIAL_VALUE) {
                 state.SECONDARY_STATS.SANITY.INITIAL_VALUE = action.value;
             } else {
                 state.SECONDARY_STATS.SANITY.ADDED_VALUE = action.value - state.SECONDARY_STATS.SANITY.INITIAL_VALUE;
@@ -367,14 +386,14 @@ function playerReducer(state: TPlayerState, action: TAction): TPlayerState {
             state.SECONDARY_STATS.SANITY.START_SANITY = action.value;
             break;
         case PlayerActions.SET_SECONDARY_STATS.LUCK:
-            if (state.SECONDARY_STATS.LUCK.INITIAL_VALUE === undefined) {
+            if (!state.SECONDARY_STATS.LUCK.INITIAL_VALUE) {
                 state.SECONDARY_STATS.LUCK.INITIAL_VALUE = action.value;
             } else {
                 state.SECONDARY_STATS.LUCK.ADDED_VALUE = action.value - state.SECONDARY_STATS.LUCK.INITIAL_VALUE;
             }
             break;
         case PlayerActions.SET_SECONDARY_STATS.MP.SET_MP:
-            if (state.SECONDARY_STATS.MP.INITIAL_VALUE === undefined) {
+            if (!state.SECONDARY_STATS.MP.INITIAL_VALUE) {
                 state.SECONDARY_STATS.MP.INITIAL_VALUE = action.value;
             } else {
                 state.SECONDARY_STATS.MP.ADDED_VALUE = action.value - state.SECONDARY_STATS.MP.INITIAL_VALUE;

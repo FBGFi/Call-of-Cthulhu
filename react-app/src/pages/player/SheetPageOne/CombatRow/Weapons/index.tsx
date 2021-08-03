@@ -9,7 +9,7 @@ const UnarmedRolls: React.FC = () => {
     const { state } = useContext(InvestigatorSkillsContext);
     return (
         <>
-            <input defaultValue={state.FIGHTING_BRAWL.CHECKED ? state.FIGHTING_BRAWL.VALUE : undefined} size={1} type="text" />
+            <input defaultValue={state.FIGHTING_BRAWL.CHECKED && state.FIGHTING_BRAWL.VALUE ? state.FIGHTING_BRAWL.VALUE : undefined} size={1} type="text" />
             <input size={1} type="text" />
             <input size={1} type="text" />
         </>

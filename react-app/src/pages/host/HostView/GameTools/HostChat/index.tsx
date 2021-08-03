@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { GameHostActions } from '../../../../../actions';
 import ChatMessage from '../../../../../components/ChatMessage';
 import { GameHostContext } from '../../../../../reducers/GameHostReducer';
@@ -21,10 +21,10 @@ const HostChat: React.FC = () => {
                 timeStamp: time,
                 type: 'message'
             });
-            if(messages.length > 30){
+            if (messages.length > 30) {
                 messages.shift();
             }
-            
+
             dispatch(
                 {
                     type: GameHostActions.SET_CHAT_MESSAGES,
@@ -32,6 +32,17 @@ const HostChat: React.FC = () => {
                 });
             inputRef.current.value = "";
         }
+    }
+
+    const clearChat = () => {
+        dispatch({
+            type: GameHostActions.SET_CHAT_MESSAGES, value: [{
+                message: "Chat was cleared by Host",
+                sender: "Host",
+                timeStamp: Date.now(),
+                type: 'alert'
+            }]
+        });
     }
 
     useEffect(() => {
@@ -52,6 +63,7 @@ const HostChat: React.FC = () => {
                 <div className="send-message-container">
                     <input ref={inputRef} type="text" />
                     <button onClick={() => sendMessage()}>Send</button>
+                    <button onClick={() => clearChat()}>Clear</button>
                 </div>
             </div>
         </div>

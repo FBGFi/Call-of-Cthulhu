@@ -20,6 +20,7 @@ type TWeapon = {
 }
 
 type TWeaponsAndGearState = {
+    [key: string]: any;
     CHARACTER_ID: string;
     WEAPONS: {
         WEAPON1: TWeapon,
@@ -148,7 +149,14 @@ const InitialWeaponsAndGearState = (id?: string): TWeaponsAndGearState => {
 }
 
 function weaponsAndGearReducer(state: TWeaponsAndGearState, action: TAction): TWeaponsAndGearState {
-    switch (action.type) {
+    switch (action.type) {    
+        case WeaponsAndGearActions.SET_EVERYTHING:
+            for(let key in state){
+                if(action.value[key]){
+                    state[key] = action.value[key];
+                }
+            }
+            break;
         // Setting weapons
         case WeaponsAndGearActions.SET_WEAPON.WEAPON1.NAME:
             state.WEAPONS.WEAPON1.NAME = action.value;

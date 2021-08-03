@@ -1,0 +1,6 @@
+.HostedGame{
+    margin: 30px 0;
+    &>.SheetPage:not(:last-of-type){
+        margin-bottom: 30px;
+    }
+}

@@ -1,4 +1,5 @@
 const InvestigatorSkillsActions = {
+    SET_EVERYTHING: 'SET_EVERYTHING',
     ACCOUNTING: {
         SET_CHECKED: 'SET_ACCOUNTING_CHECKED',
         SET_VALUE: 'SET_ACCOUNTING_VALUE'
