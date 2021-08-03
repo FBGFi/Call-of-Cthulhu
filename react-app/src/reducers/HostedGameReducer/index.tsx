@@ -2,6 +2,7 @@ import React, { createContext } from 'react';
 import { HostedGameActions } from '../../actions';
 import { Socket, io } from 'socket.io-client';
 import { TChatMessage } from '../../components/ChatMessage';
+import md5 from 'md5';
 
 type TAction = {
     type: string;
@@ -94,25 +95,34 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
             }
             break;
         case HostedGameActions.CONNECT_TO_HOST:
+            if(state.PLAYER_ID === ""){
+                state.PLAYER_ID = md5(Date.now().toString());
+            }
+            
             if(state.SOCKET_ADDRESS === "" && state.ROOM_CODE === ""){
                 state.SOCKET_ADDRESS = getCookieValue('CALL_OF_CTHULHU_RECENT_HOST_ADDRESS');
                 state.ROOM_CODE = getCookieValue('CALL_OF_CTHULHU_RECENT_HOST_ROOM_CODE');
             }
-            if (!state.SOCKET && state.SOCKET_ADDRESS !== "" && state.ROOM_CODE !== "") {                    
-                state.SOCKET = io(state.SOCKET_ADDRESS);
+            if (!state.SOCKET && state.SOCKET_ADDRESS !== "" && state.ROOM_CODE !== "") {   
+            
+                state.SOCKET = io(state.SOCKET_ADDRESS, {
+                    reconnectionAttempts: 10,
+                    reconnectionDelay: 1000,
+                });
                 state.SOCKET.on('connect', () => {
                     console.log('Connected');
+                    if(state.SOCKET){
+                        state.SOCKET.emit('verify-player', state.ROOM_CODE);
+                    }
                 });
-                state.SOCKET.on("connect_error", () => {
-                    console.log("Error connecting");
+                state.SOCKET.on('disconnect', () => {
+                    console.log('Disconnected');
                 });
                 state.SOCKET.on('host-disconnected', () => {
                     window.alert('Host has disconnected');                  
                 });
-                state.SOCKET.on('player-was-kicked', () => {
-                    if(window.confirm("You were kicked by the Host!")){
-                        window.location.href = '/';
-                    }
+                state.SOCKET.on('incorrect-room-code', () => {
+                    window.alert('Incorrect room code!');
                 });
             }
             break;
@@ -127,6 +137,14 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
         case HostedGameActions.SEND_CHAT_MESSAGE:
             if(state.SOCKET){
                 state.SOCKET.emit('player-send-message', action.value);
+            }
+            break;
+        case HostedGameActions.DISCONNECT_FROM_HOST:
+            if(state.SOCKET){
+                state.SOCKET.disconnect();
+                state.SOCKET_ADDRESS = "";
+                state.ROOM_CODE = "";
+                state.SOCKET = undefined;
             }
             break;
         default:

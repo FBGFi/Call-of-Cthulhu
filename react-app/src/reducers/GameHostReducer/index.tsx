@@ -125,21 +125,18 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
             break;
         case GameHostActions.SET_WEBSOCKET:
             
-            if (!state.SOCKET && state.IP_ADDRESS !== "" && state.PORT > 0 && state.PORT < 65536) {
+            if (!state.SOCKET && state.PORT > 0 && state.PORT < 65536) {
                 state.SOCKET = io(`http://localhost:${state.PORT}`);
-                state.SOCKET.on('connect', () => {
-                    console.log('Connected');
-                    if(state.SOCKET){
-                        state.SOCKET.emit('connect-host');
-                        state.SOCKET.emit('host-send-messages', state.CHAT_MESSAGES);
-                    }
-                });
-                state.SOCKET.on("connect_error", () => {
-                    console.log("Error connecting");
-                });
+                
                 state.SOCKET.on("disconnect", () => {
                     console.log("disconnected");
                 });
+            }
+            break;
+        case GameHostActions.DISCONNECT_FROM_SERVER:
+            if(state.SOCKET){
+                state.SOCKET.disconnect();
+                state.SOCKET = undefined;
             }
             break;
         default:

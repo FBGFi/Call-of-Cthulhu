@@ -1,18 +1,20 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { HostedGameActions } from '../../../actions';
+import LoadingScreen from '../../../components/LoadingScreen';
 import { HostedGameContext } from '../../../reducers/HostedGameReducer';
 import SavedCharacters from '../SavedCharacters';
 import './ChooseHostedGame.css';
 
 const ChooseHostedGame: React.FC = () => {
     const { state, dispatch } = useContext(HostedGameContext);
+    const [connectionSuccesful, isConnectionSuccessful] = useState(false);
 
-    const setSavedCharacterName = (id: string, type: 'set'|'remove') => {
-        if(id !== "None"){
-            dispatch({ type: HostedGameActions.SET_PLAYER_ID, value: id });  
+    const setSavedCharacterName = (id: string, type: 'set' | 'remove') => {
+        if (id !== "None") {
+            dispatch({ type: HostedGameActions.SET_PLAYER_ID, value: id });
         } else {
-            dispatch({ type: HostedGameActions.SET_PLAYER_ID, value: "" });  
+            dispatch({ type: HostedGameActions.SET_PLAYER_ID, value: "" });
         }
     }
 
@@ -20,18 +22,40 @@ const ChooseHostedGame: React.FC = () => {
         dispatch({ type: HostedGameActions[action], value: e.target.value });
     }
 
+    useEffect(() => {
+        if(state.SOCKET){
+            state.SOCKET.on('player-verified', () => {
+                isConnectionSuccessful(true);
+            });
+            state.SOCKET.on("connect_error", () => {
+                window.alert("Error connecting to the host");
+                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST});
+            });       
+            state.SOCKET.on('incorrect-room-code', () => {
+                window.alert('Incorrect room code!');
+                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST});
+            });
+        }
+    },[state.SOCKET]);
+
+    if(connectionSuccesful){
+        return <Redirect to={'/hosted/game/' + state.PLAYER_ID} />
+    }
+
+    if(state.SOCKET){
+        return(<LoadingScreen />);
+    }
+
     return (
         <div className='ChooseHostedGame'>
             <span>Room address and port</span>
-            <input onBlur={(e) => setSessionInformation(e, 'SET_SOCKET_ADDRESS')} type="text" />
+            <input defaultValue={state.SOCKET_ADDRESS} onBlur={(e) => setSessionInformation(e, 'SET_SOCKET_ADDRESS')} type="text" />
             <span>Room code</span>
-            <input onBlur={(e) => setSessionInformation(e, 'SET_ROOM_CODE')} type="text" />
+            <input defaultValue={state.ROOM_CODE} onBlur={(e) => setSessionInformation(e, 'SET_ROOM_CODE')} type="text" />
             <span>Player Name</span>
-            <input onBlur={(e) => setSessionInformation(e, 'SET_PLAYER_NAME')} type="text" />
+            <input defaultValue={state.PLAYER_NAME} onBlur={(e) => setSessionInformation(e, 'SET_PLAYER_NAME')} type="text" />
             <SavedCharacters onChange={setSavedCharacterName} hostedGame={true} />
-            <Link to={state.SOCKET_ADDRESS !== "" && state.ROOM_CODE !== "" && state.PLAYER_NAME !== "" ? '/hosted/game/' + state.PLAYER_ID : '/hosted'}>
-                <button onClick={() => { dispatch({ type: HostedGameActions.CONNECT_TO_HOST }) }}>Join Game</button>
-            </Link>
+            <button onClick={() => { dispatch({ type: HostedGameActions.CONNECT_TO_HOST }) }}>Join Game</button>
         </div >
     );
 }

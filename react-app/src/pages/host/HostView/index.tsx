@@ -31,16 +31,15 @@ const HostView: React.FC = () => {
         return cards;
     }
 
-    const setUpWebSocket = async () => {
+    const setUpIp = async () => {
         let data = await publicIp.v4({
             fallbackUrls: ["https://ifconfig.co/ip"]
         });
         await dispatch({ type: GameHostActions.SET_HOST_IP, value: data });
-        await dispatch({ type: GameHostActions.SET_WEBSOCKET });
     }
 
     useEffect(() => {
-        setUpWebSocket();
+        setUpIp();
     }, []);
 
     useEffect(() => {

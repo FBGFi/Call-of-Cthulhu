@@ -14,7 +14,7 @@ const PlayerCard: React.FC<PlayerCardProps> = (props) => {
     return (
         <div className='PlayerCard'>
             <Link to={'/host/game/' + props.playerId}>
-                <img src={props.playerImg} alt="player" />
+                <img src={props.playerImg} />
                 <div className="player-name-container">
                     <h3>{props.character} - {props.player}</h3>
                 </div>

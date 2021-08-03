@@ -1,0 +1,16 @@
+.LoadingScreen{
+    color: #000;
+    margin: auto;
+    h1{
+        animation: loadingPump infinite alternate 1s;
+        opacity: 1;
+    }
+}
+@keyframes loadingPump{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0.4;
+    }
+}

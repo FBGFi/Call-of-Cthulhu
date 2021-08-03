@@ -11,6 +11,8 @@ import SheetPageOne from '../player/SheetPageOne';
 import SheetPageTwo from '../player/SheetPageTwo';
 
 const Game: React.FC = () => {
+    console.log("Hosted");
+    
     const params = useParams() as { playerId: string };
     const [playerState, playerDispatch] = useReducer(playerReducer, InitialPlayerState(params.playerId ? params.playerId : undefined));
     const [weaponsAndGearState, weaponsAndGearDispatch] = useReducer(weaponsAndGearReducer, InitialWeaponsAndGearState(params.playerId ? params.playerId : playerState.CHARACTER_ID));
