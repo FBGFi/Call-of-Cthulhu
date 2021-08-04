@@ -34,7 +34,7 @@ io.on('connection', socket => {
             hostId = socket.id;
             roomCode = room;
 
-            let message: TMessage = {
+            const message: TMessage = {
                 timeStamp: Date.now(),
                 message: 'Host has connected to the room',
                 sender: 'SERVER',

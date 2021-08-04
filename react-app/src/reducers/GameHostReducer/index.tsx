@@ -34,6 +34,9 @@ const getRecentRoomPort = (): number => {
 const getSavedChatMessages = (roomCode: string): TChatMessage[] => {
     let messages: TChatMessage[] = [];
     if (roomCode !== "") {
+        if (window.localStorage.CALL_OF_CTHULHU === undefined) {
+            localStorage.setItem('CALL_OF_CTHULHU', '{}');
+        }
         let localValues = JSON.parse(window.localStorage.CALL_OF_CTHULHU);
         if (localValues.SAVED_ROOMS && localValues.SAVED_ROOMS[roomCode]) {
             messages = localValues.SAVED_ROOMS[roomCode].CHAT_MESSAGES;
@@ -78,7 +81,7 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
         case GameHostActions.REMOVE_PLAYER_DATA:
             let kickedPlayer = state.PLAYERS[action.value]?.CHARACTER_ID;
             delete state.PLAYERS[action.value];
-            if(state.SOCKET && kickedPlayer){
+            if (state.SOCKET && kickedPlayer) {
                 state.SOCKET.emit('kick-player', kickedPlayer);
             }
             break;
@@ -86,8 +89,8 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
             delete state.PLAYERS[action.value];
             break;
         case GameHostActions.SET_CHAT_MESSAGES:
-            state.CHAT_MESSAGES = action.value;        
-            if(state.SOCKET){
+            state.CHAT_MESSAGES = action.value;
+            if (state.SOCKET) {
                 state.SOCKET.emit('host-send-messages', action.value);
             }
             if (state.ROOM_CODE !== "") {
@@ -106,19 +109,19 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
             state.IP_ADDRESS = action.value;
             break;
         case GameHostActions.SET_WEBSOCKET:
-            
+
             if (!state.SOCKET && state.PORT > 0 && state.PORT < 65536) {
                 console.log("Starting to connect");
-                
+
                 state.SOCKET = io(`http://localhost:${state.PORT}`);
-                
+
                 state.SOCKET.on("disconnect", () => {
                     console.log("Disconnected");
                 });
             }
             break;
         case GameHostActions.DISCONNECT_FROM_SERVER:
-            if(state.SOCKET){
+            if (state.SOCKET) {
                 // @ts-ignore
                 state.SOCKET.removeAllListeners();
                 state.SOCKET.disconnect();

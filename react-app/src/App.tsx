@@ -21,8 +21,14 @@ const App: React.FC = () => {
     // If for some reason something stupid happened
     if(localValues.LOCAL_SAVES && localValues.LOCAL_SAVES[""]){
       delete localValues.LOCAL_SAVES[""];
-      localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(localValues));
+    } else if(!localValues.LOCAL_SAVES){
+      localValues.LOCAL_SAVES = {};
     }
+    if(!localValues.SAVED_ROOMS){
+      localValues.SAVED_ROOMS = {};
+
+    }
+    localStorage.setItem('CALL_OF_CTHULHU', JSON.stringify(localValues));
     
   }
 

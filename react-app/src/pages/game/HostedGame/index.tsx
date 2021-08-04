@@ -54,8 +54,6 @@ const HostedGame: React.FC = () => {
     }
 
     useEffect(() => {
-        console.log(state.VERIFIED);
-        
         if (state.PLAYER_NAME !== "") {
             playerDispatch({ type: PlayerActions.SET_CHARACTER_INFO.PLAYER, value: state.PLAYER_NAME });
         }
