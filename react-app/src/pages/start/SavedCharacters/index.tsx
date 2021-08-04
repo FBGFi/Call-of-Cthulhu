@@ -41,6 +41,12 @@ const SavedCharacters: React.FC<SavedCharactersProps> = (props) => {
         }
     }
 
+    let characters = renderOptions();
+
+    if(characters.length === 0){
+        return <></>;
+    }
+
     return (
         <>
             <span>Select a character</span>
@@ -51,7 +57,7 @@ const SavedCharacters: React.FC<SavedCharactersProps> = (props) => {
                 setSelectedCharacter(e.target.value);
             }}>
                 <option value="None" style={{ display: 'none' }}></option>
-                {renderOptions()}
+                {characters}
             </select>
             {props.hostedGame === undefined || !props.hostedGame ?
                 <Link to={selectedCharacter ? `/local/game/${selectedCharacter}` : '/local'}>

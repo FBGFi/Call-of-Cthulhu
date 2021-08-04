@@ -36,6 +36,18 @@ button{
   cursor: pointer;
 }
 
+.button-black{
+  background-color: #000;
+  color: #fff;
+  padding: 5px 15px;
+  border: 0;
+  border: 2px solid var(--dark-gray);
+  font-size: 1.2em;
+  &:hover {
+    filter: invert(0.8);
+  }
+}
+
 
 input[type="checkbox"] {
   min-width: 20px;

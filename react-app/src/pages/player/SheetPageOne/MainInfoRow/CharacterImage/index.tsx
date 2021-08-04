@@ -14,13 +14,30 @@ const CharacterImage: React.FC = () => {
 
     const changeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         let reader = new FileReader();
+        console.log(window.localStorage.CALL_OF_CTHULHU.length);
         reader.onload = (frEvent) => {
             if (e.target.files) {
-                dispatch({ type: PlayerActions.SET_CHARACTER_INFO.IMAGE, value: {SRC: frEvent.target?.result as string, TITLE: e.target.files[0].name}})
+                let size = frEvent.target?.result as string;
+                // max size 300KB
+                if (size.length < 415000) {
+                    dispatch({ type: PlayerActions.SET_CHARACTER_INFO.IMAGE, value: { SRC: frEvent.target?.result as string, TITLE: e.target.files[0].name } })
+                } else {
+                    alert("Image size should not exceed 300KB");
+                    
+                    if(imageInputRef.current){
+                        imageInputRef.current.value = "";
+                    }
+                    
+                }
             }
         }
         if (e.target.files) {
-            reader.readAsDataURL(e.target.files[0]);
+            // This fails sometimes for some reason when pressing cancel
+            try {
+                reader.readAsDataURL(e.target.files[0]);
+            } catch (error) {
+                
+            }
         }
     }
 

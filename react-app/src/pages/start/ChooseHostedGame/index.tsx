@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { HostedGameActions } from '../../../actions';
 import InfoBox from '../../../components/InfoBox';
 import LoadingScreen from '../../../components/LoadingScreen';
@@ -10,6 +10,7 @@ import './ChooseHostedGame.css';
 const ChooseHostedGame: React.FC = () => {
     const { state, dispatch } = useContext(HostedGameContext);
     const [connectionSuccesful, isConnectionSuccessful] = useState(false);
+    const [maxCharsReached, isMaxCharsReached] = useState(true);
 
     const setSavedCharacterName = (id: string, type: 'set' | 'remove') => {
         if (id !== "None") {
@@ -26,9 +27,13 @@ const ChooseHostedGame: React.FC = () => {
     useEffect(() => {
         if (state.SOCKET) {
             state.SOCKET.once('player-verified', () => {
-                if (state.SOCKET && !state.VERIFIED) {
+                if(window.localStorage.CALL_OF_CTHULHU && window.localStorage.CALL_OF_CTHULHU.length > 5500000){
+                    window.alert('Maximum number of saved characters reached');
+                    dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST});
+                } else if (state.SOCKET && !state.VERIFIED) {
                     dispatch({ type: HostedGameActions.SET_VERIFIED });
-                    isConnectionSuccessful(true);
+                    isConnectionSuccessful(true);                    
+                    isMaxCharsReached(false);
                 }
             });
             state.SOCKET.on("connect_error", () => {
@@ -46,7 +51,7 @@ const ChooseHostedGame: React.FC = () => {
         }
     }, [state.SOCKET]);
 
-    if (connectionSuccesful) {
+    if (connectionSuccesful && !maxCharsReached) {
         return <Redirect to={'/hosted/game/' + state.PLAYER_ID} />
     }
 
@@ -54,7 +59,7 @@ const ChooseHostedGame: React.FC = () => {
         return (<LoadingScreen />);
     }
     return (
-        <InfoBox title='Call of Cthulhu' className='start-container'>
+        <InfoBox title='Connect to a Game' className='start-container'>
             <div className='ChooseHostedGame'>
                 <span>Room address and port</span>
                 <input defaultValue={state.SOCKET_ADDRESS} onBlur={(e) => setSessionInformation(e, 'SET_SOCKET_ADDRESS')} type="text" />
@@ -64,6 +69,9 @@ const ChooseHostedGame: React.FC = () => {
                 <input defaultValue={state.PLAYER_NAME} onBlur={(e) => setSessionInformation(e, 'SET_PLAYER_NAME')} type="text" />
                 <SavedCharacters onChange={setSavedCharacterName} hostedGame={true} />
                 <button onClick={() => { dispatch({ type: HostedGameActions.CONNECT_TO_HOST }) }}>Join Game</button>
+                <Link to='/'>
+                    <button>Back</button>
+                </Link>
             </div >
         </InfoBox>
     );

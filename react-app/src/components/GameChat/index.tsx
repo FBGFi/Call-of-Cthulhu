@@ -29,8 +29,7 @@ const GameChat: React.FC<GameChatProps> = (props) => {
             <div className="header">
                 <h2>Chat</h2>
             </div>
-            <div onChange={() => {console.log("asd");
-            }} ref={chatRef} className="chat">
+            <div ref={chatRef} className="chat">
                 {props.messages.map(message => <ChatMessage key={message.timeStamp + Math.floor(Math.random() * 10000)} message={message.message} timeStamp={message.timeStamp} type={message.type} sender={message.sender} />)}
             </div>
             <div className="input-container">

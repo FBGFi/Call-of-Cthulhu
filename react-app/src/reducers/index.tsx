@@ -3,15 +3,16 @@ import actions from '../actions';
 
 type TAction = {
     type: string;
-    value: any;
+    value?: any;
 }
 
 type TState = {
-    CLIENT: "HOST" | "PLAYER"
+    CLIENT: "HOST" | "PLAYER",
 }
 
 const InitialState: TState = {
-    CLIENT: "PLAYER"
+    CLIENT: "PLAYER",
+
 }
 
 function appReducer(state: TState, action: TAction): TState {

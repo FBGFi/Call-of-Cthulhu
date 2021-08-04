@@ -1,5 +1,5 @@
 .HostChat {
-  flex: 1;
+  flex: 3;
   display: flex;
   flex-direction: column;
   .chat {
@@ -10,9 +10,14 @@
     .chat-messages {
       height: 30vh;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 10px;
       & > * {
         margin-bottom: 10px;
+        width: 100%;
+      }
+      p{
+        overflow-wrap: break-word;
       }
     }
 

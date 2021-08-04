@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState, useRef,} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { GameHostContext } from '../../../../reducers/GameHostReducer';
 import { GameHostActions } from '../../../../actions';
 import InfoBox from '../../../../components/InfoBox';
@@ -91,7 +91,7 @@ const HostPageSettings: React.FC = () => {
     }
 
     return (
-        <InfoBox title='Call of Cthulhu' className="HostPageSettings">
+        <InfoBox title='Host a Game' className="HostPageSettings">
             <div className="inner-container">
                 <label htmlFor="port">Port Number:</label>
                 <input
@@ -104,6 +104,9 @@ const HostPageSettings: React.FC = () => {
 
                 <button onClick={() => dispatch({ type: GameHostActions.SET_WEBSOCKET })}>Start</button>
                 {getSavedRooms()}
+                <Link to='/'>
+                    <button>Back</button>
+                </Link>
             </div>
         </InfoBox>
     );

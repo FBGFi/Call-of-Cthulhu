@@ -21,7 +21,7 @@ const StartPage: React.FC = () => {
             </Route>
 
             <Route path="/local" exact>
-                <InfoBox title='Call of Cthulhu' className='start-container'>
+                <InfoBox title='Local Game' className='start-container'>
                     <ChooseLocalPlayer />
                 </InfoBox>
             </Route>

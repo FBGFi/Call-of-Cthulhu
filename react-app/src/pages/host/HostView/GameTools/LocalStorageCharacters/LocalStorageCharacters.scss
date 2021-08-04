@@ -1,0 +1,42 @@
+.LocalStorageCharacters {
+  flex: 2;
+  .title-container {
+    position: relative;
+    span {
+      color: red;
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      animation: warningPump infinite 2s alternate;
+    }
+  }
+  .saved-characters {
+    padding: 10px;
+    overflow-x: auto;
+    height: calc(30vh + 42px);
+    .SavedCharacter {
+      margin-bottom: 10px;
+      display: flex;
+      span {
+        flex: 1;
+        margin-right: 10px;
+      }
+      button {
+        margin: auto 0;
+        font-size: 1em;
+      }
+    }
+  }
+}
+
+@keyframes warningPump {
+  0% {
+    color: red;
+  }
+  100% {
+    color: green;
+  }
+}

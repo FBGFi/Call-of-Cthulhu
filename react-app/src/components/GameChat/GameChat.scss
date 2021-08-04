@@ -13,6 +13,9 @@
     height: 60vh;
     max-height: 400px;
     overflow-y: auto;
+    p{
+      overflow-wrap: break-word;
+    }
   }
 
   .header {
