@@ -8,6 +8,7 @@ const HostedGameActions = {
     SET_PLAYER_ID: 'SET_PLAYER_ID',
     SEND_CHAT_MESSAGE: 'SEND_CHAT_MESSAGE',
     DISCONNECT_FROM_HOST: 'DISCONNECT_FROM_HOST',
+    SET_VERIFIED: 'SET_VERIFIED',
 }
 
 export default HostedGameActions;

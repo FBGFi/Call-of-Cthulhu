@@ -54,13 +54,18 @@ const HostedGame: React.FC = () => {
     }
 
     useEffect(() => {
+        console.log(state.VERIFIED);
+        
         if (state.PLAYER_NAME !== "") {
             playerDispatch({ type: PlayerActions.SET_CHARACTER_INFO.PLAYER, value: state.PLAYER_NAME });
         }
-        if (state.PLAYER_NAME !== "" && state.SOCKET) {
-            state.SOCKET.emit('connect-player', { ...playerState, ...weaponsAndGearState, ...investigatorSkillsState, ...backstoryState, ...fellowInvestigatorsState  });
+        if (state.SOCKET && state.VERIFIED) {
+            console.log("Player was verified");
+            
+            dispatch({ type: HostedGameActions.SET_VERIFIED });
+            state.SOCKET.emit('connect-player', { ...playerState, ...weaponsAndGearState, ...investigatorSkillsState, ...backstoryState, ...fellowInvestigatorsState });
         }
-    }, []);
+    }, [state.VERIFIED]);
 
     useEffect(() => {
         dispatch({ type: HostedGameActions.SEND_PLAYER_DATA, value: { ...playerState, ...weaponsAndGearState, ...investigatorSkillsState, ...backstoryState, ...fellowInvestigatorsState } })
@@ -69,20 +74,24 @@ const HostedGame: React.FC = () => {
 
     useEffect(() => {
         if (state.SOCKET) {
+            state.SOCKET.once('player-verified', () => {
+                console.log('Verified');
+                dispatch({ type: HostedGameActions.SET_VERIFIED });
+            });
             state.SOCKET.on('new-messages', data => {
                 dispatch({ type: HostedGameActions.SET_CHAT_MESSAGES, value: data });
             });
             state.SOCKET.on('player-was-kicked', () => {
-                
-                if(window.confirm("You were kicked by the Host!")){
-                    dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST});
+
+                if (window.confirm("You were kicked by the Host!")) {
+                    dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST });
                     window.location.href = '/#';
                 }
             });
         } else {
             dispatch({ type: HostedGameActions.CONNECT_TO_HOST })
         }
-    }, [state.SOCKET])
+    }, [state.SOCKET]);
 
     return (
         <div className="HostedGame">

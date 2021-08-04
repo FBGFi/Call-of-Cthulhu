@@ -3,9 +3,11 @@ import InfoBox from '../../../../../components/InfoBox';
 import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import { PlayerActions } from '../../../../../actions';
 import './CharacterInfo.css';
+import { AppContext } from '../../../../../reducers';
 
 const CharacterInfo: React.FC = () => {
     const { state, dispatch } = useContext(PlayerContext);
+    const appState = useContext(AppContext).state;
 
     const setValueForReducer = (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>, field: string) => {
         if (Object.keys(PlayerActions.SET_CHARACTER_INFO).includes(field)) {
@@ -18,24 +20,47 @@ const CharacterInfo: React.FC = () => {
             <form>
                 <div className="form-row">
                     <span>Name</span>
-                    <input onBlur={(e) => setValueForReducer(e, "NAME")} defaultValue={state.CHARACTER_INFO.NAME} type="text" />
+                    <input 
+                        onChange={() => {}}
+                        onBlur={(e) => setValueForReducer(e, "NAME")} 
+                        defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.NAME : undefined} 
+                        value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.NAME : undefined} 
+                        type="text" />
                 </div>
                 <div className="form-row">
                     <span>Player</span>
-                    <input onBlur={(e) => setValueForReducer(e, "PLAYER")} defaultValue={state.CHARACTER_INFO.PLAYER} type="text" />
+                    <input 
+                        onChange={() => {}}
+                        onBlur={(e) => setValueForReducer(e, "PLAYER")} 
+                        defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.PLAYER : undefined} 
+                        value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.PLAYER : undefined} 
+                        type="text" />
                 </div>
                 <div className="form-row">
                     <span>Occupatice</span>
-                    <input onBlur={(e) => setValueForReducer(e, "OCCUPATICE")} defaultValue={state.CHARACTER_INFO.OCCUPATICE} type="text" />
+                    <input 
+                        onChange={() => {}}
+                        onBlur={(e) => setValueForReducer(e, "OCCUPATICE")} 
+                        defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.OCCUPATICE : undefined} 
+                        value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.OCCUPATICE : undefined} 
+                        type="text" />
                 </div>
                 <div className="form-row split-row">
                     <div className="form-column">
                         <span>Age</span>
-                        <input onBlur={(e) => setValueForReducer(e, "AGE")} defaultValue={state.CHARACTER_INFO.AGE} type="number" />
+                        <input 
+                            onChange={() => {}}
+                            onBlur={(e) => setValueForReducer(e, "AGE")} 
+                            defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.AGE : undefined} 
+                            value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.AGE : undefined} 
+                            type="number" />
                     </div>
                     <div className="form-column">
                         <span>Sex</span>
-                        <select onChange={(e) => setValueForReducer(e, "SEX")} defaultValue={state.CHARACTER_INFO.SEX}>
+                        <select 
+                            onChange={(e) => setValueForReducer(e, "SEX")} 
+                            value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.SEX : undefined} 
+                            defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.SEX : undefined}>
                             <option value="NONE" style={{ display: "none" }}></option>
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
@@ -45,11 +70,19 @@ const CharacterInfo: React.FC = () => {
                 </div>
                 <div className="form-row">
                     <span>Residence</span>
-                    <input onBlur={(e) => setValueForReducer(e, "RESIDENCE")} defaultValue={state.CHARACTER_INFO.RESIDENCE} type="text" />
+                    <input 
+                        onBlur={(e) => setValueForReducer(e, "RESIDENCE")} 
+                        defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.RESIDENCE : undefined} 
+                        value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.RESIDENCE : undefined} 
+                        type="text" />
                 </div>
                 <div className="form-row">
                     <span>Birthplace</span>
-                    <input onBlur={(e) => setValueForReducer(e, "BIRTHPLACE")} defaultValue={state.CHARACTER_INFO.BIRTHPLACE} type="text" />
+                    <input 
+                        onBlur={(e) => setValueForReducer(e, "BIRTHPLACE")} 
+                        defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.BIRTHPLACE : undefined} 
+                        value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.BIRTHPLACE : undefined} 
+                        type="text" />
                 </div>
             </form>
         </InfoBox>

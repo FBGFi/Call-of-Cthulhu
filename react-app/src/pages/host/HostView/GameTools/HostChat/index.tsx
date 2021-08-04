@@ -58,7 +58,7 @@ const HostChat: React.FC = () => {
             </div>
             <div className="chat">
                 <div ref={chatMessagesRef} className="chat-messages">
-                    {state.CHAT_MESSAGES.map(message => <ChatMessage key={message.timeStamp} message={message.message} timeStamp={message.timeStamp} sender={message.sender} type={message.type} />)}
+                    {state.CHAT_MESSAGES.map(message => <ChatMessage key={message.timeStamp + Math.floor(Math.random() * 10000)} message={message.message} timeStamp={message.timeStamp} sender={message.sender} type={message.type} />)}
                 </div>
                 <div className="send-message-container">
                     <input ref={inputRef} type="text" />

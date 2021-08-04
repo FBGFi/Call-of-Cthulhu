@@ -1,11 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { WeaponsAndGearActions } from '../../../../../actions';
 import InfoBox from '../../../../../components/InfoBox';
+import { AppContext } from '../../../../../reducers';
 import { WeaponsAndGearContext } from '../../../../../reducers/WeaponsAndGearReducer';
 import './GearAndPossessions.css';
 
+type WeaponInputProps = {
+    weapon: 'WEAPON1' | 'WEAPON2' | 'WEAPON3' | 'WEAPON4' | 'WEAPON5';
+    onBlur: (e: React.FocusEvent<HTMLInputElement>, weapon: string) => void;
+    value: string | undefined;
+}
+
+const WeaponInput: React.FC<WeaponInputProps> = (props) => {
+    const [typing, isTyping] = useState(false);
+    return (
+        <input
+            className={props.value}
+            key={props.value}
+            onFocus={() => isTyping(true)}
+            onBlur={(e) => {
+                props.onBlur(e, props.weapon);
+                isTyping(false);
+            }}
+            value={props.value}
+            type="text"
+            size={1} />);
+}
+
 const GearAndPossessions: React.FC = () => {
     const { state, dispatch } = useContext(WeaponsAndGearContext);
+    const appState = useContext(AppContext).state;
 
     const setValueForReducer = (e: React.FocusEvent<HTMLInputElement>, gearKey: string) => {
         // @ts-ignore
@@ -19,7 +43,9 @@ const GearAndPossessions: React.FC = () => {
             key={gear}
             className={gear}
             // @ts-ignore
-            defaultValue={state.GEAR_AND_POSSESSIONS[gear]}
+            defaultValue={appState.CLIENT === 'PLAYER' ? state.GEAR_AND_POSSESSIONS[gear] : undefined}
+            // @ts-ignore
+            value={appState.CLIENT === 'HOST' ? state.GEAR_AND_POSSESSIONS[gear] : undefined}
             onBlur={(e) => setValueForReducer(e, gear)}
             type="text"
             size={1} />);
@@ -34,7 +60,17 @@ const GearAndPossessions: React.FC = () => {
             // @ts-ignore
             if (state.WEAPONS[weapon].NAME !== "") {
                 // @ts-ignore
-                inputs.push(<input className={weapon} key={weapon} defaultValue={state.WEAPONS[weapon].NAME} type="text" size={1} />);
+                inputs.push(
+                    <WeaponInput
+                        onBlur={(e, weapon) => {
+                            // @ts-ignore
+                            dispatch({ type: WeaponsAndGearActions.SET_WEAPON[weapon].NAME, value: e.target.value });
+                        }}
+                        // @ts-ignore
+                        value={state.WEAPONS[weapon].NAME}
+                        // @ts-ignore
+                        weapon={weapon} />
+                );
             }
         }
 

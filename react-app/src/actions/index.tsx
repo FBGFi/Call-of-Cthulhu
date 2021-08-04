@@ -6,12 +6,12 @@ import BackstoryActions from "./BackstoryActions";
 import GameHostActions from "./GameHostActions";
 import HostedGameActions from "./HostedGameActions";
 
-const actions = {
+const AppActions = {
     SET_CLIENT: "CHANGE_CLIENT_TO",
 };
 
 export {
-    actions,
+    AppActions,
     PlayerActions,
     InvestigatorSkillsActions,
     WeaponsAndGearActions,
@@ -20,4 +20,4 @@ export {
     GameHostActions,
     HostedGameActions
 }
-export default actions;
+export default AppActions;

@@ -27,7 +27,7 @@ const HPAttributes: React.FC = () => {
     }
 
     const setCurrentValue = (value: number) => {
-        dispatch({ type: PlayerActions.SET_SECONDARY_STATS.HP.SET_HP, value: value});
+        dispatch({ type: PlayerActions.SET_SECONDARY_STATS.HP.SET_HP, value: value });
     }
 
     return (
@@ -38,9 +38,19 @@ const HPAttributes: React.FC = () => {
             <div className="hp-stats">
                 <div className="hp-header">
                     <span>Dying</span>
-                    <input type="checkbox" />
+                    <input
+                        type="checkbox"
+                        onClick={() => {
+                            dispatch({ type: PlayerActions.SET_SECONDARY_STATS.HP.DYING, value: !state.SECONDARY_STATS.HP.DYING })
+                        }}
+                        checked={state.SECONDARY_STATS.HP.DYING} />
                     <span>Unconscious</span>
-                    <input type="checkbox" />
+                    <input
+                        type="checkbox"
+                        onClick={() => {
+                            dispatch({ type: PlayerActions.SET_SECONDARY_STATS.HP.UNCONSCIOUS, value: !state.SECONDARY_STATS.HP.UNCONSCIOUS })
+                        }}
+                        checked={state.SECONDARY_STATS.HP.UNCONSCIOUS} />
                 </div>
                 <table>
                     <tbody>

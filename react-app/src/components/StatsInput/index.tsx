@@ -5,6 +5,7 @@ type StatsInputProps = {
     size: "small" | "big";
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
     defaultValue?: number | undefined;
+    value?: number | undefined;
     disabled?: boolean;
 }
 
@@ -30,10 +31,22 @@ const StatsInput: React.FC<StatsInputProps> = (props: StatsInputProps) => {
 
     return (
         <div className={props.disabled ? `StatsInput ${props.size} disabled` : 'StatsInput ' + props.size}>
-            <input disabled={props.disabled} defaultValue={props.defaultValue} onBlur={props.onBlur} onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
+            <input value={props.value} disabled={props.disabled} defaultValue={props.defaultValue} onBlur={props.onBlur} onChange={() => setInputs()} ref={mainInputRef} type="number" className="stat-input main-input" />
             <div className="half-and-fifth">
-                <input defaultValue={props.defaultValue ? Math.floor(props.defaultValue / 2) : undefined} ref={halfInputRef} type="number" className="stat-input half-input" readOnly />
-                <input defaultValue={props.defaultValue ? Math.floor(props.defaultValue / 5) : undefined} ref={fifthInputRef} type="number" className="stat-input fifth-input" readOnly />
+                <input 
+                    value={props.value ? Math.floor(props.value / 2) : undefined}
+                    defaultValue={props.defaultValue ? Math.floor(props.defaultValue / 2) : undefined} 
+                    ref={halfInputRef} 
+                    type="number" 
+                    className="stat-input half-input" 
+                    readOnly />
+                <input 
+                    value={props.value ? Math.floor(props.value / 5) : undefined}
+                    defaultValue={props.defaultValue ? Math.floor(props.defaultValue / 5) : undefined} 
+                    ref={fifthInputRef} 
+                    type="number" 
+                    className="stat-input fifth-input" 
+                    readOnly />
             </div>
         </div>
     );

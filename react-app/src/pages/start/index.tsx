@@ -27,9 +27,7 @@ const StartPage: React.FC = () => {
             </Route>
             <HostedGameContext.Provider value={{ state, dispatch }}>
                 <Route path="/hosted" exact>
-                    <InfoBox title='Call of Cthulhu' className='start-container'>
-                        <ChooseHostedGame />
-                    </InfoBox>
+                    <ChooseHostedGame />
                 </Route>
                 <Route path="/hosted/game/:playerId" component={HostedGame} />
             </ HostedGameContext.Provider>

@@ -1,14 +1,14 @@
 .StartPage:not([class*="/game"]) {
-  background-image: url(../../assets/images/paper_small.jpg);
   margin: auto;
 
-  &>.InfoBox {
+  & > .InfoBox {
+    background-image: url(../../assets/images/paper_small.jpg);
     & > *:last-child {
       text-align: center;
       display: flex;
       flex-direction: column;
       padding: 30px;
-      
+
       *:not(:last-child) {
         margin-bottom: 10px;
       }
@@ -31,19 +31,16 @@
     }
 
     select {
-        background: none;
-        border: none;
-        border-bottom: 1px solid black;
-        text-align: center;
-        font-size: 1.2em;
-    
-        &:focus {
-          box-shadow: none;
-        }
+      background: none;
+      border: none;
+      border-bottom: 1px solid black;
+      text-align: center;
+      font-size: 1.2em;
+      text-align-last: center;
+
+      &:focus {
+        box-shadow: none;
       }
-    
-      select {
-        text-align-last: center;
-      }
+    }
   }
 }

@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { PlayerActions } from '../../../../../actions';
 import { formatNumberToLength } from '../../../../../constants/constants';
 import { TableCellData } from '../../../../../constants/types';
+import { AppContext } from '../../../../../reducers';
 import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import StatButtonRow from '../StatButtonRow';
 import './MPAttributes.css';
 
 const MPAttributes: React.FC = () => {
     const { state, dispatch } = useContext(PlayerContext);
+    const appState = useContext(AppContext).state;
 
     const tableCells: TableCellData[] = new Array(25);
 
@@ -38,7 +40,12 @@ const MPAttributes: React.FC = () => {
         <>
             <div className="mp-header">
                 <span>Max MP</span>
-                <input onBlur={setMaxMP} defaultValue={state.SECONDARY_STATS.MP.INITIAL_VALUE ? state.SECONDARY_STATS.MP.INITIAL_VALUE + state.SECONDARY_STATS.MP.ADDED_VALUE: undefined } type="number" placeholder="Max MP" />
+                <input 
+                    onBlur={setMaxMP} 
+                    defaultValue={appState.CLIENT === 'PLAYER' && state.SECONDARY_STATS.MP.MAX_MP ? state.SECONDARY_STATS.MP.MAX_MP: undefined } 
+                    value={appState.CLIENT === 'HOST' && state.SECONDARY_STATS.MP.MAX_MP ? state.SECONDARY_STATS.MP.MAX_MP: undefined}
+                    type="number" 
+                    placeholder="Max MP" />
             </div>
             <div className='MPAttributes'>
                 <div className="mp-stats">

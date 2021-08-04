@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import StatsInput from '../../../../../components/StatsInput';
 import { TInvestigatorSkill } from '../../../../../constants/types';
+import { AppContext } from '../../../../../reducers';
 import { InvestigatorSkillsContext } from '../../../../../reducers/InvestigatorSkillsReducer';
 import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import './InvestigatorSkill.css';
@@ -14,6 +15,7 @@ type InvestigatorSkillProps = {
 
 const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
     const { state, dispatch } = useContext(InvestigatorSkillsContext);
+    const appState = useContext(AppContext).state;
     const playerState = useContext(PlayerContext);
 
     const getDefaultValue = (): number | undefined => {   
@@ -70,13 +72,21 @@ const InvestigatorSkill: React.FC<InvestigatorSkillProps> = (props) => {
             } onClick={setChecked} onChange={() => {}} type="checkbox" />}
             <div className="title-container">
                 {props.title ? <span>{props.title}</span> : null}
-                {props.customText ? <input defaultValue={
+                {props.customText ? <input 
+                defaultValue={
                     // @ts-ignore
-                    state[props.skill].CUSTOM_TEXT
-                } onBlur={setCustomText} type="text" /> : null}
+                    appState.CLIENT === 'PLAYER' ? state[props.skill].CUSTOM_TEXT : undefined
+                } 
+                value={
+                    // @ts-ignore
+                    appState.CLIENT === 'HOST' ? state[props.skill].CUSTOM_TEXT : undefined
+                } 
+                onBlur={setCustomText} 
+                type="text" /> : null}
             </div>
             <StatsInput 
-                defaultValue={getDefaultValue()} 
+                defaultValue={appState.CLIENT === 'PLAYER' ? getDefaultValue() : undefined} 
+                value={appState.CLIENT === 'HOST' ? getDefaultValue() : undefined}
                 size="small"
                 onBlur={setValue}
                 disabled={

@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { PlayerActions } from '../../../../../actions';
 import InfoBox from '../../../../../components/InfoBox';
 import StatsInput from '../../../../../components/StatsInput';
+import { AppContext } from '../../../../../reducers';
 import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import './Combat.css';
 const Combat: React.FC = () => {
     const {state, dispatch} = useContext(PlayerContext);
+    const appState = useContext(AppContext).state;
 
     const setDmgOrBuild = (e: React.FocusEvent<HTMLInputElement>, field: "DMG_BONUS" | "BUILD") => {
         dispatch({ type: PlayerActions.SET_CHARACTERISTICS[field], value: e.target.value });
@@ -19,18 +21,27 @@ const Combat: React.FC = () => {
         <InfoBox title="Combat" className='Combat'>
             <div className="row">
                 <h3>Damage<br />Bonus</h3>
-                <input onBlur={(e) => setDmgOrBuild(e, "DMG_BONUS")} defaultValue={state.CHARACTERISTICS.DMG_BONUS} type="text" />
+                <input 
+                    onBlur={(e) => setDmgOrBuild(e, "DMG_BONUS")} 
+                    value={appState.CLIENT === "HOST" ? state.CHARACTERISTICS.DMG_BONUS : undefined} 
+                    defaultValue={appState.CLIENT === "HOST" ? undefined : state.CHARACTERISTICS.DMG_BONUS} 
+                    type="text" />
             </div>
             <div className="row">
                 <h3>Build</h3>
-                <input onBlur={(e) => setDmgOrBuild(e, "BUILD")} defaultValue={state.CHARACTERISTICS.BUILD} type="text" />
+                <input 
+                    onBlur={(e) => setDmgOrBuild(e, "BUILD")} 
+                    value={appState.CLIENT === "HOST" ? state.CHARACTERISTICS.BUILD : undefined} 
+                    defaultValue={appState.CLIENT === "HOST" ? undefined : state.CHARACTERISTICS.BUILD} 
+                    type="text" />
             </div>
             <div className="row">
                 <h3>Dodge</h3>
                 <StatsInput 
                     size="big" 
                     onBlur={(e) => setDodge(e)} 
-                    defaultValue={state.CHARACTERISTICS.DODGE.INITIAL_VALUE ? state.CHARACTERISTICS.DODGE.INITIAL_VALUE + state.CHARACTERISTICS.DODGE.ADDED_VALUE : undefined}/>
+                    value={appState.CLIENT === "HOST" && state.CHARACTERISTICS.DODGE.INITIAL_VALUE ? state.CHARACTERISTICS.DODGE.INITIAL_VALUE + state.CHARACTERISTICS.DODGE.ADDED_VALUE : undefined} 
+                    defaultValue={appState.CLIENT === "PLAYER" && state.CHARACTERISTICS.DODGE.INITIAL_VALUE ? state.CHARACTERISTICS.DODGE.INITIAL_VALUE + state.CHARACTERISTICS.DODGE.ADDED_VALUE : undefined}/>
             </div>
         </InfoBox>
     );

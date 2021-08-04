@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AppActions from '../../../actions';
+import { AppContext } from '../../../reducers';
 import './ChooseGameType.css';
 
 const ChooseGameType: React.FC = () => {
-
+    const { state, dispatch } = useContext(AppContext);
     return (
         <div className='ChooseGameType'>
             <Link to='/local'>
-                <button>Local Game</button>
+                <button onClick={() => dispatch({type: AppActions.SET_CLIENT, value: 'PLAYER'})}>Local Game</button>
             </Link>
             <Link to='/hosted'>
-                <button>Join a Game</button>
+                <button onClick={() => dispatch({type: AppActions.SET_CLIENT, value: 'PLAYER'})}>Join a Game</button>
             </Link>
             <Link to='/host'>
-                <button>Host a Game</button>
+                <button onClick={() => dispatch({type: AppActions.SET_CLIENT, value: 'HOST'})}>Host a Game</button>
             </Link>
         </div>
     );

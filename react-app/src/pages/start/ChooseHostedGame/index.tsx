@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { HostedGameActions } from '../../../actions';
+import InfoBox from '../../../components/InfoBox';
 import LoadingScreen from '../../../components/LoadingScreen';
 import { HostedGameContext } from '../../../reducers/HostedGameReducer';
 import SavedCharacters from '../SavedCharacters';
@@ -23,40 +24,48 @@ const ChooseHostedGame: React.FC = () => {
     }
 
     useEffect(() => {
-        if(state.SOCKET){
-            state.SOCKET.on('player-verified', () => {
-                isConnectionSuccessful(true);
+        if (state.SOCKET) {
+            state.SOCKET.once('player-verified', () => {
+                if (state.SOCKET && !state.VERIFIED) {
+                    dispatch({ type: HostedGameActions.SET_VERIFIED });
+                    isConnectionSuccessful(true);
+                }
             });
             state.SOCKET.on("connect_error", () => {
                 window.alert("Error connecting to the host");
-                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST});
-            });       
+                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST });
+            });
             state.SOCKET.on('incorrect-room-code', () => {
                 window.alert('Incorrect room code!');
-                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST});
+                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST });
+            });
+            state.SOCKET.on('room-not-started', () => {
+                window.alert('Room not started yet!');
+                dispatch({ type: HostedGameActions.DISCONNECT_FROM_HOST });
             });
         }
-    },[state.SOCKET]);
+    }, [state.SOCKET]);
 
-    if(connectionSuccesful){
+    if (connectionSuccesful) {
         return <Redirect to={'/hosted/game/' + state.PLAYER_ID} />
     }
 
-    if(state.SOCKET){
-        return(<LoadingScreen />);
+    if (state.SOCKET) {
+        return (<LoadingScreen />);
     }
-
     return (
-        <div className='ChooseHostedGame'>
-            <span>Room address and port</span>
-            <input defaultValue={state.SOCKET_ADDRESS} onBlur={(e) => setSessionInformation(e, 'SET_SOCKET_ADDRESS')} type="text" />
-            <span>Room code</span>
-            <input defaultValue={state.ROOM_CODE} onBlur={(e) => setSessionInformation(e, 'SET_ROOM_CODE')} type="text" />
-            <span>Player Name</span>
-            <input defaultValue={state.PLAYER_NAME} onBlur={(e) => setSessionInformation(e, 'SET_PLAYER_NAME')} type="text" />
-            <SavedCharacters onChange={setSavedCharacterName} hostedGame={true} />
-            <button onClick={() => { dispatch({ type: HostedGameActions.CONNECT_TO_HOST }) }}>Join Game</button>
-        </div >
+        <InfoBox title='Call of Cthulhu' className='start-container'>
+            <div className='ChooseHostedGame'>
+                <span>Room address and port</span>
+                <input defaultValue={state.SOCKET_ADDRESS} onBlur={(e) => setSessionInformation(e, 'SET_SOCKET_ADDRESS')} type="text" />
+                <span>Room code</span>
+                <input defaultValue={state.ROOM_CODE} onBlur={(e) => setSessionInformation(e, 'SET_ROOM_CODE')} type="text" />
+                <span>Player Name</span>
+                <input defaultValue={state.PLAYER_NAME} onBlur={(e) => setSessionInformation(e, 'SET_PLAYER_NAME')} type="text" />
+                <SavedCharacters onChange={setSavedCharacterName} hostedGame={true} />
+                <button onClick={() => { dispatch({ type: HostedGameActions.CONNECT_TO_HOST }) }}>Join Game</button>
+            </div >
+        </InfoBox>
     );
 }
 

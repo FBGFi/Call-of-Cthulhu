@@ -13,6 +13,13 @@ type TConnectedPlayers = {
     [socketId: string]: any
 };
 
+type TMessage = {
+    timeStamp: number,
+    message: string,
+    sender: string,
+    type: 'roll' | 'alert' | 'message'
+}
+
 const connectedPlayers: TConnectedPlayers = {};
 
 let hostId: string;
@@ -21,21 +28,24 @@ let roomCode: string;
 io.on('connection', socket => {
 
     socket.on('connect-host', (room) => {
-        console.log('Host has connected');
+        if (!hostId) {
+            console.log('Host has connected');
 
-        hostId = socket.id;
-        roomCode = room;
+            hostId = socket.id;
+            roomCode = room;
 
-        socket.emit('new-player-message', {
-            timeStamp: Date.now(),
-            message: 'Host has connected to the room',
-            sender: 'SERVER',
-            type: 'roll'
-        });
+            let message: TMessage = {
+                timeStamp: Date.now(),
+                message: 'Host has connected to the room',
+                sender: 'SERVER',
+                type: 'roll'
+            }
+            socket.emit('new-player-message', message);
 
-        for (const socketId in connectedPlayers) {
-            if (connectedPlayers[socketId]) {
-                socket.emit('player-connected', connectedPlayers[socketId]);
+            for (const socketId in connectedPlayers) {
+                if (connectedPlayers[socketId]) {
+                    socket.emit('player-connected', connectedPlayers[socketId]);
+                }
             }
         }
     });
@@ -44,20 +54,19 @@ io.on('connection', socket => {
 
         if (socket.id === hostId) {
             console.log('Host has disconnected');
+            hostId = undefined;
             io.emit('host-disconnected');
             socket.disconnect();
 
-        } else {
+        } else if (connectedPlayers[socket.id]) {
+            console.log('Player disconnected');
+            io.to(hostId).emit('new-player-message', {
+                timeStamp: Date.now(),
+                message: (connectedPlayers[socket.id].CHARACTER_INFO?.PLAYER ? connectedPlayers[socket.id].CHARACTER_INFO.PLAYER : 'Unnamed Player') + ' has disconnected',
+                sender: 'SERVER',
+                type: 'alert'
+            });
             io.to(hostId).emit('player-disconnected', connectedPlayers[socket.id]);
-            if (connectedPlayers[socket.id]) {
-                console.log('Player disconnected');
-                io.to(hostId).emit('new-player-message', {
-                    timeStamp: Date.now(),
-                    message: (connectedPlayers[socket.id].CHARACTER_INFO?.PLAYER ? connectedPlayers[socket.id].CHARACTER_INFO.PLAYER : 'Unnamed Player') + ' has disconnected',
-                    sender: 'SERVER',
-                    type: 'alert'
-                });
-            }
             delete connectedPlayers[socket.id];
         }
         socket.disconnect();
@@ -68,8 +77,11 @@ io.on('connection', socket => {
     socket.on('verify-player', (data) => {
         if (!connectedPlayers[socket.id] && data && data === roomCode) {
             socket.emit('player-verified');
-        } else if (!data || data !== roomCode) {
+        } else if (roomCode && (!data || data !== roomCode)) {
             socket.emit('incorrect-room-code');
+            socket.disconnect();
+        } else {
+            socket.emit('room-not-started');
             socket.disconnect();
         }
 
@@ -100,10 +112,9 @@ io.on('connection', socket => {
     socket.on('kick-player', (characterId) => {
         for (const id in connectedPlayers) {
             if (connectedPlayers[id] && connectedPlayers[id].CHARACTER_ID === characterId) {
-                console.log(characterId);
-                
                 delete connectedPlayers[id];
                 io.to(id).emit('player-was-kicked');
+                io.to(hostId).emit('player-disconnected', connectedPlayers[socket.id]);
                 io.sockets.sockets.delete(id);
             }
         }

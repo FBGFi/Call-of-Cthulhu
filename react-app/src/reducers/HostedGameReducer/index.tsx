@@ -3,6 +3,7 @@ import { HostedGameActions } from '../../actions';
 import { Socket, io } from 'socket.io-client';
 import { TChatMessage } from '../../components/ChatMessage';
 import md5 from 'md5';
+import { getCookieValue } from '../../constants/constants';
 
 type TAction = {
     type: string;
@@ -15,25 +16,7 @@ type THostedGameState = {
     ROOM_CODE: string;
     PLAYER_ID: string;
     PLAYER_NAME: string;
-}
-
-const getCookieValue = (name: string): string => {
-    let cookies = document.cookie.split('; ');
-    let splitCookie: string[];
-    if (cookies.length > 1) {
-        for (let cookie of cookies) {
-            splitCookie = cookie.split(name + '=');
-            if (splitCookie.length > 1) {
-                return splitCookie[1];
-            }
-        }
-    } else {
-        cookies = document.cookie.split(name + '=');
-        if (cookies.length === 2) {
-            return cookies[1];
-        }
-    }
-    return "";
+    VERIFIED: boolean;
 }
 
 const InitialHostedGameState: THostedGameState = {
@@ -42,7 +25,8 @@ const InitialHostedGameState: THostedGameState = {
     ROOM_CODE: getCookieValue('CALL_OF_CTHULHU_RECENT_HOST_ROOM_CODE'),
     PLAYER_ID: getCookieValue('CALL_OF_CTHULHU_RECENT_PLAYER_ID'),
     PLAYER_NAME: getCookieValue('CALL_OF_CTHULHU_RECENT_PLAYER_NAME'),
-    CHAT_MESSAGES: []
+    CHAT_MESSAGES: [],
+    VERIFIED: false
 }
 
 const changeSavedCharacterData = (id: string, playerName: string) => {
@@ -72,18 +56,18 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
     switch (action.type) {
         case HostedGameActions.SET_ROOM_CODE:
             state.ROOM_CODE = action.value;
-            document.cookie = `CALL_OF_CTHULHU_RECENT_HOST_ROOM_CODE=${action.value}; path=/hosted`;
+            document.cookie = `CALL_OF_CTHULHU_RECENT_HOST_ROOM_CODE=${action.value} path=/hosted`;
             break;
         case HostedGameActions.SET_PLAYER_ID:
             state.PLAYER_ID = action.value;
-            document.cookie = `CALL_OF_CTHULHU_RECENT_PLAYER_ID=${action.value}; path=/hosted`;
+            document.cookie = `CALL_OF_CTHULHU_RECENT_PLAYER_ID=${action.value} path=/hosted`;
             if (state.PLAYER_NAME !== "") {
                 changeSavedCharacterData(action.value, state.PLAYER_NAME);
             }
             break;
         case HostedGameActions.SET_PLAYER_NAME:
             state.PLAYER_NAME = action.value;
-            document.cookie = `CALL_OF_CTHULHU_RECENT_PLAYER_NAME=${action.value}; path=/hosted`;
+            document.cookie = `CALL_OF_CTHULHU_RECENT_PLAYER_NAME=${action.value} path=/hosted`;
             if (state.PLAYER_ID !== "") {
                 changeSavedCharacterData(state.PLAYER_ID, action.value);
             }
@@ -91,7 +75,7 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
         case HostedGameActions.SET_SOCKET_ADDRESS:
             if (action.value.split(':').length > 1) {
                 state.SOCKET_ADDRESS = action.value;
-                document.cookie = `CALL_OF_CTHULHU_RECENT_HOST_ADDRESS=${action.value}; path=/hosted`;
+                document.cookie = `CALL_OF_CTHULHU_RECENT_HOST_ADDRESS=${action.value} path=/hosted`;      
             }
             break;
         case HostedGameActions.CONNECT_TO_HOST:
@@ -104,7 +88,8 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
                 state.ROOM_CODE = getCookieValue('CALL_OF_CTHULHU_RECENT_HOST_ROOM_CODE');
             }
             if (!state.SOCKET && state.SOCKET_ADDRESS !== "" && state.ROOM_CODE !== "") {   
-            
+                console.log("Starting to connect");
+                
                 state.SOCKET = io(state.SOCKET_ADDRESS, {
                     reconnectionAttempts: 10,
                     reconnectionDelay: 1000,
@@ -120,9 +105,6 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
                 });
                 state.SOCKET.on('host-disconnected', () => {
                     window.alert('Host has disconnected');                  
-                });
-                state.SOCKET.on('incorrect-room-code', () => {
-                    window.alert('Incorrect room code!');
                 });
             }
             break;
@@ -141,11 +123,17 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
             break;
         case HostedGameActions.DISCONNECT_FROM_HOST:
             if(state.SOCKET){
+                // @ts-ignore
+                state.SOCKET.removeAllListeners();
                 state.SOCKET.disconnect();
-                state.SOCKET_ADDRESS = "";
                 state.ROOM_CODE = "";
                 state.SOCKET = undefined;
+                state.VERIFIED = false;
+                console.log("Reseting socket");        
             }
+            break;
+        case HostedGameActions.SET_VERIFIED:
+            state.VERIFIED = true;
             break;
         default:
             break;

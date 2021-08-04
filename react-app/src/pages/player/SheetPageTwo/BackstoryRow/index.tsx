@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BackstoryActions } from '../../../../actions';
 import InfoBox from '../../../../components/InfoBox';
 import SheetRow from '../../../../components/SheetRow';
+import { AppContext } from '../../../../reducers';
 import { BackstoryContext } from '../../../../reducers/BackstoryReducer';
 import './BackstoryRow.css';
 
@@ -22,6 +23,7 @@ type BackstoryContainerProps = {
 
 const BackStoryContainer: React.FC<BackstoryContainerProps> = (props) => {
     const { state, dispatch } = useContext(BackstoryContext);
+    const appState = useContext(AppContext).state;
 
     const setValueForReducer = (e: React.FocusEvent<HTMLTextAreaElement>) => {
         dispatch({ type: BackstoryActions[props.backstoryKey], value: e.target.value });
@@ -30,7 +32,10 @@ const BackStoryContainer: React.FC<BackstoryContainerProps> = (props) => {
     return (
         <div className="story-container">
             <h3>{props.title}</h3>
-            <textarea onBlur={setValueForReducer} defaultValue={state[props.backstoryKey]}></textarea>
+            <textarea 
+                onBlur={setValueForReducer} 
+                defaultValue={appState.CLIENT === 'PLAYER' ? state[props.backstoryKey] : undefined}
+                value={appState.CLIENT === 'HOST' ? state[props.backstoryKey] : undefined}></textarea>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GameHostContext } from '../../../reducers/GameHostReducer';
 import GameTools from './GameTools';
 import './HostView.css';
@@ -9,6 +9,7 @@ import { TChatMessage } from '../../../components/ChatMessage';
 
 // fucking redux...
 let chatMessages: TChatMessage[];
+let connectionSuccesful = false;
 
 const HostView: React.FC = () => {
     const { state, dispatch } = useContext(GameHostContext);
@@ -40,6 +41,9 @@ const HostView: React.FC = () => {
 
     useEffect(() => {
         setUpIp();
+        if (!state.SOCKET) {
+            dispatch({ type: GameHostActions.SET_WEBSOCKET });
+        }
     }, []);
 
     useEffect(() => {
@@ -48,16 +52,33 @@ const HostView: React.FC = () => {
 
     useEffect(() => {
         if (state.SOCKET) {
+
+            state.SOCKET.once('connect', () => {
+                if (!connectionSuccesful) {
+                    connectionSuccesful = true;
+                    console.log('Connected');
+                    if (state.SOCKET) {
+                        state.SOCKET.emit('connect-host', state.ROOM_CODE);
+                        state.SOCKET.emit('host-send-messages', state.CHAT_MESSAGES);             
+                    }
+                }
+            });
+
+            state.SOCKET.on("connect_error", () => {
+                window.alert("Error connecting to the server");
+                dispatch({ type: GameHostActions.DISCONNECT_FROM_SERVER })
+
+            });
             state.SOCKET.on('player-connected', data => {
                 if (data) {
                     dispatch({ type: GameHostActions.SET_PLAYER_DATA, value: data });
                 }
             });
             state.SOCKET.on('player-disconnected', data => {
-                if(data){                    
-                    if(data.CHARACTER_ID){
-                        if(state.PLAYERS[data.CHARACTER_ID as string]){
-                            dispatch({ type: GameHostActions.PLAYER_DISCONNECTED, value: data.CHARACTER_ID});
+                if (data) {
+                    if (data.CHARACTER_ID) {
+                        if (state.PLAYERS[data.CHARACTER_ID as string]) {
+                            dispatch({ type: GameHostActions.PLAYER_DISCONNECTED, value: data.CHARACTER_ID });
                         }
                     }
                 }
@@ -73,12 +94,14 @@ const HostView: React.FC = () => {
                 if (chatMessages.length > 30) {
                     chatMessages.shift();
                 }
+
                 dispatch(
                     {
                         type: GameHostActions.SET_CHAT_MESSAGES,
                         value: chatMessages
                     });
-            })
+            });
+            
         }
     }, [state.SOCKET]);
 

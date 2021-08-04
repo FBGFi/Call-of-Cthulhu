@@ -7,6 +7,7 @@ import { TInvestigatorSkillsState } from '../InvestigatorSkillsReducer';
 import { TPlayerState } from '../PlayerReducer';
 import { TChatMessage } from '../../components/ChatMessage';
 import { Socket, io } from 'socket.io-client';
+import { getCookieValue } from '../../constants/constants';
 
 type TAction = {
     type: string;
@@ -24,25 +25,6 @@ type TGameHostState = {
     CHAT_MESSAGES: TChatMessage[];
     IP_ADDRESS: string;
     SOCKET: Socket | undefined;
-}
-
-const getCookieValue = (name: string): string => {
-    let cookies = document.cookie.split('; ');
-    let splitCookie: string[];
-    if (cookies.length > 1) {
-        for (let cookie of cookies) {
-            splitCookie = cookie.split(name + '=');
-            if (splitCookie.length > 1) {
-                return splitCookie[1];
-            }
-        }
-    } else {
-        cookies = document.cookie.split(name + '=');
-        if (cookies.length === 2) {
-            return cookies[1];
-        }
-    }
-    return "";
 }
 
 const getRecentRoomPort = (): number => {
@@ -74,12 +56,12 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
         case GameHostActions.SET_ROOM_CODE:
             state.ROOM_CODE = action.value;
             state.CHAT_MESSAGES = getSavedChatMessages(state.ROOM_CODE);
-            document.cookie = `CALL_OF_CTHULHU_RECENT_ROOM=${action.value}; path=/host`;
+            document.cookie = `CALL_OF_CTHULHU_RECENT_ROOM=${action.value} path=/host`;
             break;
         case GameHostActions.SET_PORT:
             if (!isNaN(parseInt(action.value))) {
                 state.PORT = parseInt(action.value);
-                document.cookie = `CALL_OF_CTHULHU_RECENT_PORT=${action.value}; path=/host`;
+                document.cookie = `CALL_OF_CTHULHU_RECENT_PORT=${action.value} path=/host`;
             }
             break;
         case GameHostActions.SET_PLAYER_DATA:
@@ -126,15 +108,19 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
         case GameHostActions.SET_WEBSOCKET:
             
             if (!state.SOCKET && state.PORT > 0 && state.PORT < 65536) {
+                console.log("Starting to connect");
+                
                 state.SOCKET = io(`http://localhost:${state.PORT}`);
                 
                 state.SOCKET.on("disconnect", () => {
-                    console.log("disconnected");
+                    console.log("Disconnected");
                 });
             }
             break;
         case GameHostActions.DISCONNECT_FROM_SERVER:
             if(state.SOCKET){
+                // @ts-ignore
+                state.SOCKET.removeAllListeners();
                 state.SOCKET.disconnect();
                 state.SOCKET = undefined;
             }
