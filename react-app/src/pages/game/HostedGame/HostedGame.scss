@@ -1,6 +1,20 @@
-.HostedGame{
-    margin: 30px 0;
-    &>.SheetPage:not(:last-of-type){
-        margin-bottom: 30px;
+.HostedGame {
+  margin: 30px 0;
+  & > .SheetPage:not(:last-of-type) {
+    margin-bottom: 30px;
+  }
+  .new-messages {
+      animation: newMessagesAlert 1s infinite alternate;
+  }
+}
+
+@keyframes newMessagesAlert {
+    0% {
+        filter: brightness(50%);
+        transform: scale(1);
+    }
+    100%{
+        filter: brightness(100%);
+        transform: scale(1.05);
     }
 }

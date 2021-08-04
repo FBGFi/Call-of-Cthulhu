@@ -21,6 +21,7 @@ const HostedGame: React.FC = () => {
     const params = useParams() as { playerId: string };
 
     const [chatClicked, setChatClicked] = useState(0);
+    const [newMessages, areNewMessages] = useState(false);
     const { state, dispatch } = useContext(HostedGameContext);
     const [playerState, playerDispatch] = useReducer(playerReducer, InitialPlayerState(params.playerId ? params.playerId : undefined));
     const [weaponsAndGearState, weaponsAndGearDispatch] = useReducer(weaponsAndGearReducer, InitialWeaponsAndGearState(params.playerId ? params.playerId : playerState.CHARACTER_ID));
@@ -51,6 +52,7 @@ const HostedGame: React.FC = () => {
     // Spaghetti-O, just for re-rendering purposes to scroll the chat
     const chatIconWasClicked = (e: React.FocusEvent<HTMLDivElement>) => {
         setChatClicked(chatClicked + 1);
+        areNewMessages(false);
     }
 
     useEffect(() => {
@@ -59,7 +61,7 @@ const HostedGame: React.FC = () => {
         }
         if (state.SOCKET && state.VERIFIED) {
             console.log("Player was verified");
-            
+
             dispatch({ type: HostedGameActions.SET_VERIFIED });
             state.SOCKET.emit('connect-player', { ...playerState, ...weaponsAndGearState, ...investigatorSkillsState, ...backstoryState, ...fellowInvestigatorsState });
         }
@@ -69,6 +71,10 @@ const HostedGame: React.FC = () => {
         dispatch({ type: HostedGameActions.SEND_PLAYER_DATA, value: { ...playerState, ...weaponsAndGearState, ...investigatorSkillsState, ...backstoryState, ...fellowInvestigatorsState } })
 
     }, [playerState, weaponsAndGearState, investigatorSkillsState, backstoryState, fellowInvestigatorsState]);
+
+    useEffect(() => {
+        areNewMessages(true);
+    }, [state.CHAT_MESSAGES]);
 
     useEffect(() => {
         if (state.SOCKET) {
@@ -106,9 +112,14 @@ const HostedGame: React.FC = () => {
 
                     </FellowInvestigatorsContext.Provider>
                     <Footer diceRollCallback={sendDiceRollMessage}>
-                        <OpenableContainer onFocus={chatIconWasClicked} imgSrc={chatSVG} className="ChatContainer">
+                        <OpenableContainer 
+                            onFocus={chatIconWasClicked} 
+                            onBlur={chatIconWasClicked}
+                            imgClass={newMessages ? "new-messages" : undefined}
+                            imgSrc={chatSVG} 
+                            className="ChatContainer">
                             <GameChat messages={state.CHAT_MESSAGES} sendChatMessage={sendChatMessage} />
-                        </OpenableContainer>
+                        </OpenableContainer>   
                     </Footer>
                 </WeaponsAndGearContext.Provider>
             </PlayerContext.Provider >
