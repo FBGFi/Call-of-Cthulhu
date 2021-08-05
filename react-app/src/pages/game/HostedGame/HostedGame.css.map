@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,MAAM,EAAE,MAAM;CAYf;;AAbD,AAEE,WAFS,GAEL,UAAU,AAAA,IAAK,CAAA,aAAa,EAAE;EAChC,aAAa,EAAE,IAAI;CACpB;;AAJH,AAKE,WALS,CAKT,uBAAuB,CAAC;EACtB,OAAO,EAAE,iDAAiD;EAC1D,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,GAAG;EACR,KAAK,EAAE,GAAG;CACX",
+    "sources": [
+        "HostedGame.scss"
+    ],
+    "names": [],
+    "file": "HostedGame.css"
+}

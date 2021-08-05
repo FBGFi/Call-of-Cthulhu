@@ -1,0 +1,57 @@
+.StartPage:not([class*="/game"]) {
+  margin: auto;
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox {
+  background-image: url(../../assets/images/paper_small.jpg);
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox > *:last-child {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox > *:last-child *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox a {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox button {
+  background-color: #000;
+  color: #fff;
+  font-size: 1.2em;
+  border: 2px solid var(--dark-gray);
+  width: 100%;
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox button:hover {
+  -webkit-filter: invert(0.8);
+          filter: invert(0.8);
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox select {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 1.2em;
+  text-align-last: center;
+}
+
+.StartPage:not([class*="/game"]) > .InfoBox select:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+/*# sourceMappingURL=StartPage.css.map */

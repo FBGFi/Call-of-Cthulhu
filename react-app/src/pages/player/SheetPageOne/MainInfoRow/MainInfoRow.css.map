@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACX,UAAU,EAAE,KAAK;CAClB",
+    "sources": [
+        "MainInfoRow.scss"
+    ],
+    "names": [],
+    "file": "MainInfoRow.css"
+}

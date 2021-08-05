@@ -1,0 +1,76 @@
+.FellowInvestigators {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.FellowInvestigators .header {
+  font-size: 2.5em;
+}
+
+.FellowInvestigators .investigator-container {
+  display: -ms-grid;
+  display: grid;
+  gap: 30px;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-image: url(../../../../../assets/images/tentacles.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 135%;
+}
+
+.FellowInvestigators .investigator-container .me-container {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.FellowInvestigators .investigator-container .me-container h1 {
+  margin: auto;
+}
+
+.FellowInvestigators .investigator-container > *:not(.me-container) {
+  border: 2px solid var(--light-gray);
+  background-image: url(../../../../../assets/images/paper_small.jpg);
+  background-size: cover;
+}
+
+.FellowInvestigators .investigator-container .player-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.FellowInvestigators .investigator-container .player-container .row {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+}
+
+.FellowInvestigators .investigator-container .player-container .row > * {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.FellowInvestigators .investigator-container .player-container .row input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=FellowInvestigators.css.map */

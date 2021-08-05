@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
+:root {
+  --dark-gray: #888;
+  --light-gray: #aaa;
+  --header-bg: #ccc;
+  --opaque-white: rgba(255,255,255,0.3);
+}
+
+body {
+  margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: auto;
+}
+
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid var(--light-gray);
+  background-color: var(--opaque-white);
+  resize: none;
+  width: 100%;
+  height: 250px;
+  font-size: 1.2em;
+  padding: 5px;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+}
+
+.button-black {
+  background-color: #000;
+  color: #fff;
+  padding: 5px 15px;
+  border: 0;
+  border: 2px solid var(--dark-gray);
+  font-size: 1.2em;
+}
+
+.button-black:hover {
+  -webkit-filter: invert(0.8);
+          filter: invert(0.8);
+}
+
+input[type="checkbox"] {
+  min-width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background: linear-gradient(-30deg, var(--opaque-white), var(--light-gray));
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: relative;
+  border: 1px solid var(--light-gray);
+  border-radius: 2px;
+}
+
+input[type="checkbox"]:checked:after {
+  content: "\2714";
+  font-size: 2em;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: black;
+}
+
+input[type="checkbox"]:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+*:focus {
+  outline: none;
+  -webkit-box-shadow: 0px 0px 5px black;
+          box-shadow: 0px 0px 5px black;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  line-height: 1.5em;
+  letter-spacing: 0.05em;
+  word-spacing: 0.07em;
+  font-family: "IM Fell English SC", "Times New Roman", serif !important;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  max-width: 75ch;
+}
+
+body {
+  background-image: url(./assets/images/paper_dark.jpeg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.App {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.App > * {
+  margin: 0 auto;
+}
+
+.App > *:not(:last-child) {
+  margin-bottom: 30px;
+}
+/*# sourceMappingURL=App.css.map */

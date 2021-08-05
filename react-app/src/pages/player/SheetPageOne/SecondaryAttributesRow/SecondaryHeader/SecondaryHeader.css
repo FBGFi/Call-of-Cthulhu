@@ -1,0 +1,32 @@
+.SecondaryHeader {
+  grid-area: secondary-header;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.SecondaryHeader > * {
+  pointer-events: all;
+}
+
+.SecondaryHeader .column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.SecondaryHeader .column > * {
+  margin: auto;
+}
+
+.SecondaryHeader .column span {
+  margin-right: 5px;
+}
+
+.SecondaryHeader > *:not(:last-child) {
+  margin-right: 15px;
+}
+/*# sourceMappingURL=SecondaryHeader.css.map */

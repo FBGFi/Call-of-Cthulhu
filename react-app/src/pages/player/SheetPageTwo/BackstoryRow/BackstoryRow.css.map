@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,aADS,CACT,UAAU,CAAA;EACN,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,OAAO;EAC9B,mBAAmB,EAAE,eAAe;CASvC;;AAdL,AAOQ,aAPK,CACT,UAAU,CAMN,OAAO,CAAA;EACH,SAAS,EAAE,MAAM;CACpB;;AATT,AAWQ,aAXK,CACT,UAAU,CAUN,EAAE,CAAA;EACE,UAAU,EAAE,MAAM;CACrB",
+    "sources": [
+        "BackstoryRow.scss"
+    ],
+    "names": [],
+    "file": "BackstoryRow.css"
+}

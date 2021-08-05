@@ -1,0 +1,32 @@
+.Characteristics {
+  width: 50%;
+}
+
+.Characteristics span {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.Characteristics .stat-row, .Characteristics .stat-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Characteristics .stat-column {
+  width: 33.33%;
+}
+
+.Characteristics .move-rate-input {
+  background-color: var(--opaque-white);
+  border: 1px solid var(--light-gray);
+  border-radius: 50%;
+  width: 50%;
+  text-align: center;
+  font-size: 2.2em;
+  outline: none;
+}
+/*# sourceMappingURL=Characteristics.css.map */

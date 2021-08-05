@@ -1,5 +1,6 @@
 .OpenableContainer {
   &:focus-within {
+    z-index: 2;
     .inner-container {
       display: flex;
       flex-direction: column;
@@ -7,6 +8,7 @@
       left: 0;
       bottom: 0;
       pointer-events: all;
+      z-index: 3;
     }
     .open-button {
       position: absolute;
@@ -20,6 +22,7 @@
     padding: 0;
     display: block;
     appearance: none;
+    position: relative;
     border: 0;
     height: 80px;
     background: none;

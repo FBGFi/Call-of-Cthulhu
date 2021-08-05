@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAA;EACV,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CAKf;;AAPD,AAGI,cAHU,CAGV,EAAE,CAAA;EACE,SAAS,EAAE,iCAAiC;EAC5C,OAAO,EAAE,CAAC;CACb;;AAEL,UAAU,CAAV,WAAU;EACN,IAAI;IACA,OAAO,EAAE,CAAC;;EAEd,EAAE;IACE,OAAO,EAAE,GAAG",
+    "sources": [
+        "LoadingScreen.scss"
+    ],
+    "names": [],
+    "file": "LoadingScreen.css"
+}

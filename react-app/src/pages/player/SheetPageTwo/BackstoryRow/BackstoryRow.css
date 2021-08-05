@@ -1,0 +1,20 @@
+.BackstoryRow .Backstory {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "header header";
+}
+
+.BackstoryRow .Backstory .header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: header;
+}
+
+.BackstoryRow .Backstory h3 {
+  text-align: center;
+}
+/*# sourceMappingURL=BackstoryRow.css.map */

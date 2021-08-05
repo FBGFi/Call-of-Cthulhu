@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,mBAAmB,CAAA;EACf,IAAI,EAAE,CAAC;CAMV;;AAPD,AAEI,mBAFe,CAEf,eAAe,CAAA;EACX,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,OAAO;EAC9B,GAAG,EAAE,GAAG;CACX",
+    "sources": [
+        "GearAndPossessions.scss"
+    ],
+    "names": [],
+    "file": "GearAndPossessions.css"
+}

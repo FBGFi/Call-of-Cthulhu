@@ -1,0 +1,54 @@
+.PlayerCard {
+  width: 190px;
+  height: 260px;
+  background-image: url(../../../../assets/images/paper_small.jpg);
+  border: 3px solid var(--dark-gray);
+  margin: 30px 15px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.PlayerCard a {
+  color: #000;
+}
+
+.PlayerCard:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-box-shadow: 0px 0px 20px green;
+          box-shadow: 0px 0px 20px green;
+}
+
+.PlayerCard img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.PlayerCard .player-name-container {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+}
+
+.PlayerCard .player-name-container h3 {
+  margin: auto;
+  text-align: center;
+}
+/*# sourceMappingURL=PlayerCard.css.map */

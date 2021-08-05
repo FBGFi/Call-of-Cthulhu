@@ -1,0 +1,45 @@
+.SheetPage {
+  border: 8px solid var(--dark-gray);
+  background-image: url(../../../assets/images/paper_small.jpg);
+  background-size: 200px;
+  padding: 15px;
+  width: 1200px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+.SheetPage:first-of-type {
+  margin-top: 30px;
+}
+
+.SheetPage:last-of-type {
+  margin-bottom: 30px;
+}
+
+.SheetPage > * {
+  width: 1200px;
+}
+
+.SheetPage > *:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.SheetPage input[type="text"],
+.SheetPage select {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.SheetPage input[type="text"]:focus,
+.SheetPage select:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.SheetPage select {
+  text-align-last: center;
+}
+/*# sourceMappingURL=SheetPage.css.map */

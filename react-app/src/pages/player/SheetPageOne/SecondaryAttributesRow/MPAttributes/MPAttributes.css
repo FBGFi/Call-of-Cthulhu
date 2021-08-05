@@ -1,0 +1,43 @@
+.mp-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-area: mp-header;
+}
+
+.mp-header span {
+  margin: auto 5px auto auto;
+}
+
+.mp-header input {
+  margin: auto auto auto 0;
+}
+
+.MPAttributes {
+  grid-area: mp-attributes;
+}
+
+.MPAttributes .mp-stats {
+  background-color: rgba(255, 255, 255, 0.6);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.MPAttributes .title-container {
+  width: 22px;
+  position: relative;
+}
+
+.MPAttributes .title-container h4 {
+  -webkit-transform: rotate(90deg) translate(-50%, 60%);
+          transform: rotate(90deg) translate(-50%, 60%);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  width: 110px;
+  text-align: center;
+}
+/*# sourceMappingURL=MPAttributes.css.map */

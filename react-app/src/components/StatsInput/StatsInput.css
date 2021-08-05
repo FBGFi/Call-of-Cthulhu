@@ -1,0 +1,59 @@
+.StatsInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid var(--light-gray);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.StatsInput.disabled {
+  background-color: rgba(170, 170, 170, 0.2);
+}
+
+.StatsInput.small {
+  font-size: 9px;
+  width: 70px;
+  height: calc(70px * (2 / 3));
+}
+
+.StatsInput.big {
+  font-size: 14px;
+  width: 90px;
+  height: 60px;
+}
+
+.StatsInput input {
+  padding: 5px;
+  border: none;
+  background: none;
+}
+
+.StatsInput input.main-input {
+  width: calc(100% * (2 / 3));
+  height: 100%;
+  font-size: 2.2em;
+  border-right: 1px solid var(--light-gray);
+  z-index: 1;
+  padding: 0;
+}
+
+.StatsInput .stat-input {
+  text-align: center;
+}
+
+.StatsInput .half-and-fifth {
+  width: calc(100% / 3);
+}
+
+.StatsInput .half-and-fifth input:first-child {
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.StatsInput .half-and-fifth input {
+  font-size: 1.4em;
+  width: 100%;
+  height: 50%;
+  cursor: default;
+  -moz-appearance: textfield;
+}
+/*# sourceMappingURL=StatsInput.css.map */

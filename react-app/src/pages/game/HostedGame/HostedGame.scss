@@ -3,18 +3,12 @@
   & > .SheetPage:not(:last-of-type) {
     margin-bottom: 30px;
   }
-  .new-messages {
-      animation: newMessagesAlert 1s infinite alternate;
+  .new-messages-indicator {
+    content: url(../../../assets/images/message-indicator.svg);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
   }
-}
-
-@keyframes newMessagesAlert {
-    0% {
-        filter: brightness(50%);
-        transform: scale(1);
-    }
-    100%{
-        filter: brightness(100%);
-        transform: scale(1.05);
-    }
 }

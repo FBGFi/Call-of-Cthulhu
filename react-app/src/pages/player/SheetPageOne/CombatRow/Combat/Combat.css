@@ -1,0 +1,31 @@
+.Combat {
+  text-align: center;
+}
+
+.Combat .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Combat .row > *:last-child {
+  margin-right: 0;
+  width: 90px;
+  height: 60px;
+}
+
+.Combat .row > input[type="text"] {
+  border-radius: 20%;
+  border: 1px solid var(--light-gray);
+  background-color: var(--opaque-white);
+  text-align: center;
+  font-size: 2.2em;
+}
+
+.Combat h3 {
+  margin: auto 10px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=Combat.css.map */

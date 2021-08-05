@@ -1,0 +1,24 @@
+.AttributeButton {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1em;
+}
+
+.AttributeButton.checked {
+  background-color: var(--dark-gray);
+}
+
+.AttributeButton:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.AttributeButton > * {
+  pointer-events: none;
+}
+
+.AttributeButton input {
+  display: none;
+}
+/*# sourceMappingURL=AttributeButton.css.map */

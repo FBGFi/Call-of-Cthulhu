@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import InfoBox from '../../../../../components/InfoBox';
 import { PlayerContext } from '../../../../../reducers/PlayerReducer';
 import { PlayerActions } from '../../../../../actions';
@@ -8,6 +8,7 @@ import { AppContext } from '../../../../../reducers';
 const CharacterInfo: React.FC = () => {
     const { state, dispatch } = useContext(PlayerContext);
     const appState = useContext(AppContext).state;
+    const [typing, isTyping] = useState(false);
 
     const setValueForReducer = (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>, field: string) => {
         if (Object.keys(PlayerActions.SET_CHARACTER_INFO).includes(field)) {
@@ -15,6 +16,7 @@ const CharacterInfo: React.FC = () => {
             dispatch({ type: PlayerActions.SET_CHARACTER_INFO[field], value: e.target.value });
         }
     }
+
     return (
         <InfoBox className='CharacterInfo' title='1920s Era Investigator'>
             <form>
@@ -31,9 +33,13 @@ const CharacterInfo: React.FC = () => {
                     <span>Player</span>
                     <input 
                         onChange={() => {}}
-                        onBlur={(e) => setValueForReducer(e, "PLAYER")} 
-                        defaultValue={appState.CLIENT === 'PLAYER' ? state.CHARACTER_INFO.PLAYER : undefined} 
-                        value={appState.CLIENT === 'HOST' ? state.CHARACTER_INFO.PLAYER : undefined} 
+                        onBlur={(e) => {
+                            setValueForReducer(e, "PLAYER");
+                            isTyping(false);
+                        }} 
+                        onFocus={() => isTyping(true)}
+                        // for some reason default value wouldnt work on character creation sometimes
+                        value={state.CHARACTER_INFO.PLAYER !== "" && !typing ? state.CHARACTER_INFO.PLAYER : undefined} 
                         type="text" />
                 </div>
                 <div className="form-row">

@@ -1,0 +1,77 @@
+.CharacterInfo {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.CharacterInfo.InfoBox .header {
+  background-color: black;
+  color: white;
+  font-size: 1.1em;
+  padding: 3px;
+}
+
+.CharacterInfo .form-row,
+.CharacterInfo .form-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.CharacterInfo .form-column {
+  width: 50%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.CharacterInfo .form-column input,
+.CharacterInfo .form-column select {
+  width: 100px;
+}
+
+.CharacterInfo .form-row:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.CharacterInfo .form-column:not(:last-child) {
+  margin-right: 10px;
+}
+
+.CharacterInfo span {
+  margin-top: auto;
+  margin-right: 5px;
+}
+
+.CharacterInfo input[type="number"] {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.CharacterInfo input[type="number"]:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.CharacterInfo form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.CharacterInfo input[type="text"], .CharacterInfo select {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=CharacterInfo.css.map */

@@ -1,0 +1,30 @@
+.ConnectedPlayer {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid var(--dark-gray);
+}
+
+.ConnectedPlayer:last-child {
+  border: 0;
+}
+
+.ConnectedPlayer span {
+  font-size: 1.3em;
+  margin: auto 0;
+}
+
+.ConnectedPlayer button {
+  margin: auto 0 auto auto;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.2em;
+  border: 2px solid var(--dark-gray);
+}
+
+.ConnectedPlayer button:hover {
+  -webkit-filter: invert(0.8);
+          filter: invert(0.8);
+}
+/*# sourceMappingURL=ConnectedPlayer.css.map */

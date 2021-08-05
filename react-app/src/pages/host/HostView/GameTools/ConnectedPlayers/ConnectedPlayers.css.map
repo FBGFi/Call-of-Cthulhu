@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,iBAAiB,CAAC;EAChB,IAAI,EAAE,CAAC;EACP,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;CAMvB;;AATD,AAKE,iBALe,CAKf,QAAQ,CAAA;EACJ,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,iBAAiB;CAC5B",
+    "sources": [
+        "ConnectedPlayers.scss"
+    ],
+    "names": [],
+    "file": "ConnectedPlayers.css"
+}

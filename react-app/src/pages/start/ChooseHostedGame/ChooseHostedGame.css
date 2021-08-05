@@ -1,0 +1,14 @@
+.ChooseHostedGame input {
+  font-size: 1.2em;
+  text-align: center;
+  border: 1px solid var(--dark-gray);
+  background-color: var(--opaque-white);
+}
+
+.ChooseHostedGame a {
+  color: #FFF;
+  text-decoration: none;
+  width: 100%;
+  display: block;
+}
+/*# sourceMappingURL=ChooseHostedGame.css.map */

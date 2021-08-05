@@ -1,0 +1,29 @@
+.LoadingScreen {
+  color: #FFF;
+  margin: auto;
+}
+
+.LoadingScreen h1 {
+  -webkit-animation: loadingPump infinite alternate 1s;
+          animation: loadingPump infinite alternate 1s;
+  opacity: 1;
+}
+
+@-webkit-keyframes loadingPump {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes loadingPump {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+/*# sourceMappingURL=LoadingScreen.css.map */

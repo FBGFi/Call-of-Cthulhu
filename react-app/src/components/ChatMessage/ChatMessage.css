@@ -1,0 +1,21 @@
+.ChatMessage {
+  margin-bottom: 10px;
+}
+
+.ChatMessage span {
+  font-weight: bold;
+  width: 100%;
+}
+
+.ChatMessage p {
+  width: 100%;
+}
+
+.ChatMessage .alert {
+  color: red;
+}
+
+.ChatMessage .roll {
+  color: green;
+}
+/*# sourceMappingURL=ChatMessage.css.map */

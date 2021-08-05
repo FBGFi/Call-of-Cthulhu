@@ -1,0 +1,15 @@
+.InvestigatorSkillRow .InvestigatorSkills {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-areas: "header header header header";
+}
+
+.InvestigatorSkillRow .InvestigatorSkills .header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: header;
+}
+/*# sourceMappingURL=InvestigatorSkillRow.css.map */

@@ -1,0 +1,14 @@
+.GearAndPossessions {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.GearAndPossessions .gear-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+/*# sourceMappingURL=GearAndPossessions.css.map */

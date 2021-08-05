@@ -115,7 +115,7 @@ const HostedGame: React.FC = () => {
                         <OpenableContainer 
                             onFocus={chatIconWasClicked} 
                             onBlur={chatIconWasClicked}
-                            imgClass={newMessages ? "new-messages" : undefined}
+                            alertIndicator={newMessages ? <span className="new-messages-indicator" /> : undefined}
                             imgSrc={chatSVG} 
                             className="ChatContainer">
                             <GameChat messages={state.CHAT_MESSAGES} sendChatMessage={sendChatMessage} />

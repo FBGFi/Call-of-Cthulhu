@@ -1,0 +1,61 @@
+.SanityAttributes {
+  grid-area: sanity-attributes;
+  margin-top: -32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.SanityAttributes table {
+  width: 100%;
+}
+
+.SanityAttributes table tbody {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.SanityAttributes table tr:first-child {
+  margin-left: auto;
+}
+
+.SanityAttributes table tr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.6);
+  height: 32px;
+}
+
+.SanityAttributes table tr td {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto;
+}
+
+.SanityAttributes table tr td button {
+  width: 100%;
+}
+
+.SanityAttributes .title-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 22px;
+  position: relative;
+}
+
+.SanityAttributes .title-container h4 {
+  -webkit-transform: rotate(90deg) translate(-50%, 60%);
+          transform: rotate(90deg) translate(-50%, 60%);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+}
+/*# sourceMappingURL=SanityAttributes.css.map */

@@ -1,0 +1,66 @@
+.LocalStorageCharacters {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.LocalStorageCharacters .title-container {
+  position: relative;
+}
+
+.LocalStorageCharacters .title-container span {
+  color: red;
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  -webkit-animation: warningPump infinite 2s alternate;
+          animation: warningPump infinite 2s alternate;
+}
+
+.LocalStorageCharacters .saved-characters {
+  padding: 10px;
+  overflow-x: auto;
+  height: calc(30vh + 42px);
+}
+
+.LocalStorageCharacters .saved-characters .SavedCharacter {
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.LocalStorageCharacters .saved-characters .SavedCharacter span {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-right: 10px;
+}
+
+.LocalStorageCharacters .saved-characters .SavedCharacter button {
+  margin: auto 0;
+  font-size: 1em;
+}
+
+@-webkit-keyframes warningPump {
+  0% {
+    color: red;
+  }
+  100% {
+    color: green;
+  }
+}
+
+@keyframes warningPump {
+  0% {
+    color: red;
+  }
+  100% {
+    color: green;
+  }
+}
+/*# sourceMappingURL=LocalStorageCharacters.css.map */

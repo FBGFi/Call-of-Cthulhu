@@ -1,0 +1,74 @@
+.HostPage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.HostPage > .InfoBox {
+  background-image: url(../../assets/images/paper_small.jpg);
+  margin: auto;
+}
+
+.HostPage > .InfoBox > *:last-child {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+}
+
+.HostPage > .InfoBox > *:last-child *:not(:last-child):not(label) {
+  margin-bottom: 10px;
+}
+
+.HostPage > .InfoBox input {
+  border: 1px solid var(--light-gray);
+  background-color: var(--opaque-white);
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.HostPage > .InfoBox a {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.HostPage > .InfoBox button {
+  background-color: #000;
+  color: #fff;
+  font-size: 1.2em;
+  border: 2px solid var(--dark-gray);
+  width: 100%;
+}
+
+.HostPage > .InfoBox button:hover {
+  -webkit-filter: invert(0.8);
+          filter: invert(0.8);
+}
+
+.HostPage > .InfoBox select {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.HostPage > .InfoBox select:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.HostPage > .InfoBox select {
+  text-align-last: center;
+}
+/*# sourceMappingURL=HostPage.css.map */

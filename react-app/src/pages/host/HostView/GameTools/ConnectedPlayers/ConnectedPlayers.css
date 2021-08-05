@@ -1,0 +1,18 @@
+.ConnectedPlayers {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ConnectedPlayers .players {
+  overflow-y: auto;
+  height: calc(30vh + 42px);
+}
+/*# sourceMappingURL=ConnectedPlayers.css.map */

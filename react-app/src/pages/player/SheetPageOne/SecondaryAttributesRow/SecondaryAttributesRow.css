@@ -1,0 +1,46 @@
+.SecondaryAttributesRow {
+  background-color: var(--header-bg);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr 2fr 1fr;
+      grid-template-columns: 1fr 2fr 2fr 1fr;
+      grid-template-areas: "secondary-header secondary-header secondary-header empty" "hp-attributes sanity-attributes sanity-attributes sanity-attributes" "hp-attributes title title mp-header" "luck-attributes luck-attributes luck-attributes mp-attributes" "luck-attributes luck-attributes luck-attributes mp-attributes";
+  gap: 3px;
+  padding: 3px;
+}
+
+.SecondaryAttributesRow div {
+  min-height: 30px;
+}
+
+.SecondaryAttributesRow .title {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-area: title;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.SecondaryAttributesRow .title h1 {
+  margin-left: 25%;
+}
+
+.SecondaryAttributesRow input[type="number"] {
+  background-color: var(--opaque-white);
+  text-align: center;
+  width: 74px;
+  height: 26px;
+  font-size: 1em;
+  border: 2px solid var(--dark-gray);
+}
+
+.SecondaryAttributesRow table {
+  border-spacing: 0;
+}
+
+.SecondaryAttributesRow h4 {
+  text-decoration: underline;
+}
+/*# sourceMappingURL=SecondaryAttributesRow.css.map */
