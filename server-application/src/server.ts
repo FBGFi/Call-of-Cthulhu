@@ -141,6 +141,6 @@ io.on('connection', socket => {
     });
 });
 
-httpServer.listen(3001, async() => {
+httpServer.listen(process.env.PORT, async() => {
     console.log(`[${getCurrentTime()}]: Server listening on ${await getPublicIp()}:${process.env.PORT}`);
 })
