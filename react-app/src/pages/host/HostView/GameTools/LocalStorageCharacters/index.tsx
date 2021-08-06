@@ -39,8 +39,8 @@ const LocalStorageCharacters: React.FC = () => {
                         key={char}
                         deleteChar={deleteCharacter}
                         id={char}
-                        player={localSaves.LOCAL_SAVES[char].CHARACTER_INFO.PLAYER}
-                        character={localSaves.LOCAL_SAVES[char].CHARACTER_INFO.NAME}
+                        player={localSaves.LOCAL_SAVES[char].CHARACTER_INFO?.PLAYER ? localSaves.LOCAL_SAVES[char].CHARACTER_INFO.PLAYER : "Unnamed Player"}
+                        character={localSaves.LOCAL_SAVES[char].CHARACTER_INFO?.NAME ? localSaves.LOCAL_SAVES[char].CHARACTER_INFO.NAME : "Unnamed Character"}
                     />
                 );
             }

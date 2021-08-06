@@ -90,7 +90,7 @@ function hostedGameReducer(state: THostedGameState, action: TAction): THostedGam
             if (!state.SOCKET && state.SOCKET_ADDRESS !== "" && state.ROOM_CODE !== "") {   
                 console.log("Starting to connect");
                 
-                state.SOCKET = io(state.SOCKET_ADDRESS, {
+                state.SOCKET = io('http://' + state.SOCKET_ADDRESS, {
                     reconnectionAttempts: 10,
                     reconnectionDelay: 1000,
                 });
