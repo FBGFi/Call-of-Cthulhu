@@ -1,6 +1,6 @@
 {
   "name": "Call-Of-Cthulhu-server-application",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Installable server launcher created with electron and node.js",
   "main": "./src/server.ts",
   "scripts": {
@@ -8,14 +8,14 @@
     "clean-server-dist": "rd /s /q dist && rm -rf dist",
     "build-server": "npm run prebuild-server && npm run clean-server-dist --force && npx webpack",
     "start-server": "node ./dist/server.js",
+    "start-production": "npm run build-server && npx pm2 start ecosystem.config.js",
+    "stop-production": "npx pm2 stop ecosystem.config.js",
     "dev:server": "npx nodemon -r tsconfig-paths/register --watch ./src --exec ts-node ./src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^13.1.7",
-    "electron-builder": "^22.11.7",
     "@types/node": "^16.0.1",
     "ts-loader": "^9.2.4",
     "ts-node": "^10.0.0",
@@ -28,9 +28,12 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "http": "0.0.1-security",
     "nodemon": "^2.0.12",
     "path": "^0.12.7",
+    "pm2": "^5.1.0",
+    "public-ip": "^4.0.4",
     "socket.io": "^4.1.3"
   }
 }

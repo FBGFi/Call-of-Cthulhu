@@ -1,5 +1,8 @@
 import { Server } from 'socket.io';
+import dotenv from 'dotenv';
+dotenv.config();
 import * as http from 'http';
+import publicIp from 'public-ip';
 
 const httpServer = http.createServer();
 const io: Server = new Server(httpServer, {
@@ -25,14 +28,31 @@ const connectedPlayers: TConnectedPlayers = {};
 let hostId: string;
 let roomCode: string;
 
+const getCurrentTime = (): string => {
+    return new Date(Date.now()).toLocaleString();
+}
+
+
+const getPublicIp = async () => {
+    const data = await publicIp.v4({
+        fallbackUrls: ["https://ifconfig.co/ip"]
+    });
+    return data;
+}
+
 io.on('connection', socket => {
 
     socket.on('connect-host', (room) => {
         if (!hostId) {
-            console.log('Host has connected');
+            console.log(`[${getCurrentTime()}]: Host has connected`);
 
             hostId = socket.id;
             roomCode = room;
+
+            (async () => {
+                const ip = await getPublicIp();
+                socket.emit('get-public-ip', ip);
+            })();
 
             const message: TMessage = {
                 timeStamp: Date.now(),
@@ -53,13 +73,13 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
 
         if (socket.id === hostId) {
-            console.log('Host has disconnected');
+            console.log(`[${getCurrentTime()}]: Host has disconnected`);
             hostId = undefined;
             io.emit('host-disconnected');
             socket.disconnect();
 
         } else if (connectedPlayers[socket.id]) {
-            console.log('Player disconnected');
+            console.log(`[${getCurrentTime()}]: Player disconnected`);
             io.to(hostId).emit('new-player-message', {
                 timeStamp: Date.now(),
                 message: (connectedPlayers[socket.id].CHARACTER_INFO?.PLAYER ? connectedPlayers[socket.id].CHARACTER_INFO.PLAYER : 'Unnamed Player') + ' has disconnected',
@@ -88,7 +108,7 @@ io.on('connection', socket => {
     });
     socket.on('connect-player', (data) => {
         if (!connectedPlayers[socket.id]) {
-            console.log('Player has connected');
+            console.log(`[${getCurrentTime()}]: Player has connected`);
             connectedPlayers[socket.id] = data;
             io.to(hostId).emit('player-connected', data);
             io.to(hostId).emit('new-player-message', {
@@ -121,6 +141,6 @@ io.on('connection', socket => {
     });
 });
 
-httpServer.listen(3001, () => {
-    console.log('Server listening on port 3001');
+httpServer.listen(3001, async() => {
+    console.log(`[${getCurrentTime()}]: Server listening on ${await getPublicIp()}:${process.env.PORT}`);
 })

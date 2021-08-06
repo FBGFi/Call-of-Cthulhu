@@ -24,6 +24,7 @@ type TGameHostState = {
     PLAYERS: TPlayers;
     CHAT_MESSAGES: TChatMessage[];
     IP_ADDRESS: string;
+    PUBLIC_IP_ADDRESS: string;
     SOCKET: Socket | undefined;
 }
 
@@ -50,7 +51,8 @@ const InitialGameHostState: TGameHostState = {
     PORT: getRecentRoomPort(),
     PLAYERS: {},
     CHAT_MESSAGES: getSavedChatMessages(getCookieValue('CALL_OF_CTHULHU_RECENT_ROOM')),
-    IP_ADDRESS: "",
+    IP_ADDRESS: getCookieValue('CALL_OF_CTHULHU_RECENT_ADDRESS'),
+    PUBLIC_IP_ADDRESS: "",
     SOCKET: undefined,
 }
 
@@ -107,13 +109,16 @@ function gameHostReducer(state: TGameHostState, action: TAction): TGameHostState
             break;
         case GameHostActions.SET_HOST_IP:
             state.IP_ADDRESS = action.value;
+            document.cookie = `CALL_OF_CTHULHU_RECENT_ADDRESS=${action.value} path=/host`;
+            break;
+        case GameHostActions.SET_PUBLIC_IP:
+            state.PUBLIC_IP_ADDRESS = action.value;
             break;
         case GameHostActions.SET_WEBSOCKET:
-
             if (!state.SOCKET && state.PORT > 0 && state.PORT < 65536) {
                 console.log("Starting to connect");
 
-                state.SOCKET = io(`http://localhost:${state.PORT}`);
+                state.SOCKET = io(`http://${state.IP_ADDRESS}:${state.PORT}`);
 
                 state.SOCKET.on("disconnect", () => {
                     console.log("Disconnected");

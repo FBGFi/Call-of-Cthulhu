@@ -13,7 +13,7 @@ const HostPageSettings: React.FC = () => {
     const [selectedRoom, setSelectedRoom] = useState<string | undefined>(undefined);
     const [connectionSuccesful, isConnectionSuccessful] = useState(false);
 
-    const setGameInformation = (e: React.FocusEvent<HTMLInputElement>, key: "SET_PORT" | "SET_ROOM_CODE") => {
+    const setGameInformation = (e: React.FocusEvent<HTMLInputElement>, key: "SET_PORT" | "SET_ROOM_CODE" | "SET_HOST_IP") => {
         dispatch({ type: GameHostActions[key], value: e.target.value });
     }
 
@@ -93,6 +93,11 @@ const HostPageSettings: React.FC = () => {
     return (
         <InfoBox title='Host a Game' className="HostPageSettings">
             <div className="inner-container">
+                <label htmlFor="ip-address">Address:</label>
+                <input type="text"
+                    defaultValue={state.IP_ADDRESS}  
+                    onBlur={(e) => setGameInformation(e, "SET_HOST_IP")}
+                />
                 <label htmlFor="port">Port Number:</label>
                 <input
                     defaultValue={state.PORT > 0 && state.PORT <= 65535 ? state.PORT : undefined}

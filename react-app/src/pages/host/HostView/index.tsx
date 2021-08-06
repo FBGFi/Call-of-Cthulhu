@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GameHostContext } from '../../../reducers/GameHostReducer';
 import GameTools from './GameTools';
 import './HostView.css';
 import PlayerCard from './PlayerCard';
-import publicIp from 'public-ip'
 import { GameHostActions } from '../../../actions';
 import { TChatMessage } from '../../../components/ChatMessage';
 
 // fucking redux...
-let chatMessages: TChatMessage[];
+var chatMessages: TChatMessage[];
 let connectionSuccesful = false;
 
 const HostView: React.FC = () => {
@@ -32,37 +31,26 @@ const HostView: React.FC = () => {
         return cards;
     }
 
-    const setUpIp = async () => {
-        let data = await publicIp.v4({
-            fallbackUrls: ["https://ifconfig.co/ip"]
-        });
-        await dispatch({ type: GameHostActions.SET_HOST_IP, value: data });
-    }
 
     useEffect(() => {
-        setUpIp();
         if (!state.SOCKET) {
             dispatch({ type: GameHostActions.SET_WEBSOCKET });
         }
-    }, []);
-
-    useEffect(() => {
-        chatMessages = state.CHAT_MESSAGES;
-    }, [state.CHAT_MESSAGES]);
-
-    useEffect(() => {
-        if (state.SOCKET) {
-
+        if (state.SOCKET && !connectionSuccesful) {
             state.SOCKET.once('connect', () => {
                 if (!connectionSuccesful) {
                     connectionSuccesful = true;
                     console.log('Connected');
                     if (state.SOCKET) {
                         state.SOCKET.emit('connect-host', state.ROOM_CODE);
-                        state.SOCKET.emit('host-send-messages', state.CHAT_MESSAGES);             
+                        state.SOCKET.emit('host-send-messages', state.CHAT_MESSAGES);
                     }
                 }
             });
+
+            state.SOCKET.once('get-public-ip', (ip) => {
+                dispatch({ type: GameHostActions.SET_PUBLIC_IP, value: ip })
+            })
 
             state.SOCKET.on("connect_error", () => {
                 window.alert("Error connecting to the server");
@@ -101,14 +89,22 @@ const HostView: React.FC = () => {
                         value: chatMessages
                     });
             });
-            
+
         }
-    }, [state.SOCKET]);
+    }, []);
+
+    useEffect(() => {
+        chatMessages = state.CHAT_MESSAGES;
+    }, [state.CHAT_MESSAGES]);
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <div className='HostView'>
             <div className="room-info-container">
-                <span><b>Room address:</b> {state.IP_ADDRESS}:{state.PORT}</span>
+                <span><b>Room address:</b> {state.PUBLIC_IP_ADDRESS}:{state.PORT}</span>
                 <span><b>Room code:</b> {state.ROOM_CODE}</span>
             </div>
             <div className="player-card-container">
