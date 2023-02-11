@@ -30,10 +30,10 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "http": "0.0.1-security",
-    "nodemon": "^2.0.12",
+    "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "pm2": "^5.1.0",
-    "public-ip": "^4.0.4",
+    "public-ip": "^6.0.1",
     "socket.io": "^4.1.3"
   }
 }
