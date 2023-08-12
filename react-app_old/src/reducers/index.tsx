@@ -12,7 +12,6 @@ type TState = {
 
 const InitialState: TState = {
     CLIENT: "PLAYER",
-
 }
 
 function appReducer(state: TState, action: TAction): TState {

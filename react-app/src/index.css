@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
+
+:root {
+  --dark-gray: #888;
+  --light-gray: #aaa;
+  --header-bg: #ccc;
+  --opaque-white: rgba(255, 255, 255, 0.3);
+  --breakpoint-uhd: 1920px;
+  --breakpoint-full-hd: 1280px;
+  --breakpoint-hd: 720px;
+  --breakpoint-regular: 420px;
+}
+
+body {
+  margin: 0;
+  background-image: url(/images/paper_dark.jpeg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: auto;
+}
+
+textarea {
+  appearance: none;
+  border: 1px solid var(--light-gray);
+  background-color: var(--opaque-white);
+  resize: none;
+  width: 100%;
+  height: 250px;
+  font-size: 1.2em;
+  padding: 5px;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+}
+
+.button-black {
+  background-color: #000;
+  color: #fff;
+  padding: 5px 15px;
+  border: 0;
+  border: 2px solid var(--dark-gray);
+  font-size: 1.2em;
+  &:hover {
+    filter: invert(0.8);
+  }
+}
+
+input[type="checkbox"]:focus {
+  box-shadow: none;
+}
+
+input[type="checkbox"]:checked:after {
+  content: "\2714";
+  font-size: 2em;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: black;
+}
+
+input[type="checkbox"] {
+  min-width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background: linear-gradient(-30deg, var(--opaque-white), var(--light-gray));
+  appearance: none;
+  position: relative;
+  border: 1px solid var(--light-gray);
+  border-radius: 2px;
+}
+
+*:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px black;
+}
+
+* {
+  box-sizing: border-box;
+  line-height: 1.5em;
+  letter-spacing: 0.05em;
+  word-spacing: 0.07em;
+  font-family: "IM Fell English SC", "Times New Roman", serif !important;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  max-width: 75ch;
+}
